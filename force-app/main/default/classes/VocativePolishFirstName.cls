@@ -271,7 +271,7 @@ public class VocativePolishFirstName {
             default:
                 throw new \Exception('Undefined gender');
         }
-    }
+
 
     /**
      * Remake first name to Polish vocative
