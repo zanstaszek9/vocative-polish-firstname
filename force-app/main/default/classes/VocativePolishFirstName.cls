@@ -60,32 +60,31 @@ public class VocativePolishFirstName {
     private $_encoding;
 
     /**
-     * List of exceptions
+     * @description List of exceptions
      *
-     * @var array
      */
-    public $exceptions = [
-        'Ola' => ['W', 'Olu'],
-        'Saba' => ['W', 'Sabo'],
-        'Noemi' => ['W', 'Noemi'],
-        'Sonia' => ['W', 'Soniu'],
-        'Luba' => ['W', 'Lubo'],
-        'Jeremi' => ['M', 'Jeremi'],
-        'Kirył' => ['M', 'Kiryle'],
-        'Miriam' => ['W', 'Miriam'],
-        'Margot' => ['W', 'Margot'],
-        'Ingrid' => ['W', 'Ingrid'],
-        'Lew' => ['M', 'Lwie'],
-        'Narcyz' => ['M', 'Narcyzie'],
-        'Kosma' => ['M', 'Kosmo'],
-        'Bonawentura' => ['M', 'Bonawenturo'],
-        'Carmen' => ['W', 'Carmen'],
-        'Doris' => ['W', 'Doris'],
-        'Dolores' => ['W', 'Dolores'],
-        'Abigail' => ['W', 'Abigail'],
-        'Nikolett' => ['W', 'Nikoletto'],
-        'Ania' => ['W', "Aniu"]
-    ];
+    public final Map<String, VocativeSex> exceptions = new Map<String, VocativeSex>{
+            'Ola' => new VocativeSex('Ola', 'W', 'Olu'),
+            'Saba' => new VocativeSex('Saba', 'W', 'Sabo'),
+            'Noemi' => new VocativeSex('Noemi', 'W', 'Noemi'),
+            'Sonia' => new VocativeSex('Sonia', 'W', 'Soniu'),
+            'Luba' => new VocativeSex('Luba', 'W', 'Lubo'),
+            'Jeremi' => new VocativeSex('Jeremi', 'M', 'Jeremi'),
+            'Kirył' => new VocativeSex('Kirył', 'M', 'Kiryle'),
+            'Miriam' => new VocativeSex('Miriam', 'W', 'Miriam'),
+            'Margot' => new VocativeSex('Margot', 'W', 'Margot'),
+            'Ingrid' => new VocativeSex('Ingrid', 'W', 'Ingrid'),
+            'Lew' => new VocativeSex('Lew', 'M', 'Lwie'),
+            'Narcyz' => new VocativeSex('Narcyz', 'M', 'Narcyzie'),
+            'Kosma' => new VocativeSex('Kosma', 'M', 'Kosmo'),
+            'Bonawentura' => new VocativeSex('Bonawentura', 'M', 'Bonawenturo'),
+            'Carmen' => new VocativeSex('Carmen', 'W', 'Carmen'),
+            'Doris' => new VocativeSex('Doris', 'W', 'Doris'),
+            'Dolores' => new VocativeSex('Dolores', 'W', 'Dolores'),
+            'Abigail' => new VocativeSex('Abigail', 'W', 'Abigail'),
+            'Nikolett' => new VocativeSex('Nikolett', 'W', 'Nikoletto'),
+            'Ania' => new VocativeSex('Ania', 'W', 'Aniu')
+    };
 
     /**
      * @param string $first_name
