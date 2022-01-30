@@ -11,6 +11,30 @@
 
 
 public class VocativePolishFirstName {
+
+    /**
+     * Structure to hold name, sex and vocative
+     *
+     *
+     */
+    private class VocativeSex {
+        public final String denominatorName;
+        public final String sex;
+        public final String vocative;
+
+        /**
+         * @param denominatorName name in denominator (pl. mianownik) form
+         * @param sex sex indication in form of letters, 'U' for 'Unable to defined', 'W' for Woman, 'M' for Man
+         * @param vocative name in vocative (pl. wołacz) form
+         **/
+        public VocativeSex(String denominatorName, String sex, String vocative) {
+            this.denominatorName = denominatorName;
+            this.sex = sex;
+            this.vocative = vocative;
+        }
+    }
+
+
     /**
      * Polish definitions array for default group
      *
