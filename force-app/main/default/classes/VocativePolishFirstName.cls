@@ -51,14 +51,7 @@ public class VocativePolishFirstName {
             }
     };
 
-    /**
-     * Vocative array
-     *
-     * 0 = title
-     * 1 = vocative first name
-     *
-     */
-    private _vocative = [];
+    private VocativeSex vocative;
 
     /**
      * @var string
@@ -169,7 +162,7 @@ public class VocativePolishFirstName {
      */
     public function getVocativeArray()
     {
-        return this._vocative;
+        return this.vocative;
     }
 
     /**
@@ -179,7 +172,7 @@ public class VocativePolishFirstName {
      */
     public function getVocativeFirstName()
     {
-        return this._vocative[1];
+        return this.vocative[1];
     }
 
     /**
@@ -190,7 +183,7 @@ public class VocativePolishFirstName {
      */
     public function getDetectedTitle(group = 'default')
     {
-        return this.titles[group][this._vocative[0]];
+        return this.titles[group][this.vocative[0]];
     }
 
     /**
@@ -200,7 +193,7 @@ public class VocativePolishFirstName {
      */
     public function getDetectedGender()
     {
-        return this._vocative[0];
+        return this.vocative[0];
     }
 
 
@@ -211,7 +204,7 @@ public class VocativePolishFirstName {
      */
     public function isMale()
     {
-        if (this._vocative[0] == 'M') {
+        if (this.vocative[0] == 'M') {
             return true;
         }
 
@@ -225,7 +218,7 @@ public class VocativePolishFirstName {
      */
     public function isWoman()
     {
-        if (this._vocative[0] == 'W') {
+        if (this.vocative[0] == 'W') {
             return true;
         }
 
