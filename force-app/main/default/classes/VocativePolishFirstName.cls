@@ -53,10 +53,7 @@ public class VocativePolishFirstName {
 
     private VocativeSex vocative;
 
-    /**
-     * @var string
-     */
-    private _encoding;
+    private String encoding;
 
     /**
      * @description List of exceptions
@@ -152,7 +149,7 @@ public class VocativePolishFirstName {
      */
     public function setEncoding(encoding)
     {
-        this._encoding = encoding;
+        this.encoding = encoding;
     }
 
     /**
@@ -245,7 +242,7 @@ public class VocativePolishFirstName {
      */
     public function nameCaseConvert(name)
     {
-        return mb_convert_case(mb_strtolower(name), MB_CASE_TITLE, this._encoding);
+        return mb_convert_case(mb_strtolower(name), MB_CASE_TITLE, this.encoding);
     }
 
 
