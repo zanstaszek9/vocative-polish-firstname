@@ -85,3 +85,6 @@ $RECYCLE.BIN/
 
 # Local environment variables
 .env
+
+# Illuminated Cloud
+/IlluminatedCloud/
