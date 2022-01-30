@@ -120,7 +120,7 @@ public class VocativePolishFirstName {
      */
     public function getTitles()
     {
-        return $this->_titles['default'];
+        return $this->titles['default'];
     }
 
     /**
@@ -131,7 +131,7 @@ public class VocativePolishFirstName {
      */
     public function getTitlesByGroup($group = 'default')
     {
-        return $this->_titles[$group];
+        return $this->titles[$group];
     }
 
     /**
@@ -149,7 +149,7 @@ public class VocativePolishFirstName {
      */
     public function setTitles($titles, $group = 'default')
     {
-        $this->_titles[$group] = $titles;
+        $this->titles[$group] = $titles;
     }
 
     /**
@@ -190,7 +190,7 @@ public class VocativePolishFirstName {
      */
     public function getDetectedTitle($group = 'default')
     {
-        return $this->_titles[$group][$this->_vocative[0]];
+        return $this->titles[$group][$this->_vocative[0]];
     }
 
     /**
