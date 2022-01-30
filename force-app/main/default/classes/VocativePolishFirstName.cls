@@ -1,18 +1,16 @@
-<?php
 /**
  * VocativePolishFirstName
  *
  * Component for remake first name to Polish vocative
  *
  * @author  Mariusz Mielnik <mariusz@ecbox.pl>
+ * @author  Stanislaw Zan <zanstaszek9@gmail.com>
  * @license  MIT
  *
  */
-namespace ecbox;
 
 
-class VocativePolishFirstName
-{
+public class VocativePolishFirstName {
     /**
      * Polish definitions array for default group
      *
