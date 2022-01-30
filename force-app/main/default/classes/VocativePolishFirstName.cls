@@ -38,12 +38,18 @@ public class VocativePolishFirstName {
     /**
      * Polish definitions array for default group
      *
-     * U = Unknown (not detected)
+     * U = Unable to define
      * M = Male
      * W = Woman
      *
      */
-    private $_titles = ['default' => ['U' => 'Panie/Pani', 'M' => 'Panie', 'W' => 'Pani']];
+    private final Map<String, Map<String, String>> titles = new Map<String, Map<String, String>>{
+            'default' => new  Map<String, String>{
+                    'U' => 'Panie/Pani',
+                    'M' => 'Panie',
+                    'W' => 'Pani'
+            }
+    };
 
     /**
      * Vocative array
