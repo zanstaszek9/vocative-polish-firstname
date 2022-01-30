@@ -99,7 +99,7 @@ public class VocativePolishFirstName {
      * @param array|null $exceptions
      * @throws \Exception
      */
-    public function __construct($first_name, $encoding = "UTF-8", $titles = null, $exceptions = null)
+    public function __construct($first_name, $encoding = 'UTF-8', $titles = null, $exceptions = null)
     {
         if (!is_null($titles)) {
             this.setTitles($titles);
@@ -235,7 +235,7 @@ public class VocativePolishFirstName {
     /**
      * Return vocative first name with title
      *
-     * @param string $delimiter default " " (space)
+     * @param string $delimiter default ' ' (space)
      * @param string $group
      * @return string
      */
@@ -307,109 +307,109 @@ public class VocativePolishFirstName {
             }
 
             switch ($first_name) {
-                case in_array(mb_substr($first_name, -2, 2), array("ni", "li", "zi")):
+                case in_array(mb_substr($first_name, -2, 2), array('ni', 'li', 'zi')):
                     this._vocative = ['M', $first_name];
                     break;
-                case mb_substr($first_name, -2, 2) == "eł":
-                    this._vocative = ['M', mb_substr($first_name, 0, -2) . "le"];
+                case mb_substr($first_name, -2, 2) == 'eł':
+                    this._vocative = ['M', mb_substr($first_name, 0, -2) . 'le'];
                     break;
-                case mb_substr($first_name, -2, 2) == "ił":
-                    this._vocative = ['M', mb_substr($first_name, 0, -1) . "le"];
+                case mb_substr($first_name, -2, 2) == 'ił':
+                    this._vocative = ['M', mb_substr($first_name, 0, -1) . 'le'];
                     break;
-                case mb_substr($first_name, -2, 2) == "et":
-                    this._vocative = ['M', mb_substr($first_name, 0, -1) . "cie"];
+                case mb_substr($first_name, -2, 2) == 'et':
+                    this._vocative = ['M', mb_substr($first_name, 0, -1) . 'cie'];
                     break;
-                case mb_substr($first_name, -2, 2) == "tr":
-                    this._vocative = ['M', $first_name . "ze"];
+                case mb_substr($first_name, -2, 2) == 'tr':
+                    this._vocative = ['M', $first_name . 'ze'];
                     break;
-                case mb_substr($first_name, -2, 2) == "ał":
-                    this._vocative = ['M', mb_substr($first_name, 0, -1) . "le"];
+                case mb_substr($first_name, -2, 2) == 'ał':
+                    this._vocative = ['M', mb_substr($first_name, 0, -1) . 'le'];
                     break;
-                case in_array(mb_substr($first_name, -2, 2), array("it", "rt")):
-                    this._vocative = ['M', mb_substr($first_name, 0, -1) . "cie"];
+                case in_array(mb_substr($first_name, -2, 2), array('it', 'rt')):
+                    this._vocative = ['M', mb_substr($first_name, 0, -1) . 'cie'];
                     break;
-                case mb_substr($first_name, -4, 4) == "ciek":
-                    this._vocative = ['M', mb_substr($first_name, 0, -4) . "ćku"];
+                case mb_substr($first_name, -4, 4) == 'ciek':
+                    this._vocative = ['M', mb_substr($first_name, 0, -4) . 'ćku'];
                     break;
-                case mb_substr($first_name, -4, 4) == "siek":
-                    this._vocative = ['M', mb_substr($first_name, 0, -4) . "śku"];
+                case mb_substr($first_name, -4, 4) == 'siek':
+                    this._vocative = ['M', mb_substr($first_name, 0, -4) . 'śku'];
                     break;
-                case mb_substr($first_name, -4, 4) == "niec":
-                    this._vocative = ['M', mb_substr($first_name, 0, -4) . "ńcu"];
+                case mb_substr($first_name, -4, 4) == 'niec':
+                    this._vocative = ['M', mb_substr($first_name, 0, -4) . 'ńcu'];
                     break;
-                case mb_substr($first_name, -3, 3) == "per":
-                    this._vocative = ['M', mb_substr($first_name, 0, -2) . "rze"];
+                case mb_substr($first_name, -3, 3) == 'per':
+                    this._vocative = ['M', mb_substr($first_name, 0, -2) . 'rze'];
                     break;
-                case in_array(mb_substr($first_name, -2, 2), array("ek", "ko")):
-                    this._vocative = ['M', mb_substr($first_name, 0, -2) . "ku"];
+                case in_array(mb_substr($first_name, -2, 2), array('ek', 'ko')):
+                    this._vocative = ['M', mb_substr($first_name, 0, -2) . 'ku'];
                     break;
-                case mb_substr($first_name, -2, 2) == "st":
-                    this._vocative = ['M', mb_substr($first_name, 0, -2) . "ście"];
+                case mb_substr($first_name, -2, 2) == 'st':
+                    this._vocative = ['M', mb_substr($first_name, 0, -2) . 'ście'];
                     break;
-                case mb_substr($first_name, -2, 2) == "sł":
-                    this._vocative = ['M', mb_substr($first_name, 0, -2) . "śle"];
+                case mb_substr($first_name, -2, 2) == 'sł':
+                    this._vocative = ['M', mb_substr($first_name, 0, -2) . 'śle'];
                     break;
                 case in_array(mb_substr($first_name, -3, 3),
-                        array("cja", "ria", "lia", "dia", "wia", "fia")) || in_array(mb_substr($first_name, -4, 4),
-                        array("iela", "bela", "zula", "saba")):
-                    this._vocative = ['W', mb_substr($first_name, 0, -1) . "o"];
+                        array('cja', 'ria', 'lia', 'dia', 'wia', 'fia')) || in_array(mb_substr($first_name, -4, 4),
+                        array('iela', 'bela', 'zula', 'saba')):
+                    this._vocative = ['W', mb_substr($first_name, 0, -1) . 'o'];
                     break;
-                case in_array(mb_substr($first_name, -4, 4), array("iola", "rola")) :
-                    this._vocative = ['W', mb_substr($first_name, 0, -1) . "u"];
+                case in_array(mb_substr($first_name, -4, 4), array('iola', 'rola')) :
+                    this._vocative = ['W', mb_substr($first_name, 0, -1) . 'u'];
                     break;
-                case in_array(mb_substr($first_name, -3, 3), array("aja", "sia")) :
-                    this._vocative = ['W', mb_substr($first_name, 0, -1) . "u"];
+                case in_array(mb_substr($first_name, -3, 3), array('aja', 'sia')) :
+                    this._vocative = ['W', mb_substr($first_name, 0, -1) . 'u'];
                     break;
-                case in_array(mb_substr($first_name, -2, 2), array("ja", "ia", "la")) :
-                    this._vocative = ['W', mb_substr($first_name, 0, -1) . "o"];
+                case in_array(mb_substr($first_name, -2, 2), array('ja', 'ia', 'la')) :
+                    this._vocative = ['W', mb_substr($first_name, 0, -1) . 'o'];
                     break;
-                case mb_substr($first_name, -2, 2) == "ba":
-                    this._vocative = ['M', mb_substr($first_name, 0, -1) . "o"];
+                case mb_substr($first_name, -2, 2) == 'ba':
+                    this._vocative = ['M', mb_substr($first_name, 0, -1) . 'o'];
                     break;
-                case in_array(mb_substr($first_name, -2, 2), array("oe", "ue")) :
+                case in_array(mb_substr($first_name, -2, 2), array('oe', 'ue')) :
                     this._vocative = ['M', $first_name];
                     break;
-                case mb_substr($first_name, -2, 2) == "oń":
-                    this._vocative = ['M', mb_substr($first_name, 0, -1) . "niu"];
+                case mb_substr($first_name, -2, 2) == 'oń':
+                    this._vocative = ['M', mb_substr($first_name, 0, -1) . 'niu'];
                     break;
-                case in_array(mb_substr($first_name, -1, 1), array("n", "f", "m", "w", "p", "s", "b")):
-                    this._vocative = ['M', $first_name . "ie"];
+                case in_array(mb_substr($first_name, -1, 1), array('n', 'f', 'm', 'w', 'p', 's', 'b')):
+                    this._vocative = ['M', $first_name . 'ie'];
                     break;
-                case mb_substr($first_name, -3, 3) == "bel":
-                    this._vocative = ['M', mb_substr($first_name, 0, -3) . "ble"];
+                case mb_substr($first_name, -3, 3) == 'bel':
+                    this._vocative = ['M', mb_substr($first_name, 0, -3) . 'ble'];
                     break;
-                case mb_substr($first_name, -2, 2) == "ez":
+                case mb_substr($first_name, -2, 2) == 'ez':
                     this._vocative = ['W', $first_name];
                     break;
-                case in_array(mb_substr($first_name, -1, 1), array("g", "h", "j", "k", "l", "z")):
-                    this._vocative = ['M', $first_name . "u"];
+                case in_array(mb_substr($first_name, -1, 1), array('g', 'h', 'j', 'k', 'l', 'z')):
+                    this._vocative = ['M', $first_name . 'u'];
                     break;
-                case mb_substr($first_name, -3, 3) == "der":
-                    this._vocative = ['M', mb_substr($first_name, 0, -2) . "rze"];
+                case mb_substr($first_name, -3, 3) == 'der':
+                    this._vocative = ['M', mb_substr($first_name, 0, -2) . 'rze'];
                     break;
-                case mb_substr($first_name, -4, 4) == "ster":
-                    this._vocative = ['M', mb_substr($first_name, 0, -2) . "rze"];
+                case mb_substr($first_name, -4, 4) == 'ster':
+                    this._vocative = ['M', mb_substr($first_name, 0, -2) . 'rze'];
                     break;
-                case mb_substr($first_name, -1, 1) == "r":
-                    this._vocative = ['M', $first_name . "ze"];
+                case mb_substr($first_name, -1, 1) == 'r':
+                    this._vocative = ['M', $first_name . 'ze'];
                     break;
-                case mb_substr($first_name, -1, 1) == "d":
-                    this._vocative = ['M', $first_name . "zie"];
+                case mb_substr($first_name, -1, 1) == 'd':
+                    this._vocative = ['M', $first_name . 'zie'];
                     break;
-                case mb_substr($first_name, -1, 1) == "a":
-                    this._vocative = ['W', mb_substr($first_name, 0, -1) . "o"];
+                case mb_substr($first_name, -1, 1) == 'a':
+                    this._vocative = ['W', mb_substr($first_name, 0, -1) . 'o'];
                     break;
-                case mb_substr($first_name, -1, 1) == "e":
+                case mb_substr($first_name, -1, 1) == 'e':
                     this._vocative = ['W', $first_name];
                     break;
-                case mb_substr($first_name, -1, 1) == "y":
+                case mb_substr($first_name, -1, 1) == 'y':
                     this._vocative = ['M', $first_name];
                     break;
-                case mb_substr($first_name, -1, 1) == "o":
+                case mb_substr($first_name, -1, 1) == 'o':
                     this._vocative = ['M', $first_name];
                     break;
-                case mb_substr($first_name, -1, 1) == "t":
-                    this._vocative = ['M', mb_substr($first_name, 0, -1) . "cie"];
+                case mb_substr($first_name, -1, 1) == 't':
+                    this._vocative = ['M', mb_substr($first_name, 0, -1) . 'cie'];
                     break;
                 default:
                     this._vocative = ['U', $first_name];
