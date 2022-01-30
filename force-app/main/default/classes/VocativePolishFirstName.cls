@@ -89,7 +89,7 @@ public class VocativePolishFirstName {
      * @param array|null exceptions
      * @throws \Exception
      */
-    public function __construct(first_name, encoding = 'UTF-8', titles = null, exceptions = null)
+    public  __construct(first_name, encoding = 'UTF-8', titles = null, exceptions = null)
     {
         if (!is_null(titles)) {
             this.setTitles(titles);
@@ -108,7 +108,7 @@ public class VocativePolishFirstName {
      *
      * @return array
      */
-    public function getTitles()
+    public  getTitles()
     {
         return this.titles['default'];
     }
@@ -119,7 +119,7 @@ public class VocativePolishFirstName {
      * @param string group
      * @return array
      */
-    public function getTitlesByGroup(group = 'default')
+    public  getTitlesByGroup(group = 'default')
     {
         return this.titles[group];
     }
@@ -137,7 +137,7 @@ public class VocativePolishFirstName {
      * @param array titles
      * @param string group
      */
-    public function setTitles(titles, group = 'default')
+    public  setTitles(titles, group = 'default')
     {
         this.titles[group] = titles;
     }
@@ -147,7 +147,7 @@ public class VocativePolishFirstName {
      *
      * @param encoding
      */
-    public function setEncoding(encoding)
+    public  setEncoding(encoding)
     {
         this.encoding = encoding;
     }
@@ -157,7 +157,7 @@ public class VocativePolishFirstName {
      *
      * @return array
      */
-    public function getVocativeArray()
+    public  getVocativeArray()
     {
         return this.vocative;
     }
@@ -167,7 +167,7 @@ public class VocativePolishFirstName {
      *
      * @return string
      */
-    public function getVocativeFirstName()
+    public  getVocativeFirstName()
     {
         return this.vocative[1];
     }
@@ -178,7 +178,7 @@ public class VocativePolishFirstName {
      * @param string group
      * @return string
      */
-    public function getDetectedTitle(group = 'default')
+    public  getDetectedTitle(group = 'default')
     {
         return this.titles[group][this.vocative[0]];
     }
@@ -188,7 +188,7 @@ public class VocativePolishFirstName {
      *
      * @return string
      */
-    public function getDetectedGender()
+    public  getDetectedGender()
     {
         return this.vocative[0];
     }
@@ -199,7 +199,7 @@ public class VocativePolishFirstName {
      *
      * @return bool
      */
-    public function isMale()
+    public  isMale()
     {
         if (this.vocative[0] == 'M') {
             return true;
@@ -213,7 +213,7 @@ public class VocativePolishFirstName {
      *
      * @return bool
      */
-    public function isWoman()
+    public  isWoman()
     {
         if (this.vocative[0] == 'W') {
             return true;
@@ -229,7 +229,7 @@ public class VocativePolishFirstName {
      * @param string group
      * @return string
      */
-    public function getVocativeString(delimiter = ' ', group = 'default')
+    public  getVocativeString(delimiter = ' ', group = 'default')
     {
         return this.getDetectedTitle(group) . delimiter . this.getVocativeFirstName();
     }
@@ -240,7 +240,7 @@ public class VocativePolishFirstName {
      * @param string name
      * @return string
      */
-    public function nameCaseConvert(name)
+    public  nameCaseConvert(name)
     {
         return mb_convert_case(mb_strtolower(name), MB_CASE_TITLE, this.encoding);
     }
@@ -251,7 +251,7 @@ public class VocativePolishFirstName {
      * @return array|null
      * @throws \Exception
      */
-    protected function checkExceptions(first_name)
+    protected  checkExceptions(first_name)
     {
         if (!isset(this.exceptions[first_name])) {
             return null;
@@ -280,7 +280,7 @@ public class VocativePolishFirstName {
      * @return array
      * @throws \Exception
      */
-    protected function remakeToVocative(first_name)
+    protected  remakeToVocative(first_name)
     {
         if (empty(first_name)) {
             throw new  \Exception('First name cannot be empty');
