@@ -24,7 +24,7 @@ public class VocativePolishFirstName {
 
         /**
          * @param denominatorName name in denominator (pl. mianownik) form
-         * @param sex sex indication in form of letters, 'U' for 'Unable to defined', 'W' for Woman, 'M' for Man
+         * @param sex sex indication in form of letters, 'U' for 'Unable to define', 'W' for Woman, 'M' for Man
          * @param vocative name in vocative (pl. wołacz) form
          **/
         public VocativeSex(String denominatorName, String sex, String vocative) {
