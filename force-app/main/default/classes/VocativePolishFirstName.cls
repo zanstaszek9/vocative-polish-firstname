@@ -149,8 +149,7 @@ public class VocativePolishFirstName {
      *
      * @param encoding
      */
-    public  setEncoding(encoding)
-    {
+    public void setEncoding(String encoding) {
         this.encoding = encoding;
     }
 
