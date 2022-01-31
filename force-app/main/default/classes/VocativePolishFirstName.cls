@@ -294,21 +294,23 @@ public class VocativePolishFirstName {
      * @return array
      * @throws \Exception
      */
-    protected  remakeToVocative(first_name)
-    {
-        if (empty(first_name)) {
-            throw new  \Exception('First name cannot be empty');
+
+    public void remakeToVocative(String first_name) {
+        if (String.isBlank(first_name)) {
+            throw new  VocativePolishFirstNameException('First name cannot be empty');
         }
 
-        if (empty(this._vocative)) {
-            first_name = trim(this.nameCaseConvert(first_name));
-            mb_internal_encoding(this._encoding);
+        if (this.vocative == null) {
+            first_name = nameCaseConvert(first_name).trim();
+//            mb_internal_encoding(this._encoding);
 
-            if ((vocative = this.checkExceptions(first_name)) !== null) {
-                this._vocative = vocative;
+            VocativeSex tempVocative = this.checkExceptions(first_name);
 
+            if (tempVocative != null) {
+                this.vocative = vocative;
                 return;
             }
+
 
             switch (first_name) {
                 case in_array(mb_substr(first_name, -2, 2), array('ni', 'li', 'zi')):
