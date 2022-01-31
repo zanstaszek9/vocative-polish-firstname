@@ -82,21 +82,22 @@ public class VocativePolishFirstName {
             'Ania' => new VocativeSex('Ania', 'W', 'Aniu')
     };
 
+
     /**
-     * @param string first_name
-     * @param string encoding
-     * @param array|null titles
-     * @param array|null exceptions
-     * @throws \Exception
-     */
-    public  __construct(first_name, encoding = 'UTF-8', titles = null, exceptions = null)
-    {
-        if (!is_null(titles)) {
+     * @description
+     *
+     * @param first_name
+     * @param encoding TODO: encoding = 'UTF-8'
+     * @param titles
+     * @param exceptions
+     **/
+    public VocativePolishFirstName (String first_name, String encoding, Map<String, Map<String, String>> titles, Map<String, VocativeSex> exceptions) {
+        if (!titles.isEmpty()) {
             this.setTitles(titles);
         }
 
-        if (!is_null(exceptions)) {
-            this.exceptions = array_merge(this.exceptions, exceptions);
+        if (!exceptions.isEmpty()) {
+            this.exceptions.putAll(exceptions);
         }
 
         this.setEncoding(encoding);
