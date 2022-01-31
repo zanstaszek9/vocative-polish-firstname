@@ -105,13 +105,12 @@ public class VocativePolishFirstName {
     }
 
     /**
-     * Return default titles definition
+     * @description Return default titles definition
      *
      * @return array
      */
-    public  getTitles()
-    {
-        return this.titles['default'];
+    public Map<String, String> getTitles() {
+        return this.titles.get('default');
     }
 
     /**
