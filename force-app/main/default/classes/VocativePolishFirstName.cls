@@ -126,21 +126,23 @@ public class VocativePolishFirstName {
     }
 
     /**
-     * Setup own title
-     *
+     * @description Setup own title
+     * <p/>
      * for english ex. ['U' => '', 'M' => 'Mrs.', 'W' => 'Mr.'];
+     * <p/>
      * for polish ex. ['U' => '', 'M' => 'Szanowny Panie', 'W' => 'Szanowna Pani'];
-     *
+     * <p/>
      * For multiple titles definitions use group name
-     * for polish ex. group: 'default' => ['U' => 'Panie/Pani', 'M' => 'Panie', 'W' => 'Pani'];
+     * <p/>
+     * for polish ex. group: 'default' => ['U' => 'Panie &#47;  Pani', 'M' => 'Panie', 'W' => 'Pani'];
+     * <p/>
      * for polish ex. group: 'polite' => ['U' => '', 'M' => 'Szanowny Panie', 'W' => 'Szanowna Pani'];
      *
-     * @param array titles
-     * @param string group
+     * @param titles
+     * @param aGroup TODO:  group = 'default'
      */
-    public  setTitles(titles, group = 'default')
-    {
-        this.titles[group] = titles;
+    public void setTitles(Map<String, String> titles, String aGroup) {
+        this.titles.put(aGroup, titles);
     }
 
     /**
