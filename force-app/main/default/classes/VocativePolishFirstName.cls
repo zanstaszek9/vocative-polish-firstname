@@ -163,13 +163,12 @@ public class VocativePolishFirstName {
     }
 
     /**
-     * Returns vocative first name
+     * @description Returns vocative first name
      *
      * @return string
      */
-    public  getVocativeFirstName()
-    {
-        return this.vocative[1];
+    public String getVocativeFirstName() {
+        return this.vocative.vocative;
     }
 
     /**
