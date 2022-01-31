@@ -154,12 +154,11 @@ public class VocativePolishFirstName {
     }
 
     /**
-     * Returns array with vocative firs name and gender.
+     * @description Returns array with vocative firs name and gender.
      *
-     * @return array
+     * @return VocativeSex
      */
-    public  getVocativeArray()
-    {
+    public VocativeSex getVocativeSex() {
         return this.vocative;
     }
 
