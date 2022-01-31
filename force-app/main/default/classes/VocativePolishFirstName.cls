@@ -17,7 +17,7 @@ public class VocativePolishFirstName {
      *
      *
      */
-    private class VocativeSex {
+    private class VocativeSex { //TODO: Change name
         public final String denominatorName;
         public final String sex;
         public final String vocative;
@@ -158,7 +158,7 @@ public class VocativePolishFirstName {
      *
      * @return VocativeSex
      */
-    public VocativeSex getVocativeSex() {
+    public VocativeSex getVocativeSex() {   //TODO: Change name
         return this.vocative;
     }
 
@@ -167,7 +167,7 @@ public class VocativePolishFirstName {
      *
      * @return string
      */
-    public String getVocativeFirstName() {
+    public String getVocativeFirstName() { //TODO: Change name
         return this.vocative.vocative;
     }
 
