@@ -238,14 +238,18 @@ public class VocativePolishFirstName {
     }
 
     /**
-     * Convert name to first letter up
+     * @description Convert name to first letter up
      *
-     * @param string name
+     * @param name
+     *
      * @return string
      */
-    public  nameCaseConvert(name)
-    {
-        return mb_convert_case(mb_strtolower(name), MB_CASE_TITLE, this.encoding);
+    public static String nameCaseConvert(String name) {
+        // TODO: Jan-Krzysztof will fail
+        String output = '';
+        final Matcher m = Pattern.compile('(\\w+|\\W+)').matcher(name);
+        while (m.find()) output += m.group().capitalize();
+        return output;
     }
 
 
