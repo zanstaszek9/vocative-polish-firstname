@@ -115,14 +115,14 @@ public class VocativePolishFirstName {
     }
 
     /**
-     * Returns titles definition by group name
+     * @description Returns titles definition by group name
      *
-     * @param string group
-     * @return array
+     * @param aGroup TODO: aGroup = 'default'
+     *
+     * @return Map<String, String>
      */
-    public  getTitlesByGroup(group = 'default')
-    {
-        return this.titles[group];
+    public Map<String, String> getTitlesByGroup(String aGroup) {
+        return this.titles.get(aGroup);
     }
 
     /**
