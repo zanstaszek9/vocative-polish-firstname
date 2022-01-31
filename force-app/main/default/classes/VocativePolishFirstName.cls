@@ -32,6 +32,10 @@ public class VocativePolishFirstName {
             this.sex = sex;
             this.vocative = vocative;
         }
+
+        public Boolean hasDefinedVocativeAndSex() {
+            return String.isNotBlank(this.vocative) && String.isNotBlank(this.sex);
+        }
     }
 
 
@@ -254,30 +258,33 @@ public class VocativePolishFirstName {
 
 
     /**
-     * @param string first_name
-     * @return array|null
-     * @throws \Exception
+     * @description
+     *
+     * @param first_name
+     *
+     * @return VocativeSex
+     * @exception VocativePolishFirstNameException
      */
-    protected  checkExceptions(first_name)
-    {
-        if (!isset(this.exceptions[first_name])) {
+    private VocativeSex checkExceptions(String first_name) {
+        final VocativeSex nameWithException = this.exceptions.get(first_name);
+        if (nameWithException == null) {
             return null;
         }
 
-        if (count(this.exceptions[first_name]) != 2) {
-            throw new \Exception('Invalid format');
+        if (nameWithException.hasDefinedVocativeAndSex()) {
+            throw new VocativePolishFirstNameException('Invalid format');
         }
 
-        switch (this.exceptions[first_name][0]) {
-            case 'M':
-            case 'W':
-            case 'U':
-                return this.exceptions[first_name];
-                break;
-
-            default:
-                throw new \Exception('Undefined gender');
+        switch on nameWithException.sex {
+            when 'M', 'W', 'U' {
+                return nameWithException;
+            }
+            when else {
+                throw new VocativePolishFirstNameException('Undefined gender');
+            }
         }
+
+    }
 
 
     /**
