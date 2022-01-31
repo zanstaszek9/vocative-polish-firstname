@@ -91,7 +91,7 @@ public class VocativePolishFirstName {
      * @param titles
      * @param exceptions
      **/
-    public VocativePolishFirstName (String first_name, String encoding, Map<String, Map<String, String>> titles, Map<String, VocativeSex> exceptions) {
+    public VocativePolishFirstName (String first_name, String encoding, Map<String, String> titles, Map<String, VocativeSex> exceptions) {
         if (!titles.isEmpty()) {
             this.setTitles(titles);
         }
@@ -124,6 +124,10 @@ public class VocativePolishFirstName {
         return this.titles.get(aGroup);
     }
 
+    //TODO: add ApexDoc
+    public void setTitles(Map<String, String> titles) {
+        setTitles(titles, 'default');
+    }
     /**
      * @description Setup own title
      * <p/>
