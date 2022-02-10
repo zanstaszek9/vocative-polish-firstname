@@ -313,6 +313,10 @@ public class VocativePolishFirstName {
 
             final Integer first_nameLength = first_name.length();
 
+            System.debug('%%% STZAN1 class: VocativePolishFirstName, method: remakeToVocative; 2022-01-31, first_name: ' + first_name);
+            System.debug('%%% STZAN2 class: VocativePolishFirstName, method: remakeToVocative; 2022-01-31, first_name subs: ' + first_name.substring(first_nameLength-1, first_nameLength));
+
+
             if ( new Set<String>{'ni', 'li', 'zi'}.contains(((first_name.substring(first_nameLength-2, first_nameLength))))) {
                 this.vocative = new VocativeSex(first_name, 'M', first_name);
             }
