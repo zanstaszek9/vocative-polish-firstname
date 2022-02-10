@@ -27,4 +27,15 @@ private class VocativePolishFirstNameTest {
         System.assert(namesWithWrongVocative.isEmpty(), 'Some vocatives were wrong: ' + JSON.serializePretty(namesWithWrongVocative));
 
     }
+
+    @IsTest
+    static void test2() {
+        //TODO: Export the tested method and Test to another class, like String.Utils STZAN
+        System.assert(VocativePolishFirstName.endsWithAnySpecifiedIgnoreCase('Ada', new Set<String> {'a'}));
+        System.assert(!VocativePolishFirstName.endsWithAnySpecifiedIgnoreCase('Ada', new Set<String> {'b'}));
+        System.assert(VocativePolishFirstName.endsWithAnySpecifiedIgnoreCase('Ada', new Set<String> {'b', 'a'}));
+        System.assert(VocativePolishFirstName.endsWithAnySpecifiedIgnoreCase('Ada', new Set<String> {''}));
+        System.assert(!VocativePolishFirstName.endsWithAnySpecifiedIgnoreCase('Ada', new Set<String> {'longerThanName'}));
+
+    }
 }
