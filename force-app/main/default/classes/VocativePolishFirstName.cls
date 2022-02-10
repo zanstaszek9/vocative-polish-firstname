@@ -423,4 +423,12 @@ public class VocativePolishFirstName {
 
         }
     }
+
+    public static Boolean endsWithAnySpecifiedIgnoreCase(final String aString, final Set<String> suffixes) {
+        Boolean doesStringEndsWithAnySuffix = false;
+        for (String suffix : suffixes) {
+            doesStringEndsWithAnySuffix |= aString.endsWithIgnoreCase(suffix);
+        }
+        return doesStringEndsWithAnySuffix;
+    }
 }
