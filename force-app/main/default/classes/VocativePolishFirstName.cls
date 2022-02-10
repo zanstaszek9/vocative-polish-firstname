@@ -17,7 +17,7 @@ public class VocativePolishFirstName {
      *
      *
      */
-    private class VocativeSex { //TODO: Change name
+    public class VocativeSex { //TODO: Change name
         public final String denominatorName;
         public final String sex;
         public final String vocative;
@@ -178,34 +178,34 @@ public class VocativePolishFirstName {
     public String getVocativeFirstName() { //TODO: Change name
         return this.vocative.vocative;
     }
-
-    /**
+/*
+    *//**
      * Returns title
      *
      * @param string group
      * @return string
-     */
+     *//*
     public  getDetectedTitle(group = 'default')
     {
         return this.titles[group][this.vocative[0]];
     }
 
-    /**
+    *//**
      * Returns gender M - Male, W - Woman, U - Unknown
      *
      * @return string
-     */
+     *//*
     public  getDetectedGender()
     {
         return this.vocative[0];
     }
 
 
-    /**
+    *//**
      * Returns true if first name belongs to male
      *
      * @return bool
-     */
+     *//*
     public  isMale()
     {
         if (this.vocative[0] == 'M') {
@@ -215,11 +215,11 @@ public class VocativePolishFirstName {
         return false;
     }
 
-    /**
+    *//**
      * Returns true if first name belongs to woman
      *
      * @return bool
-     */
+     *//*
     public  isWoman()
     {
         if (this.vocative[0] == 'W') {
@@ -229,17 +229,17 @@ public class VocativePolishFirstName {
         return false;
     }
 
-    /**
+    *//**
      * Return vocative first name with title
      *
      * @param string delimiter default ' ' (space)
      * @param string group
      * @return string
-     */
+     *//*
     public  getVocativeString(delimiter = ' ', group = 'default')
     {
         return this.getDetectedTitle(group) . delimiter . this.getVocativeFirstName();
-    }
+    }*/
 
     /**
      * @description Convert name to first letter up
