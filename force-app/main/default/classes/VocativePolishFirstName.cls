@@ -311,114 +311,114 @@ public class VocativePolishFirstName {
                 return;
             }
 
+            final Integer first_nameLength = first_name.length();
 
-            switch (first_name) {
-                case in_array(mb_substr(first_name, -2, 2), array('ni', 'li', 'zi')):
-                    this.vocative = new VocativeSex(first_name, 'M', first_name);
-                    break;
-                case mb_substr(first_name, -2, 2) == 'eł':
-                    this.vocative = new VocativeSex(first_name, 'M', mb_substr(first_name, 0, -2) . 'le');
-                    break;
-                case mb_substr(first_name, -2, 2) == 'ił':
-                    this.vocative = new VocativeSex(first_name, 'M', mb_substr(first_name, 0, -1) . 'le');
-                    break;
-                case mb_substr(first_name, -2, 2) == 'et':
-                    this.vocative = new VocativeSex(first_name, 'M', mb_substr(first_name, 0, -1) . 'cie');
-                    break;
-                case mb_substr(first_name, -2, 2) == 'tr':
-                    this.vocative = new VocativeSex(first_name, 'M', first_name . 'ze');
-                    break;
-                case mb_substr(first_name, -2, 2) == 'ał':
-                    this.vocative = new VocativeSex(first_name, 'M', mb_substr(first_name, 0, -1) . 'le');
-                    break;
-                case in_array(mb_substr(first_name, -2, 2), array('it', 'rt')):
-                    this.vocative = new VocativeSex(first_name, 'M', mb_substr(first_name, 0, -1) . 'cie');
-                    break;
-                case mb_substr(first_name, -4, 4) == 'ciek':
-                    this.vocative = new VocativeSex(first_name, 'M', mb_substr(first_name, 0, -4) . 'ćku');
-                    break;
-                case mb_substr(first_name, -4, 4) == 'siek':
-                    this.vocative = new VocativeSex(first_name, 'M', mb_substr(first_name, 0, -4) . 'śku');
-                    break;
-                case mb_substr(first_name, -4, 4) == 'niec':
-                    this.vocative = new VocativeSex(first_name, 'M', mb_substr(first_name, 0, -4) . 'ńcu');
-                    break;
-                case mb_substr(first_name, -3, 3) == 'per':
-                    this.vocative = new VocativeSex(first_name, 'M', mb_substr(first_name, 0, -2) . 'rze');
-                    break;
-                case in_array(mb_substr(first_name, -2, 2), array('ek', 'ko')):
-                    this.vocative = new VocativeSex(first_name, 'M', mb_substr(first_name, 0, -2) . 'ku');
-                    break;
-                case mb_substr(first_name, -2, 2) == 'st':
-                    this.vocative = new VocativeSex(first_name, 'M', mb_substr(first_name, 0, -2) . 'ście');
-                    break;
-                case mb_substr(first_name, -2, 2) == 'sł':
-                    this.vocative = new VocativeSex(first_name, 'M', mb_substr(first_name, 0, -2) . 'śle');
-                    break;
-                case in_array(mb_substr(first_name, -3, 3),
-                        array('cja', 'ria', 'lia', 'dia', 'wia', 'fia')) || in_array(mb_substr(first_name, -4, 4),
-                        array('iela', 'bela', 'zula', 'saba')):
-                    this.vocative = new VocativeSex(first_name, 'W', mb_substr(first_name, 0, -1) . 'o');
-                    break;
-                case in_array(mb_substr(first_name, -4, 4), array('iola', 'rola')) :
-                    this.vocative = new VocativeSex(first_name, 'W', mb_substr(first_name, 0, -1) . 'u');
-                    break;
-                case in_array(mb_substr(first_name, -3, 3), array('aja', 'sia')) :
-                    this.vocative = new VocativeSex(first_name, 'W', mb_substr(first_name, 0, -1) . 'u');
-                    break;
-                case in_array(mb_substr(first_name, -2, 2), array('ja', 'ia', 'la')) :
-                    this.vocative = new VocativeSex(first_name, 'W', mb_substr(first_name, 0, -1) . 'o');
-                    break;
-                case mb_substr(first_name, -2, 2) == 'ba':
-                    this.vocative = new VocativeSex(first_name, 'M', mb_substr(first_name, 0, -1) . 'o');
-                    break;
-                case in_array(mb_substr(first_name, -2, 2), array('oe', 'ue')) :
-                    this.vocative = new VocativeSex(first_name, 'M', first_name);
-                    break;
-                case mb_substr(first_name, -2, 2) == 'oń':
-                    this.vocative = new VocativeSex(first_name, 'M', mb_substr(first_name, 0, -1) . 'niu');
-                    break;
-                case in_array(mb_substr(first_name, -1, 1), array('n', 'f', 'm', 'w', 'p', 's', 'b')):
-                    this.vocative = new VocativeSex(first_name, 'M', first_name . 'ie');
-                    break;
-                case mb_substr(first_name, -3, 3) == 'bel':
-                    this.vocative = new VocativeSex(first_name, 'M', mb_substr(first_name, 0, -3) . 'ble');
-                    break;
-                case mb_substr(first_name, -2, 2) == 'ez':
-                    this.vocative = new VocativeSex(first_name, 'W', first_name);
-                    break;
-                case in_array(mb_substr(first_name, -1, 1), array('g', 'h', 'j', 'k', 'l', 'z')):
-                    this.vocative = new VocativeSex(first_name, 'M', first_name . 'u');
-                    break;
-                case mb_substr(first_name, -3, 3) == 'der':
-                    this.vocative = new VocativeSex(first_name, 'M', mb_substr(first_name, 0, -2) . 'rze');
-                    break;
-                case mb_substr(first_name, -4, 4) == 'ster':
-                    this.vocative = new VocativeSex(first_name, 'M', mb_substr(first_name, 0, -2) . 'rze');
-                    break;
-                case mb_substr(first_name, -1, 1) == 'r':
-                    this.vocative = new VocativeSex(first_name, 'M', first_name . 'ze');
-                    break;
-                case mb_substr(first_name, -1, 1) == 'd':
-                    this.vocative = new VocativeSex(first_name, 'M', first_name . 'zie');
-                    break;
-                case mb_substr(first_name, -1, 1) == 'a':
-                    this.vocative = new VocativeSex(first_name, 'W', mb_substr(first_name, 0, -1) . 'o');
-                    break;
-                case mb_substr(first_name, -1, 1) == 'e':
-                    this.vocative = new VocativeSex(first_name, 'W', first_name);
-                    break;
-                case mb_substr(first_name, -1, 1) == 'y':
-                    this.vocative = new VocativeSex(first_name, 'M', first_name);
-                    break;
-                case mb_substr(first_name, -1, 1) == 'o':
-                    this.vocative = new VocativeSex(first_name, 'M', first_name);
-                    break;
-                case mb_substr(first_name, -1, 1) == 't':
-                    this.vocative = new VocativeSex(first_name, 'M', mb_substr(first_name, 0, -1) . 'cie');
-                    break;
-                default:
-                    this.vocative = new VocativeSex(first_name, 'U', first_name);
+
+            if ( new Set<String>{'ni', 'li', 'zi'}.contains(((first_name.substring(first_nameLength-2, first_nameLength))))) {
+                this.vocative = new VocativeSex(first_name, 'M', first_name);
+            }
+            else if ( (first_name.substring(first_nameLength-2, first_nameLength)) == 'eł') {
+                this.vocative = new VocativeSex(first_name, 'M', (first_name.substring(0, first_nameLength-2)) + 'le');
+            }
+            else if ( (first_name.substring(first_nameLength-2, first_nameLength)) == 'ił') {
+                this.vocative = new VocativeSex(first_name, 'M', (first_name.substring(0, first_nameLength)) + 'le');
+            }
+            else if ( (first_name.substring(first_nameLength-2, first_nameLength)) == 'et') {
+                this.vocative = new VocativeSex(first_name, 'M', (first_name.substring(0, first_nameLength)) + 'cie');
+            }
+            else if ( (first_name.substring(first_nameLength-2, first_nameLength)) == 'tr') {
+                this.vocative = new VocativeSex(first_name, 'M', first_name + 'ze');
+            }
+            else if ( (first_name.substring(first_nameLength-2, first_nameLength)) == 'ał') {
+                this.vocative = new VocativeSex(first_name, 'M', (first_name.substring(0, first_nameLength)) + 'le');
+            }
+            else if ( new Set<String>{'it', 'rt'}.contains(((first_name.substring(first_nameLength-2, first_nameLength))))) {
+                this.vocative = new VocativeSex(first_name, 'M', (first_name.substring(0, first_nameLength)) + 'cie');
+            }
+            else if ( (first_name.substring(first_nameLength-4, first_nameLength)) == 'ciek') {
+                this.vocative = new VocativeSex(first_name, 'M', (first_name.substring(0, first_nameLength-4)) + 'ćku');
+            }
+            else if ( (first_name.substring(first_nameLength-4, first_nameLength)) == 'siek') {
+                this.vocative = new VocativeSex(first_name, 'M', (first_name.substring(0, first_nameLength-4)) + 'śku');
+            }
+            else if ( (first_name.substring(first_nameLength-4, first_nameLength)) == 'niec') {
+                this.vocative = new VocativeSex(first_name, 'M', (first_name.substring(0, first_nameLength-4)) + 'ńcu');
+            }
+            else if ( (first_name.substring(first_nameLength-3, first_nameLength)) == 'per') {
+                this.vocative = new VocativeSex(first_name, 'M', (first_name.substring(0, first_nameLength-2)) + 'rze');
+            }
+            else if ( new Set<String>{'ek', 'ko'}.contains(((first_name.substring(first_nameLength-2, first_nameLength))))) {
+                this.vocative = new VocativeSex(first_name, 'M', (first_name.substring(0, first_nameLength-2)) + 'ku');
+            }
+            else if ( (first_name.substring(first_nameLength-2, first_nameLength)) == 'st') {
+                this.vocative = new VocativeSex(first_name, 'M', (first_name.substring(0, first_nameLength-2)) + 'ście');
+            }
+            else if ( (first_name.substring(first_nameLength-2, first_nameLength)) == 'sł') {
+                this.vocative = new VocativeSex(first_name, 'M', (first_name.substring(0, first_nameLength-2)) + 'śle');
+            }
+            else if ( new Set<String>{'cja', 'ria', 'lia', 'dia', 'wia', 'fia'}.contains(((first_name.substring(first_nameLength-3, first_nameLength))))
+                    ||  new Set<String>{'iela', 'bela', 'zula', 'saba'}.contains(((first_name.substring(first_nameLength-4, first_nameLength))))) {
+                this.vocative = new VocativeSex(first_name, 'W', (first_name.substring(0, first_nameLength)) + 'o');
+            }
+            else if ( new Set<String>{'iola', 'rola'}.contains(((first_name.substring(first_nameLength-4, first_nameLength)))) ) {
+                this.vocative = new VocativeSex(first_name, 'W', (first_name.substring(0, first_nameLength)) + 'u');
+            }
+            else if ( new Set<String>{'aja', 'sia'}.contains(((first_name.substring(first_nameLength-3, first_nameLength)))) ) {
+                this.vocative = new VocativeSex(first_name, 'W', (first_name.substring(0, first_nameLength)) + 'u');
+            }
+            else if ( new Set<String>{'ja', 'ia', 'la'}.contains(((first_name.substring(first_nameLength-2, first_nameLength)))) ) {
+                this.vocative = new VocativeSex(first_name, 'W', (first_name.substring(0, first_nameLength)) + 'o');
+            }
+            else if ( (first_name.substring(first_nameLength-2, first_nameLength)) == 'ba') {
+                this.vocative = new VocativeSex(first_name, 'M', (first_name.substring(0, first_nameLength)) + 'o');
+            }
+            else if ( new Set<String>{'oe', 'ue'}.contains(((first_name.substring(first_nameLength-2, first_nameLength)))) ) {
+                this.vocative = new VocativeSex(first_name, 'M', first_name);
+            }
+            else if ( (first_name.substring(first_nameLength-2, first_nameLength)) == 'oń') {
+                this.vocative = new VocativeSex(first_name, 'M', (first_name.substring(0, first_nameLength)) + 'niu');
+            }
+            else if ( new Set<String>{'n', 'f', 'm', 'w', 'p', 's', 'b'}.contains(((first_name.substring(first_nameLength-1, first_nameLength))))) {
+                this.vocative = new VocativeSex(first_name, 'M', first_name + 'ie');
+            }
+            else if ( (first_name.substring(first_nameLength-3, first_nameLength)) == 'bel') {
+                this.vocative = new VocativeSex(first_name, 'M', (first_name.substring(0, first_nameLength-3)) + 'ble');
+            }
+            else if ( (first_name.substring(first_nameLength-2, first_nameLength)) == 'ez') {
+                this.vocative = new VocativeSex(first_name, 'W', first_name);
+            }
+            else if ( new Set<String>{'g', 'h', 'j', 'k', 'l', 'z'}.contains(((first_name.substring(first_nameLength-1, first_nameLength))))) {
+                this.vocative = new VocativeSex(first_name, 'M', first_name + 'u');
+            }
+            else if ( (first_name.substring(first_nameLength-3, first_nameLength)) == 'der') {
+                this.vocative = new VocativeSex(first_name, 'M', (first_name.substring(0, first_nameLength-2)) + 'rze');
+            }
+            else if ( (first_name.substring(first_nameLength-4, first_nameLength)) == 'ster') {
+                this.vocative = new VocativeSex(first_name, 'M', (first_name.substring(0, first_nameLength-2)) + 'rze');
+            }
+            else if ( (first_name.substring(first_nameLength-1, first_nameLength)) == 'r') {
+                this.vocative = new VocativeSex(first_name, 'M', first_name + 'ze');
+            }
+            else if ( (first_name.substring(first_nameLength-1, first_nameLength)) == 'd') {
+                this.vocative = new VocativeSex(first_name, 'M', first_name + 'zie');
+            }
+            else if ( (first_name.substring(first_nameLength-1, first_nameLength)) == 'a') {
+                this.vocative = new VocativeSex(first_name, 'W', (first_name.substring(0, first_nameLength)) + 'o');
+            }
+            else if ( (first_name.substring(first_nameLength-1, first_nameLength)) == 'e') {
+                this.vocative = new VocativeSex(first_name, 'W', first_name);
+            }
+            else if ( (first_name.substring(first_nameLength-1, first_nameLength)) == 'y') {
+                this.vocative = new VocativeSex(first_name, 'M', first_name);
+            }
+            else if ( (first_name.substring(first_nameLength-1, first_nameLength)) == 'o') {
+                this.vocative = new VocativeSex(first_name, 'M', first_name);
+            }
+            else if ( (first_name.substring(first_nameLength-1, first_nameLength)) == 't') {
+                this.vocative = new VocativeSex(first_name, 'M', (first_name.substring(0, first_nameLength)) + 'cie');
+            }
+            else {
+                this.vocative = new VocativeSex(first_name, 'U', first_name);
             }
         }
     }
