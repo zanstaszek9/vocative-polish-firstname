@@ -318,112 +318,111 @@ public class VocativePolishFirstName {
 
             try {
 
-            if ( new Set<String>{'ni', 'li', 'zi'}.contains(((first_name.substring(first_nameLength-2, first_nameLength))))) {
-                this.vocative = new VocativeSex(first_name, 'M', first_name);
-            }
-            else if ( (first_name.endsWithIgnoreCase('eł'))) {
-                this.vocative = new VocativeSex(first_name, 'M', (first_name.substring(0, first_nameLength-2)) + 'le');
-            }
-            else if ( (first_name.endsWithIgnoreCase('ił'))) {
-                this.vocative = new VocativeSex(first_name, 'M', (first_name.substring(0, first_nameLength)) + 'le');
-            }
-            else if ( (first_name.endsWithIgnoreCase('et'))) {
-                this.vocative = new VocativeSex(first_name, 'M', (first_name.substring(0, first_nameLength)) + 'cie');
-            }
-            else if ( (first_name.endsWithIgnoreCase('tr'))) {
-                this.vocative = new VocativeSex(first_name, 'M', first_name + 'ze');
-            }
-            else if ( (first_name.endsWithIgnoreCase('ał'))) {
-                this.vocative = new VocativeSex(first_name, 'M', (first_name.substring(0, first_nameLength)) + 'le');
-            }
-            else if ( new Set<String>{'it', 'rt'}.contains(((first_name.substring(first_nameLength-2, first_nameLength))))) {
-                this.vocative = new VocativeSex(first_name, 'M', (first_name.substring(0, first_nameLength)) + 'cie');
-            }
-            else if ( (first_name.endsWithIgnoreCase('ciek'))) {
-                this.vocative = new VocativeSex(first_name, 'M', (first_name.substring(0, first_nameLength-4)) + 'ćku');
-            }
-            else if ( (first_name.endsWithIgnoreCase('siek'))) {
-                this.vocative = new VocativeSex(first_name, 'M', (first_name.substring(0, first_nameLength-4)) + 'śku');
-            }
-            else if ( (first_name.endsWithIgnoreCase('niec'))) {
-                this.vocative = new VocativeSex(first_name, 'M', (first_name.substring(0, first_nameLength-4)) + 'ńcu');
-            }
-            else if ( (first_name.endsWithIgnoreCase('per'))) {
-                this.vocative = new VocativeSex(first_name, 'M', (first_name.substring(0, first_nameLength-2)) + 'rze');
-            }
-            else if ( new Set<String>{'ek', 'ko'}.contains(((first_name.substring(first_nameLength-2, first_nameLength))))) {
-                this.vocative = new VocativeSex(first_name, 'M', (first_name.substring(0, first_nameLength-2)) + 'ku');
-            }
-            else if ( (first_name.endsWithIgnoreCase('st'))) {
-                this.vocative = new VocativeSex(first_name, 'M', (first_name.substring(0, first_nameLength-2)) + 'ście');
-            }
-            else if ( (first_name.endsWithIgnoreCase('sł'))) {
-                this.vocative = new VocativeSex(first_name, 'M', (first_name.substring(0, first_nameLength-2)) + 'śle');
-            }
-            else if ( new Set<String>{'cja', 'ria', 'lia', 'dia', 'wia', 'fia'}.contains(((first_name.substring(first_nameLength-3, first_nameLength))))
-                    ||  new Set<String>{'iela', 'bela', 'zula', 'saba'}.contains(((first_name.substring(first_nameLength-4, first_nameLength))))) {
-                this.vocative = new VocativeSex(first_name, 'W', (first_name.substring(0, first_nameLength)) + 'o');
-            }
-            else if ( new Set<String>{'iola', 'rola'}.contains(((first_name.substring(first_nameLength-4, first_nameLength)))) ) {
-                this.vocative = new VocativeSex(first_name, 'W', (first_name.substring(0, first_nameLength)) + 'u');
-            }
-            else if ( new Set<String>{'aja', 'sia'}.contains(((first_name.substring(first_nameLength-3, first_nameLength)))) ) {
-                this.vocative = new VocativeSex(first_name, 'W', (first_name.substring(0, first_nameLength)) + 'u');
-            }
-            else if ( new Set<String>{'ja', 'ia', 'la'}.contains(((first_name.substring(first_nameLength-2, first_nameLength)))) ) {
-                this.vocative = new VocativeSex(first_name, 'W', (first_name.substring(0, first_nameLength)) + 'o');
-            }
-            else if ( (first_name.endsWithIgnoreCase('ba'))) {
-                this.vocative = new VocativeSex(first_name, 'M', (first_name.substring(0, first_nameLength)) + 'o');
-            }
-            else if ( new Set<String>{'oe', 'ue'}.contains(((first_name.substring(first_nameLength-2, first_nameLength)))) ) {
-                this.vocative = new VocativeSex(first_name, 'M', first_name);
-            }
-            else if ( (first_name.endsWithIgnoreCase('oń'))) {
-                this.vocative = new VocativeSex(first_name, 'M', (first_name.substring(0, first_nameLength)) + 'niu');
-            }
-            else if ( new Set<String>{'n', 'f', 'm', 'w', 'p', 's', 'b'}.contains(((first_name.substring(first_nameLength-1, first_nameLength))))) {
-                this.vocative = new VocativeSex(first_name, 'M', first_name + 'ie');
-            }
-            else if ( (first_name.endsWithIgnoreCase('bel'))) {
-                this.vocative = new VocativeSex(first_name, 'M', (first_name.substring(0, first_nameLength-3)) + 'ble');
-            }
-            else if ( (first_name.endsWithIgnoreCase('ez'))) {
-                this.vocative = new VocativeSex(first_name, 'W', first_name);
-            }
-            else if ( new Set<String>{'g', 'h', 'j', 'k', 'l', 'z'}.contains(((first_name.substring(first_nameLength-1, first_nameLength))))) {
-                this.vocative = new VocativeSex(first_name, 'M', first_name + 'u');
-            }
-            else if ( (first_name.endsWithIgnoreCase('der'))) {
-                this.vocative = new VocativeSex(first_name, 'M', (first_name.substring(0, first_nameLength-2)) + 'rze');
-            }
-            else if ( (first_name.endsWithIgnoreCase('ster'))) {
-                this.vocative = new VocativeSex(first_name, 'M', (first_name.substring(0, first_nameLength-2)) + 'rze');
-            }
-            else if ( (first_name.endsWithIgnoreCase('r'))) {
-                this.vocative = new VocativeSex(first_name, 'M', first_name + 'ze');
-            }
-            else if ( (first_name.endsWithIgnoreCase('d'))) {
-                this.vocative = new VocativeSex(first_name, 'M', first_name + 'zie');
-            }
-            else if ( (first_name.endsWithIgnoreCase('a'))) {
-                this.vocative = new VocativeSex(first_name, 'W', (first_name.substring(0, first_nameLength)) + 'o');
-            }
-            else if ( (first_name.endsWithIgnoreCase('e'))) {
-                this.vocative = new VocativeSex(first_name, 'W', first_name);
-            }
-            else if ( (first_name.endsWithIgnoreCase('y'))) {
-                this.vocative = new VocativeSex(first_name, 'M', first_name);
-            }
-            else if ( (first_name.endsWithIgnoreCase('o'))) {
-                this.vocative = new VocativeSex(first_name, 'M', first_name);
-            }
-            else if ( (first_name.endsWithIgnoreCase('t'))) {
-                this.vocative = new VocativeSex(first_name, 'M', (first_name.substring(0, first_nameLength)) + 'cie');
-            }
-            else {
-                this.vocative = new VocativeSex(first_name, 'U', first_name);
-            }
+                if ( new Set<String>{'ni', 'li', 'zi'}.contains(((first_name.substring(first_nameLength-2, first_nameLength))))) {
+                    this.vocative = new VocativeSex(first_name, 'M', first_name);
+                }
+                else if ( (first_name.endsWithIgnoreCase('eł'))) {
+                    this.vocative = new VocativeSex(first_name, 'M', (first_name.substring(0, first_nameLength-2)) + 'le');
+                }
+                else if ( (first_name.endsWithIgnoreCase('ił'))) {
+                    this.vocative = new VocativeSex(first_name, 'M', (first_name.substring(0, first_nameLength)) + 'le');
+                }
+                else if ( (first_name.endsWithIgnoreCase('et'))) {
+                    this.vocative = new VocativeSex(first_name, 'M', (first_name.substring(0, first_nameLength)) + 'cie');
+                }
+                else if ( (first_name.endsWithIgnoreCase('tr'))) {
+                    this.vocative = new VocativeSex(first_name, 'M', first_name + 'ze');
+                }
+                else if ( (first_name.endsWithIgnoreCase('ał'))) {
+                    this.vocative = new VocativeSex(first_name, 'M', (first_name.substring(0, first_nameLength)) + 'le');
+                }
+                else if ( new Set<String>{'it', 'rt'}.contains(((first_name.substring(first_nameLength-2, first_nameLength))))) {
+                    this.vocative = new VocativeSex(first_name, 'M', (first_name.substring(0, first_nameLength)) + 'cie');
+                }
+                else if ( (first_name.endsWithIgnoreCase('ciek'))) {
+                    this.vocative = new VocativeSex(first_name, 'M', (first_name.substring(0, first_nameLength-4)) + 'ćku');
+                }
+                else if ( (first_name.endsWithIgnoreCase('siek'))) {
+                    this.vocative = new VocativeSex(first_name, 'M', (first_name.substring(0, first_nameLength-4)) + 'śku');
+                }
+                else if ( (first_name.endsWithIgnoreCase('niec'))) {
+                    this.vocative = new VocativeSex(first_name, 'M', (first_name.substring(0, first_nameLength-4)) + 'ńcu');
+                }
+                else if ( (first_name.endsWithIgnoreCase('per'))) {
+                    this.vocative = new VocativeSex(first_name, 'M', (first_name.substring(0, first_nameLength-2)) + 'rze');
+                }
+                else if ( new Set<String>{'ek', 'ko'}.contains(((first_name.substring(first_nameLength-2, first_nameLength))))) {
+                    this.vocative = new VocativeSex(first_name, 'M', (first_name.substring(0, first_nameLength-2)) + 'ku');
+                }
+                else if ( (first_name.endsWithIgnoreCase('st'))) {
+                    this.vocative = new VocativeSex(first_name, 'M', (first_name.substring(0, first_nameLength-2)) + 'ście');
+                }
+                else if ( (first_name.endsWithIgnoreCase('sł'))) {
+                    this.vocative = new VocativeSex(first_name, 'M', (first_name.substring(0, first_nameLength-2)) + 'śle');
+                }
+                else if (endsWithAnySpecifiedIgnoreCase(first_name, new Set<String>{'cja', 'ria', 'lia', 'dia', 'wia', 'fia', 'iela', 'bela', 'zula', 'saba'})) {
+                    this.vocative = new VocativeSex(first_name, 'W', (first_name.substring(0, first_nameLength)) + 'o');
+                }
+                else if ( new Set<String>{'iola', 'rola'}.contains(((first_name.substring(first_nameLength-4, first_nameLength)))) ) {
+                    this.vocative = new VocativeSex(first_name, 'W', (first_name.substring(0, first_nameLength)) + 'u');
+                }
+                else if ( new Set<String>{'aja', 'sia'}.contains(((first_name.substring(first_nameLength-3, first_nameLength)))) ) {
+                    this.vocative = new VocativeSex(first_name, 'W', (first_name.substring(0, first_nameLength)) + 'u');
+                }
+                else if ( new Set<String>{'ja', 'ia', 'la'}.contains(((first_name.substring(first_nameLength-2, first_nameLength)))) ) {
+                    this.vocative = new VocativeSex(first_name, 'W', (first_name.substring(0, first_nameLength)) + 'o');
+                }
+                else if ( (first_name.endsWithIgnoreCase('ba'))) {
+                    this.vocative = new VocativeSex(first_name, 'M', (first_name.substring(0, first_nameLength)) + 'o');
+                }
+                else if ( new Set<String>{'oe', 'ue'}.contains(((first_name.substring(first_nameLength-2, first_nameLength)))) ) {
+                    this.vocative = new VocativeSex(first_name, 'M', first_name);
+                }
+                else if ( (first_name.endsWithIgnoreCase('oń'))) {
+                    this.vocative = new VocativeSex(first_name, 'M', (first_name.substring(0, first_nameLength)) + 'niu');
+                }
+                else if ( new Set<String>{'n', 'f', 'm', 'w', 'p', 's', 'b'}.contains(((first_name.substring(first_nameLength-1, first_nameLength))))) {
+                    this.vocative = new VocativeSex(first_name, 'M', first_name + 'ie');
+                }
+                else if ( (first_name.endsWithIgnoreCase('bel'))) {
+                    this.vocative = new VocativeSex(first_name, 'M', (first_name.substring(0, first_nameLength-3)) + 'ble');
+                }
+                else if ( (first_name.endsWithIgnoreCase('ez'))) {
+                    this.vocative = new VocativeSex(first_name, 'W', first_name);
+                }
+                else if ( new Set<String>{'g', 'h', 'j', 'k', 'l', 'z'}.contains(((first_name.substring(first_nameLength-1, first_nameLength))))) {
+                    this.vocative = new VocativeSex(first_name, 'M', first_name + 'u');
+                }
+                else if ( (first_name.endsWithIgnoreCase('der'))) {
+                    this.vocative = new VocativeSex(first_name, 'M', (first_name.substring(0, first_nameLength-2)) + 'rze');
+                }
+                else if ( (first_name.endsWithIgnoreCase('ster'))) {
+                    this.vocative = new VocativeSex(first_name, 'M', (first_name.substring(0, first_nameLength-2)) + 'rze');
+                }
+                else if ( (first_name.endsWithIgnoreCase('r'))) {
+                    this.vocative = new VocativeSex(first_name, 'M', first_name + 'ze');
+                }
+                else if ( (first_name.endsWithIgnoreCase('d'))) {
+                    this.vocative = new VocativeSex(first_name, 'M', first_name + 'zie');
+                }
+                else if ( (first_name.endsWithIgnoreCase('a'))) {
+                    this.vocative = new VocativeSex(first_name, 'W', (first_name.substring(0, first_nameLength)) + 'o');
+                }
+                else if ( (first_name.endsWithIgnoreCase('e'))) {
+                    this.vocative = new VocativeSex(first_name, 'W', first_name);
+                }
+                else if ( (first_name.endsWithIgnoreCase('y'))) {
+                    this.vocative = new VocativeSex(first_name, 'M', first_name);
+                }
+                else if ( (first_name.endsWithIgnoreCase('o'))) {
+                    this.vocative = new VocativeSex(first_name, 'M', first_name);
+                }
+                else if ( (first_name.endsWithIgnoreCase('t'))) {
+                    this.vocative = new VocativeSex(first_name, 'M', (first_name.substring(0, first_nameLength)) + 'cie');
+                }
+                else {
+                    this.vocative = new VocativeSex(first_name, 'U', first_name);
+                }
 
             }
             catch (StringException e) {
