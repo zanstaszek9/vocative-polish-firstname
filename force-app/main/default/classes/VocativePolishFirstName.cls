@@ -271,8 +271,8 @@ public class VocativePolishFirstName {
             return null;
         }
 
-        if (nameWithException.hasDefinedVocativeAndSex()) {
-            throw new VocativePolishFirstNameException('Invalid format');
+        if (!nameWithException.hasDefinedVocativeAndSex()) {
+            throw new VocativePolishFirstNameException('Invalid format - exception to the rules of firstname must have specified gender and vocative form.');
         }
 
         switch on nameWithException.sex {
@@ -307,13 +307,12 @@ public class VocativePolishFirstName {
             VocativeSex tempVocative = this.checkExceptions(first_name);
 
             if (tempVocative != null) {
-                this.vocative = vocative;
+                this.vocative = tempVocative;
                 return;
             }
 
             final Integer first_nameLength = first_name.length();
 
-            System.debug('%%% STZAN1 class: VocativePolishFirstName, method: remakeToVocative; 2022-01-31, first_name: ' + first_name);
             System.debug('%%% STZAN2 class: VocativePolishFirstName, method: remakeToVocative; 2022-01-31, first_name subs: ' + first_name.substring(first_nameLength-1, first_nameLength));
 
             try {
