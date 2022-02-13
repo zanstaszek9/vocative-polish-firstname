@@ -38,4 +38,17 @@ private class VocativePolishFirstNameTest {
         System.assert(!VocativePolishFirstName.endsWithAnySpecifiedIgnoreCase('Ada', new Set<String> {'longerThanName'}));
 
     }
+
+    @IsTest
+    static void shouldProcessCorrectlyOnPolishDiacritics() {
+        System.assertEquals('Bogusądzie', new VocativePolishFirstName('Bogusąd', '', new Map<String, String>(), new Map<String, VocativePolishFirstName.VocativeSex>() ).getVocativeFirstName());
+        System.assertEquals('Więcemile', new VocativePolishFirstName('Więcemił', '', new Map<String, String>(), new Map<String, VocativePolishFirstName.VocativeSex>() ).getVocativeFirstName());
+        System.assertEquals('Kiryle', new VocativePolishFirstName('Kirył', '', new Map<String, String>(), new Map<String, VocativePolishFirstName.VocativeSex>() ).getVocativeFirstName());
+        System.assertEquals('Czechoniu', new VocativePolishFirstName('Czechoń', '', new Map<String, String>(), new Map<String, VocativePolishFirstName.VocativeSex>() ).getVocativeFirstName());
+        System.assertEquals('Mściwóju', new VocativePolishFirstName('Mściwój', '', new Map<String, String>(), new Map<String, VocativePolishFirstName.VocativeSex>() ).getVocativeFirstName());
+        System.assertEquals('Świętopełku', new VocativePolishFirstName('Świętopełk', '', new Map<String, String>(), new Map<String, VocativePolishFirstName.VocativeSex>() ).getVocativeFirstName());
+        System.assertEquals('Andżeliko', new VocativePolishFirstName('Andżelika', '', new Map<String, String>(), new Map<String, VocativePolishFirstName.VocativeSex>() ).getVocativeFirstName());
+
+
+    }
 }
