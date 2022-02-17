@@ -45,4 +45,15 @@ private class VocativePolishFirstNameTest {
 
 
     }
+
+    @IsTest
+    static void shouldProcessDoubleBarreledName() {
+        System.assertEquals('Janie-Krzysztofie', new VocativePolishFirstName('Jan-Krzysztof', '', new Map<String, String>(), new Map<String, VocativePolishFirstName.VocativeSex>()).getVocativeFirstName());
+    }
+
+    @IsTest
+    static void shouldProcessDoubleName() {
+        // TODO: Assume gender from first name
+        System.assertEquals('Janie Mario', new VocativePolishFirstName('Jan Maria', '', new Map<String, String>(), new Map<String, VocativePolishFirstName.VocativeSex>()).getVocativeFirstName());
+    }
 }
