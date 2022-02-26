@@ -45,4 +45,12 @@ private class VocativePolishFirstNameTest {
 
 
     }
+
+    @IsTest
+    static void shouldReturnProperTitlesForDefaultSexes() {
+        System.assert(new VocativePolishFirstName('Krzysztof', '', new Map<String, String>(), new Map<String, VocativePolishFirstName.VocativeSex>()).getVocativeStringWithTitle().startsWith('Panie'));
+        System.assert(new VocativePolishFirstName('Alicja', '', new Map<String, String>(), new Map<String, VocativePolishFirstName.VocativeSex>()).getVocativeStringWithTitle().startsWith('Pani'));
+        System.assert(new VocativePolishFirstName('Maliq', '', new Map<String, String>(), new Map<String, VocativePolishFirstName.VocativeSex>()).getVocativeStringWithTitle().startsWith('Panie/Pani'));
+    }
+
 }

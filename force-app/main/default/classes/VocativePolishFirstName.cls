@@ -178,19 +178,27 @@ public class VocativePolishFirstName {
     public String getVocativeFirstName() { //TODO: Change name
         return this.vocative.vocative;
     }
-/*
-    *//**
-     * Returns title
+    /**
+     * @description Returns title for a given Group that has been previously defined
      *
-     * @param string group
-     * @return string
-     *//*
-    public  getDetectedTitle(group = 'default')
-    {
-        return this.titles[group][this.vocative[0]];
+     * @param aGroup
+     *
+     * @return String
+     */
+    public String getDetectedTitle(String aGroup){
+        return this.titles.get(aGroup).get(this.vocative.sex);
     }
 
-    *//**
+    /**
+     * @description Returns title for default settings
+     *
+     * @return string
+     */
+    public String getDetectedTitle() {
+        return this.getDetectedTitle('default');
+    }
+
+    /**
      * Returns gender M - Male, W - Woman, U - Unknown
      *
      * @return string
@@ -229,17 +237,35 @@ public class VocativePolishFirstName {
         return false;
     }
 
-    *//**
+    /**
      * Return vocative first name with title
      *
      * @param string delimiter default ' ' (space)
      * @param string group
      * @return string
-     *//*
-    public  getVocativeString(delimiter = ' ', group = 'default')
-    {
-        return this.getDetectedTitle(group) . delimiter . this.getVocativeFirstName();
-    }*/
+     */
+    public String getVocativeStringWithTitle(String delimiter, String aGroup) {
+        return this.getDetectedTitle(aGroup) + delimiter + this.getVocativeFirstName();
+    }
+
+    /**
+     * @description Return vocative first name with title, with specified delimiter and default Group
+     * @param delimiter
+     * @return String
+     */
+    public String getVocativeStringWithTitle(String delimiter) {
+        return getVocativeStringWithTitle(delimiter, 'default');
+    }
+
+    // TODO: Missing 'getVocativeStringWithTitle' with Group as a parameter as it's String as well.
+    /**
+     * @description Return vocative first name with title, with delimiter of Space and default Group
+     *
+     * @return String
+     */
+    public String getVocativeStringWithTitle() {
+        return getVocativeStringWithTitle(' ', 'default');
+    }
 
     /**
      * @description Convert name to first letter up
