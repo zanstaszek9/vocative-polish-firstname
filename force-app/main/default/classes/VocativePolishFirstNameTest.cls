@@ -53,4 +53,22 @@ private class VocativePolishFirstNameTest {
         System.assert(new VocativePolishFirstName('Maliq', '', new Map<String, String>(), new Map<String, VocativePolishFirstName.VocativeSex>()).getVocativeStringWithTitle().startsWith('Panie/Pani'));
     }
 
+    @IsTest
+    static void shouldReturnProperGender() {
+        System.assertEquals('M', new VocativePolishFirstName('Krzysztof', '', new Map<String, String>(), new Map<String, VocativePolishFirstName.VocativeSex>()).getDetectedGender());
+        System.assertEquals('W', new VocativePolishFirstName('Alicja', '', new Map<String, String>(), new Map<String, VocativePolishFirstName.VocativeSex>()).getDetectedGender());
+        System.assertEquals('U', new VocativePolishFirstName('Maliq', '', new Map<String, String>(), new Map<String, VocativePolishFirstName.VocativeSex>()).getDetectedGender());
+    }
+
+    @IsTest
+    static void shouldReturnTrueForMaleName() {
+        System.assert(new VocativePolishFirstName('Krzysztof', '', new Map<String, String>(), new Map<String, VocativePolishFirstName.VocativeSex>()).isMan());
+
+    }
+
+    @IsTest
+    static void shouldReturnTrueForFemaleName() {
+        System.assert(new VocativePolishFirstName('Alicja', '', new Map<String, String>(), new Map<String, VocativePolishFirstName.VocativeSex>()).isWoman());
+    }
+
 }

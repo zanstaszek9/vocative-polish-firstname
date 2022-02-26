@@ -202,35 +202,34 @@ public class VocativePolishFirstName {
      * Returns gender M - Male, W - Woman, U - Unknown
      *
      * @return string
-     *//*
-    public  getDetectedGender()
-    {
-        return this.vocative[0];
+     */
+    public String getDetectedGender() {
+        return this.vocative.sex;
     }
 
 
-    *//**
-     * Returns true if first name belongs to male
+    /**
+     * Returns true if first name belongs to man
      *
      * @return bool
-     *//*
-    public  isMale()
+     */
+    public Boolean isMan()
     {
-        if (this.vocative[0] == 'M') {
+        if (this.vocative.sex == 'M') {
             return true;
         }
 
         return false;
     }
 
-    *//**
+    /**
      * Returns true if first name belongs to woman
      *
      * @return bool
-     *//*
-    public  isWoman()
+     */
+    public Boolean isWoman()
     {
-        if (this.vocative[0] == 'W') {
+        if (this.vocative.sex == 'W') {
             return true;
         }
 
