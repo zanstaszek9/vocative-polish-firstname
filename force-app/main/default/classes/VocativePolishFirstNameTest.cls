@@ -71,4 +71,10 @@ private class VocativePolishFirstNameTest {
         System.assert(new VocativePolishFirstName('Alicja', '', new Map<String, String>(), new Map<String, VocativePolishFirstName.VocativeSex>()).isWoman());
     }
 
+
+    @IsTest
+    static void shouldCapitalizeDoubleName() {
+        System.assertEquals('Jan Krzysztof', VocativePolishFirstName.nameCaseConvert('jan krzysztof'));
+    }
+    
 }

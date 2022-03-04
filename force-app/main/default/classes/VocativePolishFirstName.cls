@@ -276,8 +276,9 @@ public class VocativePolishFirstName {
     public static String nameCaseConvert(String name) {
         // TODO: Jan-Krzysztof will fail
         String output = '';
-        final Matcher m = Pattern.compile('(([\\w*[\\u00c0-\\u017e]*\\w*]*)|\\W+)').matcher(name);
-        while (m.find()) output += m.group().capitalize();
+        for (String str : name.toLowerCase().splitByCharacterTypeCamelCase()) {
+            output += str.capitalize();
+        }
         return output;
     }
 
