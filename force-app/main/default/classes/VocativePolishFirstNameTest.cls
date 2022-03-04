@@ -82,4 +82,20 @@ private class VocativePolishFirstNameTest {
         System.assertEquals('Jan Krzysztof', VocativePolishFirstName.nameCaseConvert('jan krzysztof'));
     }
 
+
+    @IsTest
+    static void shouldProcessDoubleBarreledName() {
+        System.assertEquals('Janie-Krzysztofie', new VocativePolishFirstName('Jan-Krzysztof', '', new Map<String, String>(), new Map<String, VocativePolishFirstName.VocativeSex>()).getVocativeFirstName());
+    }
+
+    @IsTest
+    static void shouldProcessDoubleName() {
+        System.assertEquals('Janie Mario', new VocativePolishFirstName('Jan Maria', '', new Map<String, String>(), new Map<String, VocativePolishFirstName.VocativeSex>()).getVocativeFirstName());
+    }
+
+    @IsTest
+    static void shouldProcessTwoNamesWithConjunction() {
+        // TODO: Assume Undefined gender
+        System.assertEquals('Janie i Mario', new VocativePolishFirstName('Jan i Maria', '', new Map<String, String>(), new Map<String, VocativePolishFirstName.VocativeSex>()).getVocativeFirstName());
+    }
 }
