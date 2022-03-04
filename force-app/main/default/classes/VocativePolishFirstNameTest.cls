@@ -8,6 +8,7 @@ private class VocativePolishFirstNameTest {
     @IsTest
     static void checkAgainstAllVocativesFromFile() {
         final Map<String, String> namesWithWrongVocative = new Map<String, String>();
+        final Map<String, String> namesWithWrongGender = new Map<String, String>();
         //given
         final List<Contact> contacts = (List<Contact>) Test.loadData(Contact.SObjectType, 'imiona');
 
@@ -17,9 +18,13 @@ private class VocativePolishFirstNameTest {
             if (contact.LastName != nameWithVoc.getVocativeFirstName()){
                 namesWithWrongVocative.put(contact.LastName, nameWithVoc.getVocativeFirstName());
             }
+            if (contact.Gender__c != nameWithVoc.getDetectedGender()){
+                namesWithWrongGender.put(contact.Gender__c, nameWithVoc.getDetectedGender());
+            }
         }
         //then
         System.assert(namesWithWrongVocative.isEmpty(), namesWithWrongVocative.size() + ' vocatives were wrong: ' + namesWithWrongVocative);
+        System.assert(namesWithWrongGender.isEmpty(), namesWithWrongGender.size() + ' genders were wrong: ' + namesWithWrongGender);
     }
 
     @IsTest
@@ -76,5 +81,5 @@ private class VocativePolishFirstNameTest {
     static void shouldCapitalizeDoubleName() {
         System.assertEquals('Jan Krzysztof', VocativePolishFirstName.nameCaseConvert('jan krzysztof'));
     }
-    
+
 }
