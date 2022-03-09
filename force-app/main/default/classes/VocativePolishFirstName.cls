@@ -485,4 +485,32 @@ public class VocativePolishFirstName {
     public static String chopString(final String aString, final Integer amountOfLettersToRemoveFromRight) {
         return (aString.substring(0, aString.length() - amountOfLettersToRemoveFromRight));
     }
+
+    public class VocativeRule {
+        public Set<String> nameEndings;
+        public String gender;
+        public Integer replaceFromRight;
+        public String vocativeSuffix;
+
+
+        public VocativeRule(String nameEnding, String gender, Integer replaceFromRight, String vocativeSuffix) {
+            this(new Set<String>{nameEnding}, gender, replaceFromRight, vocativeSuffix);
+        }
+
+        public VocativeRule(Set<String> nameEndings, String gender, Integer replaceFromRight, String vocativeSuffix) {
+            this.nameEndings = nameEndings;
+            this.gender = gender;
+            this.replaceFromRight = replaceFromRight;
+            this.vocativeSuffix = vocativeSuffix;
+        }
+
+        public Boolean isEndingMatching(final String firstname){
+            return endsWithAnySpecifiedIgnoreCase(firstname, this.nameEndings);
+        }
+
+        public String getVocativeName(final String firstname){
+            return (chopString(firstname, this.replaceFromRight)) + vocativeSuffix;
+        }
+
+    }
 }
