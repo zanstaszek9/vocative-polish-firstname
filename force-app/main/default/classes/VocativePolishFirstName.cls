@@ -40,6 +40,7 @@ public class VocativePolishFirstName {
             this.sex = (String.isBlank(this.sex)) ? this.sex = sex : this.sex;
             this.vocative += vocative;
         }
+
         public void attachToVocativeSex(String denominatorName, VocativeRule vocativeRule) {
             this.sex = (String.isBlank(this.sex)) ? this.sex = vocativeRule.gender : this.sex;
             this.vocative += vocativeRule.getVocativeName(denominatorName);
@@ -109,6 +110,10 @@ public class VocativePolishFirstName {
         this.remakeToVocative(first_name);
     }
 
+    /**
+     * @description
+     * @param first_name
+     **/
     public VocativePolishFirstName(String first_name) {
         this(first_name, new Map<String, String>(), new Map<String, VocativePolishFirstName.VocativeSex>());
     }
@@ -125,7 +130,7 @@ public class VocativePolishFirstName {
     /**
      * @description Returns titles definition by group name
      *
-     * @param aGroup TODO: aGroup = 'default'
+     * @param aGroup
      *
      * @return Map<String, String>
      */
@@ -133,13 +138,8 @@ public class VocativePolishFirstName {
         return this.titles.get(aGroup);
     }
 
-    //TODO: add ApexDoc
-    public void setTitles(Map<String, String> titles) {
-        setTitles(titles, 'default');
-    }
-
     /**
-     * @description Setup own title
+     * @description Setup own titles like Mr&#47; Mrs, Panie&#47;Pani
      * <p/>
      * for english ex. ['U' => '', 'M' => 'Mrs.', 'W' => 'Mr.'];
      * <p/>
@@ -152,7 +152,26 @@ public class VocativePolishFirstName {
      * for polish ex. group: 'polite' => ['U' => '', 'M' => 'Szanowny Panie', 'W' => 'Szanowna Pani'];
      *
      * @param titles
-     * @param aGroup TODO:  group = 'default'
+     **/
+    public void setTitles(Map<String, String> titles) {
+        setTitles(titles, 'default');
+    }
+
+    /**
+     * @description Setup own titles like Mr&#47; Mrs, Panie&#47;Pani
+     * <p/>
+     * for english ex. ['U' => '', 'M' => 'Mrs.', 'W' => 'Mr.'];
+     * <p/>
+     * for polish ex. ['U' => '', 'M' => 'Szanowny Panie', 'W' => 'Szanowna Pani'];
+     * <p/>
+     * For multiple titles definitions use group name
+     * <p/>
+     * for polish ex. group: 'default' => ['U' => 'Panie &#47;  Pani', 'M' => 'Panie', 'W' => 'Pani'];
+     * <p/>
+     * for polish ex. group: 'polite' => ['U' => '', 'M' => 'Szanowny Panie', 'W' => 'Szanowna Pani'];
+     *
+     * @param titles
+     * @param aGroup
      */
     public void setTitles(Map<String, String> titles, String aGroup) {
         this.titles.put(aGroup, titles);
@@ -255,7 +274,6 @@ public class VocativePolishFirstName {
         return getVocativeStringWithTitle(delimiter, 'default');
     }
 
-    // TODO: Missing 'getVocativeStringWithTitle' with Group as a parameter as it's String as well.
     /**
      * @description Return vocative first name with title, with delimiter of Space and default Group
      *
@@ -266,7 +284,7 @@ public class VocativePolishFirstName {
     }
 
     /**
-     * @description Convert name to first letter up
+     * @description Convert name to make every first letter up, split by character type
      *
      * @param name
      *
@@ -317,9 +335,8 @@ public class VocativePolishFirstName {
      *
      * @param firstname first_name
      *
-     * @throws
+     * @throws VocativePolishFirstNameException
      */
-
     public void remakeToVocative(String firstname) {
         if (String.isBlank(firstname)) {
             throw new VocativePolishFirstNameException('First name cannot be empty');
@@ -329,10 +346,9 @@ public class VocativePolishFirstName {
             firstname = nameCaseConvert(firstname).trim();
             VocativeSex creatingVocative = new VocativeSex(firstname, '', '');
             this.vocative = creatingVocative;
+
             for (String first_name : firstname.splitByCharacterTypeCamelCase()) {
-
                 VocativeSex tempVocative = this.checkExceptions(first_name);
-
                 if (tempVocative != null) {
                     this.vocative = tempVocative;
                     return;
@@ -362,16 +378,30 @@ public class VocativePolishFirstName {
         }
     }
 
-    public static Boolean endsWithAnySpecifiedIgnoreCase(final String aString, final Set<String> suffixes) {
+    /**
+     * @description Check if last letters of toBeChopped matches all Suffixes
+     * @param toBeChecked String to check suffixes
+     * @param suffixes
+     *
+     * @return
+     **/
+    public static Boolean endsWithAnySpecifiedIgnoreCase(final String toBeChecked, final Set<String> suffixes) {
         Boolean doesStringEndsWithAnySuffix = false;
         for (String suffix : suffixes) {
-            doesStringEndsWithAnySuffix |= aString.endsWithIgnoreCase(suffix);
+            doesStringEndsWithAnySuffix |= toBeChecked.endsWithIgnoreCase(suffix);
         }
         return doesStringEndsWithAnySuffix;
     }
 
-    public static String chopString(final String aString, final Integer amountOfLettersToRemoveFromRight) {
-        return (aString.substring(0, aString.length() - amountOfLettersToRemoveFromRight));
+    /**
+     * @description Removes letters from the right
+     * @param toBeChopped String to be chopped
+     * @param amountOfLettersToRemoveFromRight
+     *
+     * @return
+     **/
+    public static String chopString(final String toBeChopped, final Integer amountOfLettersToRemoveFromRight) {
+        return (toBeChopped.substring(0, toBeChopped.length() - amountOfLettersToRemoveFromRight));
     }
 
     public class VocativeRule {
@@ -380,13 +410,24 @@ public class VocativePolishFirstName {
         public Integer replaceFromRight;
         public String vocativeSuffix;
 
-
+        /**
+         * @description
+         * @param nameEnding The last letters from tha name that allows to assume Vocative form
+         * @param gender A gender to assume
+         * @param replaceFromRight Amount of letters to chop from right
+         * @param vocativeSuffix Suffix to add to the end of string
+         **/
         public VocativeRule(String nameEnding, String gender, Integer replaceFromRight, String vocativeSuffix) {
-            this(new Set<String>{
-                    nameEnding
-            }, gender, replaceFromRight, vocativeSuffix);
+            this(new Set<String>{nameEnding}, gender, replaceFromRight, vocativeSuffix);
         }
 
+        /**
+         * @description
+         * @param nameEndings A group of the last letters from tha name that allows to assume Vocative form for all endings
+         * @param gender A gender to assume
+         * @param replaceFromRight Amount of letters to chop from right
+         * @param vocativeSuffix Suffix to add to the end of string
+         **/
         public VocativeRule(Set<String> nameEndings, String gender, Integer replaceFromRight, String vocativeSuffix) {
             this.nameEndings = nameEndings;
             this.gender = gender;
@@ -398,12 +439,21 @@ public class VocativePolishFirstName {
             return endsWithAnySpecifiedIgnoreCase(firstname, this.nameEndings);
         }
 
+        /**
+         * @description Return the actual Vocative form
+         * @param firstname
+         *
+         * @return Actual Vocative form
+         **/
         public String getVocativeName(final String firstname) {
             return (chopString(firstname, this.replaceFromRight)) + vocativeSuffix;
         }
 
     }
 
+    /**
+     * @description List of Vocative Rules with lazy-loading
+     **/
     public static List<VocativeRule> vocativeRules {
         public get {
             if (vocativeRules == null) {
@@ -415,6 +465,9 @@ public class VocativePolishFirstName {
         private set;
     }
 
+    /**
+     * @description Defined rules that should cover all standard Polish vocatives
+     **/
     public static void populateVocativeRules() {
         vocativeRules.add(new VocativeRule(new Set<String>{'ni', 'li', 'zi'}, 'M', 0, ''));
         vocativeRules.add(new VocativeRule('eł', 'M', 2, 'le'));
