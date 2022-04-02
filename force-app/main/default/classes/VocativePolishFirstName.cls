@@ -15,7 +15,7 @@ public class VocativePolishFirstName {
     /**
      * @description Structure to hold name, sex and vocative
      */
-    public class VocativeSex { //TODO: Change name
+    public class VocativePerson {
         public final String denominatorName;
         public String sex;
         public String vocative = '';
@@ -27,7 +27,7 @@ public class VocativePolishFirstName {
          * @param sex sex indication in form of letters, 'U' for 'Unable to define', 'W' for Woman, 'M' for Man
          * @param vocative name in vocative (pl. wołacz) form
          **/
-        public VocativeSex(String denominatorName, String sex, String vocative) {
+        public VocativePerson(String denominatorName, String sex, String vocative) {
             this.denominatorName = denominatorName;
             this.sex = sex;
             this.vocative = vocative;
@@ -45,7 +45,7 @@ public class VocativePolishFirstName {
             this.vocative += aString;
         }
 
-        public void attachToVocativeSex(String denominatorName, VocativeRule vocativeRule) {
+        public void attachToVocativePerson(String denominatorName, VocativeRule vocativeRule) {
             this.sex = (String.isBlank(this.sex)) ? this.sex = vocativeRule.gender : this.sex;
             this.vocative += vocativeRule.getVocativeName(denominatorName);
         }
@@ -73,32 +73,32 @@ public class VocativePolishFirstName {
             }
     };
 
-    private VocativeSex vocative;
+    private VocativePerson vocativePerson;
 
     /**
      * @description List of exceptions
      */
-    public final Map<String, VocativeSex> exceptions = new Map<String, VocativeSex>{
-            'Ola' => new VocativeSex('Ola', 'W', 'Olu'),
-            'Saba' => new VocativeSex('Saba', 'W', 'Sabo'),
-            'Noemi' => new VocativeSex('Noemi', 'W', 'Noemi'),
-            'Sonia' => new VocativeSex('Sonia', 'W', 'Soniu'),
-            'Luba' => new VocativeSex('Luba', 'W', 'Lubo'),
-            'Jeremi' => new VocativeSex('Jeremi', 'M', 'Jeremi'),
-            'Kirył' => new VocativeSex('Kirył', 'M', 'Kiryle'),
-            'Miriam' => new VocativeSex('Miriam', 'W', 'Miriam'),
-            'Margot' => new VocativeSex('Margot', 'W', 'Margot'),
-            'Ingrid' => new VocativeSex('Ingrid', 'W', 'Ingrid'),
-            'Lew' => new VocativeSex('Lew', 'M', 'Lwie'),
-            'Narcyz' => new VocativeSex('Narcyz', 'M', 'Narcyzie'),
-            'Kosma' => new VocativeSex('Kosma', 'M', 'Kosmo'),
-            'Bonawentura' => new VocativeSex('Bonawentura', 'M', 'Bonawenturo'),
-            'Carmen' => new VocativeSex('Carmen', 'W', 'Carmen'),
-            'Doris' => new VocativeSex('Doris', 'W', 'Doris'),
-            'Dolores' => new VocativeSex('Dolores', 'W', 'Dolores'),
-            'Abigail' => new VocativeSex('Abigail', 'W', 'Abigail'),
-            'Nikolett' => new VocativeSex('Nikolett', 'W', 'Nikoletto'),
-            'Ania' => new VocativeSex('Ania', 'W', 'Aniu')
+    public final Map<String, VocativePerson> exceptions = new Map<String, VocativePerson>{
+            'Ola' => new VocativePerson('Ola', 'W', 'Olu'),
+            'Saba' => new VocativePerson('Saba', 'W', 'Sabo'),
+            'Noemi' => new VocativePerson('Noemi', 'W', 'Noemi'),
+            'Sonia' => new VocativePerson('Sonia', 'W', 'Soniu'),
+            'Luba' => new VocativePerson('Luba', 'W', 'Lubo'),
+            'Jeremi' => new VocativePerson('Jeremi', 'M', 'Jeremi'),
+            'Kirył' => new VocativePerson('Kirył', 'M', 'Kiryle'),
+            'Miriam' => new VocativePerson('Miriam', 'W', 'Miriam'),
+            'Margot' => new VocativePerson('Margot', 'W', 'Margot'),
+            'Ingrid' => new VocativePerson('Ingrid', 'W', 'Ingrid'),
+            'Lew' => new VocativePerson('Lew', 'M', 'Lwie'),
+            'Narcyz' => new VocativePerson('Narcyz', 'M', 'Narcyzie'),
+            'Kosma' => new VocativePerson('Kosma', 'M', 'Kosmo'),
+            'Bonawentura' => new VocativePerson('Bonawentura', 'M', 'Bonawenturo'),
+            'Carmen' => new VocativePerson('Carmen', 'W', 'Carmen'),
+            'Doris' => new VocativePerson('Doris', 'W', 'Doris'),
+            'Dolores' => new VocativePerson('Dolores', 'W', 'Dolores'),
+            'Abigail' => new VocativePerson('Abigail', 'W', 'Abigail'),
+            'Nikolett' => new VocativePerson('Nikolett', 'W', 'Nikoletto'),
+            'Ania' => new VocativePerson('Ania', 'W', 'Aniu')
     };
 
 
@@ -108,7 +108,7 @@ public class VocativePolishFirstName {
      * @param titles
      * @param exceptions
      **/
-    public VocativePolishFirstName(String first_name, Map<String, String> titles, Map<String, VocativeSex> exceptions) {
+    public VocativePolishFirstName(String first_name, Map<String, String> titles, Map<String, VocativePerson> exceptions) {
         if (!titles.isEmpty()) {
             this.setTitles(titles);
         }
@@ -125,7 +125,7 @@ public class VocativePolishFirstName {
      * @param first_name
      **/
     public VocativePolishFirstName(String first_name) {
-        this(first_name, new Map<String, String>(), new Map<String, VocativePolishFirstName.VocativeSex>());
+        this(first_name, new Map<String, String>(), new Map<String, VocativePolishFirstName.VocativePerson>());
     }
 
     /**
@@ -191,10 +191,10 @@ public class VocativePolishFirstName {
     /**
      * @description Returns array with vocative firs name and gender.
      *
-     * @return VocativeSex
+     * @return VocativePerson
      */
-    public VocativeSex getVocativeSex() {   //TODO: Change name
-        return this.vocative;
+    public VocativePerson getVocativePerson() {
+        return this.vocativePerson;
     }
 
     /**
@@ -203,7 +203,7 @@ public class VocativePolishFirstName {
      * @return string
      */
     public String getVocativeFirstName() { //TODO: Change name
-        return this.vocative.vocative;
+        return this.vocativePerson.vocative;
     }
     /**
      * @description Returns title for a given Group that has been previously defined
@@ -213,7 +213,7 @@ public class VocativePolishFirstName {
      * @return String
      */
     public String getDetectedTitle(String aGroup) {
-        return this.titles.get(aGroup).get(this.vocative.sex);
+        return this.titles.get(aGroup).get(this.vocativePerson.sex);
     }
 
     /**
@@ -231,7 +231,7 @@ public class VocativePolishFirstName {
      * @return string
      */
     public String getDetectedGender() {
-        return this.vocative.sex;
+        return this.vocativePerson.sex;
     }
 
 
@@ -241,7 +241,7 @@ public class VocativePolishFirstName {
      * @return bool
      */
     public Boolean isMan() {
-        if (this.vocative.sex == 'M') {
+        if (this.vocativePerson.sex == 'M') {
             return true;
         }
 
@@ -254,7 +254,7 @@ public class VocativePolishFirstName {
      * @return bool
      */
     public Boolean isWoman() {
-        if (this.vocative.sex == 'W') {
+        if (this.vocativePerson.sex == 'W') {
             return true;
         }
 
@@ -313,12 +313,12 @@ public class VocativePolishFirstName {
      * @description
      * @param first_name
      *
-     * @return VocativeSex
+     * @return VocativePerson
      *
      * @throws VocativePolishFirstNameException
      */
-    private VocativeSex checkExceptions(String first_name) {
-        final VocativeSex nameWithException = this.exceptions.get(first_name);
+    private VocativePerson checkExceptions(String first_name) {
+        final VocativePerson nameWithException = this.exceptions.get(first_name);
         if (nameWithException == null) {
             return null;
         }
@@ -351,22 +351,22 @@ public class VocativePolishFirstName {
             throw new VocativePolishFirstNameException('First name cannot be empty');
         }
 
-        if (this.vocative != null) {
+        if (this.vocativePerson != null) {
             return;
         }
 
         firstname = nameCaseConvert(firstname).trim();
-        final VocativeSex creatingVocative = new VocativeSex(firstname, '', '');
-        this.vocative = creatingVocative;
+        final VocativePerson creatingVocative = new VocativePerson(firstname, '', '');
+        this.vocativePerson = creatingVocative;
 
         processAndAddNamePartsToVocative(firstname, creatingVocative);
     }
 
-    private void processAndAddNamePartsToVocative(final String firstname, final VocativeSex creatingVocative) {
+    private void processAndAddNamePartsToVocative(final String firstname, final VocativePerson creatingVocative) {
         for (String partOfName : firstname.splitByCharacterTypeCamelCase()) {
-            final VocativeSex tempVocative = this.checkExceptions(partOfName);
+            final VocativePerson tempVocative = this.checkExceptions(partOfName);
             if (isInExceptionList(tempVocative)) {
-                this.vocative = tempVocative;
+                this.vocativePerson = tempVocative;
                 return;
             }
 
@@ -384,16 +384,16 @@ public class VocativePolishFirstName {
         }
     }
 
-    private void findAndUseMatchingRule(String partOfName, VocativeSex creatingVocative) {
+    private void findAndUseMatchingRule(String partOfName, VocativePerson creatingVocative) {
         for (VocativeRule vocativeRule : vocativeRules) {
             if (vocativeRule.isEndingMatching(partOfName)) {
-                creatingVocative.attachToVocativeSex(partOfName, vocativeRule);
+                creatingVocative.attachToVocativePerson(partOfName, vocativeRule);
                 return;
             }
         }
     }
 
-    private Boolean isInExceptionList(VocativeSex tempVocative) {
+    private Boolean isInExceptionList(VocativePerson tempVocative) {
         return tempVocative != null;
     }
 
