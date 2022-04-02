@@ -357,8 +357,8 @@ public class VocativePolishFirstName {
             this.vocative = creatingVocative;
 
             for (String partOfName : firstname.splitByCharacterTypeCamelCase()) {
-                VocativeSex tempVocative = this.checkExceptions(partOfName);
-                if (tempVocative != null) {
+                final VocativeSex tempVocative = this.checkExceptions(partOfName);
+                if (isInExceptionList(tempVocative)) {
                     this.vocative = tempVocative;
                     return;
                 }
@@ -383,6 +383,10 @@ public class VocativePolishFirstName {
 
 
         }
+    }
+
+    private Boolean isInExceptionList(VocativeSex tempVocative) {
+        return tempVocative != null;
     }
 
     private Boolean isSpaceOrDelimiterOrConjunction(Integer partOfName) {
