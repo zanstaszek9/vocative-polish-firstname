@@ -1,5 +1,12 @@
 /**
- * Created by Stanislaw Zan, zanstaszek9@gmail.com on 08.02.2022.
+ * VocativePolishFirstName
+ *
+ * Component for remake first name to Polish vocative
+ *
+ * @author  Mariusz Mielnik <mariusz@ecbox.pl>
+ * @author  Stanislaw Zan <zanstaszek9@gmail.com>
+ * @license  MIT
+ *
  */
 
 @IsTest
@@ -25,23 +32,6 @@ private class VocativePolishFirstNameTest {
         //then
         System.assert(namesWithWrongVocative.isEmpty(), namesWithWrongVocative.size() + ' vocatives were wrong: ' + namesWithWrongVocative);
         System.assert(namesWithWrongGender.isEmpty(), namesWithWrongGender.size() + ' genders were wrong: ' + namesWithWrongGender);
-    }
-
-    @IsTest
-    static void test2() {
-        //TODO: Export the tested method and Test to another class, like String.Utils STZAN
-        System.assert(VocativePolishFirstName.endsWithAnySpecifiedIgnoreCase('Ada', new Set<String> {'a'}));
-        System.assert(!VocativePolishFirstName.endsWithAnySpecifiedIgnoreCase('Ada', new Set<String> {'b'}));
-        System.assert(VocativePolishFirstName.endsWithAnySpecifiedIgnoreCase('Ada', new Set<String> {'b', 'a'}));
-        System.assert(VocativePolishFirstName.endsWithAnySpecifiedIgnoreCase('Ada', new Set<String> {''}));
-        System.assert(!VocativePolishFirstName.endsWithAnySpecifiedIgnoreCase('Ada', new Set<String> {'longerThanName'}));
-
-    }
-
-    @IsTest
-    static void test3(){
-        //TODO: Export the tested method and Test to another class, like String.Utils STZAN
-        System.assertEquals('A', VocativePolishFirstName.chopString('Ada', 2));
     }
 
     @IsTest
