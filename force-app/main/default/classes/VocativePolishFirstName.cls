@@ -13,9 +13,7 @@
 public class VocativePolishFirstName {
 
     /**
-     * Structure to hold name, sex and vocative
-     *
-     *
+     * @description Structure to hold name, sex and vocative
      */
     public class VocativeSex { //TODO: Change name
         public final String denominatorName;
@@ -23,6 +21,7 @@ public class VocativePolishFirstName {
         public String vocative = '';
 
         /**
+         * @description
          * @param denominatorName name in denominator (pl. mianownik) form
          * @param sex sex indication in form of letters, 'U' for 'Unable to define', 'W' for Woman, 'M' for Man
          * @param vocative name in vocative (pl. wołacz) form
@@ -49,15 +48,14 @@ public class VocativePolishFirstName {
 
 
     /**
-     * Polish definitions array for default group
-     *
+     * @description Polish definitions array for default group
+     * <p/>
      * U = Unable to define
      * M = Male
      * W = Woman
-     *
      */
     private final Map<String, Map<String, String>> titles = new Map<String, Map<String, String>>{
-            'default' => new  Map<String, String>{
+            'default' => new Map<String, String>{
                     'U' => 'Panie/Pani',
                     'M' => 'Panie',
                     'W' => 'Pani'
@@ -68,7 +66,6 @@ public class VocativePolishFirstName {
 
     /**
      * @description List of exceptions
-     *
      */
     public final Map<String, VocativeSex> exceptions = new Map<String, VocativeSex>{
             'Ola' => new VocativeSex('Ola', 'W', 'Olu'),
@@ -112,7 +109,7 @@ public class VocativePolishFirstName {
         this.remakeToVocative(first_name);
     }
 
-    public VocativePolishFirstName (String first_name) {
+    public VocativePolishFirstName(String first_name) {
         this(first_name, new Map<String, String>(), new Map<String, VocativePolishFirstName.VocativeSex>());
     }
 
@@ -140,6 +137,7 @@ public class VocativePolishFirstName {
     public void setTitles(Map<String, String> titles) {
         setTitles(titles, 'default');
     }
+
     /**
      * @description Setup own title
      * <p/>
@@ -185,7 +183,7 @@ public class VocativePolishFirstName {
      *
      * @return String
      */
-    public String getDetectedTitle(String aGroup){
+    public String getDetectedTitle(String aGroup) {
         return this.titles.get(aGroup).get(this.vocative.sex);
     }
 
@@ -199,7 +197,7 @@ public class VocativePolishFirstName {
     }
 
     /**
-     * Returns gender M - Male, W - Woman, U - Unknown
+     * @description Returns gender M - Male, W - Woman, U - Unknown
      *
      * @return string
      */
@@ -209,12 +207,11 @@ public class VocativePolishFirstName {
 
 
     /**
-     * Returns true if first name belongs to man
+     * @description Returns true if first name belongs to man
      *
      * @return bool
      */
-    public Boolean isMan()
-    {
+    public Boolean isMan() {
         if (this.vocative.sex == 'M') {
             return true;
         }
@@ -223,12 +220,11 @@ public class VocativePolishFirstName {
     }
 
     /**
-     * Returns true if first name belongs to woman
+     * @description Returns true if first name belongs to woman
      *
      * @return bool
      */
-    public Boolean isWoman()
-    {
+    public Boolean isWoman() {
         if (this.vocative.sex == 'W') {
             return true;
         }
@@ -237,10 +233,11 @@ public class VocativePolishFirstName {
     }
 
     /**
-     * Return vocative first name with title
+     * @description Return vocative first name with title
      *
-     * @param string delimiter default ' ' (space)
-     * @param string group
+     * @param delimiter default ' ' (space)
+     * @param aGroup group
+     *
      * @return string
      */
     public String getVocativeStringWithTitle(String delimiter, String aGroup) {
@@ -249,7 +246,9 @@ public class VocativePolishFirstName {
 
     /**
      * @description Return vocative first name with title, with specified delimiter and default Group
+     *
      * @param delimiter
+     *
      * @return String
      */
     public String getVocativeStringWithTitle(String delimiter) {
@@ -285,11 +284,11 @@ public class VocativePolishFirstName {
 
     /**
      * @description
-     *
      * @param first_name
      *
      * @return VocativeSex
-     * @exception VocativePolishFirstNameException
+     *
+     * @throws VocativePolishFirstNameException
      */
     private VocativeSex checkExceptions(String first_name) {
         final VocativeSex nameWithException = this.exceptions.get(first_name);
@@ -314,16 +313,16 @@ public class VocativePolishFirstName {
 
 
     /**
-     * Remake first name to Polish vocative
+     * @description Remake first name to Polish vocative
      *
-     * @param string first_name
-     * @return array
-     * @throws \Exception
+     * @param firstname first_name
+     *
+     * @throws
      */
 
     public void remakeToVocative(String firstname) {
         if (String.isBlank(firstname)) {
-            throw new  VocativePolishFirstNameException('First name cannot be empty');
+            throw new VocativePolishFirstNameException('First name cannot be empty');
         }
 
         if (this.vocative == null) {
@@ -383,7 +382,9 @@ public class VocativePolishFirstName {
 
 
         public VocativeRule(String nameEnding, String gender, Integer replaceFromRight, String vocativeSuffix) {
-            this(new Set<String>{nameEnding}, gender, replaceFromRight, vocativeSuffix);
+            this(new Set<String>{
+                    nameEnding
+            }, gender, replaceFromRight, vocativeSuffix);
         }
 
         public VocativeRule(Set<String> nameEndings, String gender, Integer replaceFromRight, String vocativeSuffix) {
@@ -393,11 +394,11 @@ public class VocativePolishFirstName {
             this.vocativeSuffix = vocativeSuffix;
         }
 
-        public Boolean isEndingMatching(final String firstname){
+        public Boolean isEndingMatching(final String firstname) {
             return endsWithAnySpecifiedIgnoreCase(firstname, this.nameEndings);
         }
 
-        public String getVocativeName(final String firstname){
+        public String getVocativeName(final String firstname) {
             return (chopString(firstname, this.replaceFromRight)) + vocativeSuffix;
         }
 
@@ -411,43 +412,44 @@ public class VocativePolishFirstName {
             }
             return vocativeRules;
         }
-        private set;}
+        private set;
+    }
 
-    public static void populateVocativeRules(){
-        vocativeRules.add(new VocativeRule(new Set<String>{'ni', 'li', 'zi'},  'M',  0, ''));
-        vocativeRules.add(new VocativeRule('eł',  'M',  2, 'le'));
-        vocativeRules.add(new VocativeRule('ił',  'M',  1, 'le'));
-        vocativeRules.add(new VocativeRule('et',  'M',  1, 'cie'));
-        vocativeRules.add(new VocativeRule('tr',  'M',  0, 'ze'));
-        vocativeRules.add(new VocativeRule('ał',  'M',  1, 'le'));
-        vocativeRules.add(new VocativeRule(new Set<String>{'it', 'rt'},  'M',  1, 'cie'));
-        vocativeRules.add(new VocativeRule('ciek',  'M',  4, 'ćku'));
-        vocativeRules.add(new VocativeRule('siek',  'M',  4, 'śku'));
-        vocativeRules.add(new VocativeRule('niec',  'M',  4, 'ńcu'));
-        vocativeRules.add(new VocativeRule('per',  'M',  2, 'rze'));
-        vocativeRules.add(new VocativeRule(new Set<String>{'ek', 'ko'},  'M',  2, 'ku'));
-        vocativeRules.add(new VocativeRule('st',  'M',  2, 'ście'));
-        vocativeRules.add(new VocativeRule('sł',  'M',  2, 'śle'));
-        vocativeRules.add(new VocativeRule(new Set<String>{'cja', 'ria', 'lia', 'dia', 'wia', 'fia', 'iela', 'bela', 'zula', 'saba'},  'W',  1, 'o'));
-        vocativeRules.add(new VocativeRule(new Set<String>{'iola', 'rola'},  'W',  1, 'u'));
-        vocativeRules.add(new VocativeRule(new Set<String>{'aja', 'sia'},  'W',  1, 'u'));
-        vocativeRules.add(new VocativeRule(new Set<String>{'ja', 'ia', 'la'},  'W',  1, 'o'));
-        vocativeRules.add(new VocativeRule('ba',  'M',  1, 'o'));
-        vocativeRules.add(new VocativeRule(new Set<String>{'oe', 'ue'},  'M',  0, ''));
-        vocativeRules.add(new VocativeRule('oń',  'M',  1, 'niu'));
-        vocativeRules.add(new VocativeRule(new Set<String>{'n', 'f', 'm', 'w', 'p', 's', 'b'},  'M',  0, 'ie'));
-        vocativeRules.add(new VocativeRule('bel',  'M',  3, 'ble'));
-        vocativeRules.add(new VocativeRule('ez',  'W',  0, ''));
-        vocativeRules.add(new VocativeRule(new Set<String>{'g', 'h', 'j', 'k', 'l', 'z'},  'M',  0, 'u'));
-        vocativeRules.add(new VocativeRule('der',  'M',  2, 'rze'));
-        vocativeRules.add(new VocativeRule('ster',  'M',  2, 'rze'));
-        vocativeRules.add(new VocativeRule('r',  'M',  0, 'ze'));
-        vocativeRules.add(new VocativeRule('d',  'M',  0, 'zie'));
-        vocativeRules.add(new VocativeRule('a',  'W',  1, 'o'));
-        vocativeRules.add(new VocativeRule('e',  'W',  0, ''));
-        vocativeRules.add(new VocativeRule('y',  'M',  0, ''));
-        vocativeRules.add(new VocativeRule('o',  'M',  0, ''));
-        vocativeRules.add(new VocativeRule('t',  'M',  1, 'cie'));
-        vocativeRules.add(new VocativeRule('', 'U', 0, '' )); //TODO Test czy nameEnding pusty jest TRUE
+    public static void populateVocativeRules() {
+        vocativeRules.add(new VocativeRule(new Set<String>{'ni', 'li', 'zi'}, 'M', 0, ''));
+        vocativeRules.add(new VocativeRule('eł', 'M', 2, 'le'));
+        vocativeRules.add(new VocativeRule('ił', 'M', 1, 'le'));
+        vocativeRules.add(new VocativeRule('et', 'M', 1, 'cie'));
+        vocativeRules.add(new VocativeRule('tr', 'M', 0, 'ze'));
+        vocativeRules.add(new VocativeRule('ał', 'M', 1, 'le'));
+        vocativeRules.add(new VocativeRule(new Set<String>{'it', 'rt'}, 'M', 1, 'cie'));
+        vocativeRules.add(new VocativeRule('ciek', 'M', 4, 'ćku'));
+        vocativeRules.add(new VocativeRule('siek', 'M', 4, 'śku'));
+        vocativeRules.add(new VocativeRule('niec', 'M', 4, 'ńcu'));
+        vocativeRules.add(new VocativeRule('per', 'M', 2, 'rze'));
+        vocativeRules.add(new VocativeRule(new Set<String>{'ek', 'ko'}, 'M', 2, 'ku'));
+        vocativeRules.add(new VocativeRule('st', 'M', 2, 'ście'));
+        vocativeRules.add(new VocativeRule('sł', 'M', 2, 'śle'));
+        vocativeRules.add(new VocativeRule(new Set<String>{'cja', 'ria', 'lia', 'dia', 'wia', 'fia', 'iela', 'bela', 'zula', 'saba'}, 'W', 1, 'o'));
+        vocativeRules.add(new VocativeRule(new Set<String>{'iola', 'rola'}, 'W', 1, 'u'));
+        vocativeRules.add(new VocativeRule(new Set<String>{'aja', 'sia'}, 'W', 1, 'u'));
+        vocativeRules.add(new VocativeRule(new Set<String>{'ja', 'ia', 'la'}, 'W', 1, 'o'));
+        vocativeRules.add(new VocativeRule('ba', 'M', 1, 'o'));
+        vocativeRules.add(new VocativeRule(new Set<String>{'oe', 'ue'}, 'M', 0, ''));
+        vocativeRules.add(new VocativeRule('oń', 'M', 1, 'niu'));
+        vocativeRules.add(new VocativeRule(new Set<String>{'n', 'f', 'm', 'w', 'p', 's', 'b'}, 'M', 0, 'ie'));
+        vocativeRules.add(new VocativeRule('bel', 'M', 3, 'ble'));
+        vocativeRules.add(new VocativeRule('ez', 'W', 0, ''));
+        vocativeRules.add(new VocativeRule(new Set<String>{'g', 'h', 'j', 'k', 'l', 'z'}, 'M', 0, 'u'));
+        vocativeRules.add(new VocativeRule('der', 'M', 2, 'rze'));
+        vocativeRules.add(new VocativeRule('ster', 'M', 2, 'rze'));
+        vocativeRules.add(new VocativeRule('r', 'M', 0, 'ze'));
+        vocativeRules.add(new VocativeRule('d', 'M', 0, 'zie'));
+        vocativeRules.add(new VocativeRule('a', 'W', 1, 'o'));
+        vocativeRules.add(new VocativeRule('e', 'W', 0, ''));
+        vocativeRules.add(new VocativeRule('y', 'M', 0, ''));
+        vocativeRules.add(new VocativeRule('o', 'M', 0, ''));
+        vocativeRules.add(new VocativeRule('t', 'M', 1, 'cie'));
+        vocativeRules.add(new VocativeRule('', 'U', 0, '')); //TODO Test czy nameEnding pusty jest TRUE
     }
 }
