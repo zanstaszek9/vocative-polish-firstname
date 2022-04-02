@@ -398,7 +398,7 @@ public class VocativePolishFirstName {
     }
 
     private Boolean isSpaceOrDelimiterOrConjunction(Integer partOfName) {
-        final Integer maxDelimiterLength;
+        final Integer maxDelimiterLength = 1;
         return partOfName <= maxDelimiterLength;
     }
 
