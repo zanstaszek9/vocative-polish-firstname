@@ -13,10 +13,11 @@
 * @description Structure to hold name, sex and vocative
 */
 public with sharing class VocativePerson {
+    private final static String commonConjunction = 'i';
+
     public final String denominatorName;
     public String sex;
     public String vocative = '';
-    private String commonConjunction = 'i';
 
     /**
      * @description
@@ -47,10 +48,8 @@ public with sharing class VocativePerson {
         this.vocative += vocativeRule.getVocativeName(denominatorName);
     }
 
-    private Boolean isConjunctionBetweenTwoNames(String aString){
-        //TODO make static
+    private static Boolean isConjunctionBetweenTwoNames(String aString){
         return aString == commonConjunction;
     }
-
 
 }
