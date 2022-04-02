@@ -66,8 +66,6 @@ public class VocativePolishFirstName {
 
     private VocativeSex vocative;
 
-    private String encoding;
-
     /**
      * @description List of exceptions
      *
@@ -98,13 +96,11 @@ public class VocativePolishFirstName {
 
     /**
      * @description
-     *
      * @param first_name
-     * @param encoding TODO: encoding = 'UTF-8'
      * @param titles
      * @param exceptions
      **/
-    public VocativePolishFirstName (String first_name, String encoding, Map<String, String> titles, Map<String, VocativeSex> exceptions) {
+    public VocativePolishFirstName(String first_name, Map<String, String> titles, Map<String, VocativeSex> exceptions) {
         if (!titles.isEmpty()) {
             this.setTitles(titles);
         }
@@ -113,12 +109,11 @@ public class VocativePolishFirstName {
             this.exceptions.putAll(exceptions);
         }
 
-        this.setEncoding(encoding);
         this.remakeToVocative(first_name);
     }
 
     public VocativePolishFirstName (String first_name) {
-        this(first_name, '', new Map<String, String>(), new Map<String, VocativePolishFirstName.VocativeSex>());
+        this(first_name, new Map<String, String>(), new Map<String, VocativePolishFirstName.VocativeSex>());
     }
 
     /**
@@ -165,14 +160,6 @@ public class VocativePolishFirstName {
         this.titles.put(aGroup, titles);
     }
 
-    /**
-     * Set string encoding
-     *
-     * @param encoding
-     */
-    public void setEncoding(String encoding) {
-        this.encoding = encoding;
-    }
 
     /**
      * @description Returns array with vocative firs name and gender.
@@ -343,7 +330,6 @@ public class VocativePolishFirstName {
             firstname = nameCaseConvert(firstname).trim();
             VocativeSex creatingVocative = new VocativeSex(firstname, '', '');
             this.vocative = creatingVocative;
-//            mb_internal_encoding(this._encoding);
             for (String first_name : firstname.splitByCharacterTypeCamelCase()) {
 
                 VocativeSex tempVocative = this.checkExceptions(first_name);
