@@ -14,7 +14,7 @@ private class VocativePolishFirstNameTest {
 
         //when
         for (Contact  contact : contacts) {
-            final VocativePolishFirstName nameWithVoc = new VocativePolishFirstName(contact.FirstName, '', new Map<String, String>(), new Map<String, VocativePolishFirstName.VocativeSex>() );
+            final VocativePolishFirstName nameWithVoc = new VocativePolishFirstName(contact.FirstName);
             if (contact.LastName != nameWithVoc.getVocativeFirstName()){
                 namesWithWrongVocative.put(contact.LastName, nameWithVoc.getVocativeFirstName());
             }
@@ -39,41 +39,47 @@ private class VocativePolishFirstNameTest {
     }
 
     @IsTest
+    static void test3(){
+        //TODO: Export the tested method and Test to another class, like String.Utils STZAN
+        System.assertEquals('A', VocativePolishFirstName.chopString('Ada', 2));
+    }
+
+    @IsTest
     static void shouldProcessCorrectlyOnPolishDiacritics() {
-        System.assertEquals('Bogusądzie', new VocativePolishFirstName('Bogusąd', '', new Map<String, String>(), new Map<String, VocativePolishFirstName.VocativeSex>() ).getVocativeFirstName());
-        System.assertEquals('Więcemile', new VocativePolishFirstName('Więcemił', '', new Map<String, String>(), new Map<String, VocativePolishFirstName.VocativeSex>() ).getVocativeFirstName());
-        System.assertEquals('Kiryle', new VocativePolishFirstName('Kirył', '', new Map<String, String>(), new Map<String, VocativePolishFirstName.VocativeSex>() ).getVocativeFirstName());
-        System.assertEquals('Czechoniu', new VocativePolishFirstName('Czechoń', '', new Map<String, String>(), new Map<String, VocativePolishFirstName.VocativeSex>() ).getVocativeFirstName());
-        System.assertEquals('Mściwóju', new VocativePolishFirstName('Mściwój', '', new Map<String, String>(), new Map<String, VocativePolishFirstName.VocativeSex>() ).getVocativeFirstName());
-        System.assertEquals('Świętopełku', new VocativePolishFirstName('Świętopełk', '', new Map<String, String>(), new Map<String, VocativePolishFirstName.VocativeSex>() ).getVocativeFirstName());
-        System.assertEquals('Andżeliko', new VocativePolishFirstName('Andżelika', '', new Map<String, String>(), new Map<String, VocativePolishFirstName.VocativeSex>() ).getVocativeFirstName());
+        System.assertEquals('Bogusądzie', new VocativePolishFirstName('Bogusąd').getVocativeFirstName());
+        System.assertEquals('Więcemile', new VocativePolishFirstName('Więcemił').getVocativeFirstName());
+        System.assertEquals('Kiryle', new VocativePolishFirstName('Kirył').getVocativeFirstName());
+        System.assertEquals('Czechoniu', new VocativePolishFirstName('Czechoń').getVocativeFirstName());
+        System.assertEquals('Mściwóju', new VocativePolishFirstName('Mściwój').getVocativeFirstName());
+        System.assertEquals('Świętopełku', new VocativePolishFirstName('Świętopełk').getVocativeFirstName());
+        System.assertEquals('Andżeliko', new VocativePolishFirstName('Andżelika').getVocativeFirstName());
 
 
     }
 
     @IsTest
     static void shouldReturnProperTitlesForDefaultSexes() {
-        System.assert(new VocativePolishFirstName('Krzysztof', '', new Map<String, String>(), new Map<String, VocativePolishFirstName.VocativeSex>()).getVocativeStringWithTitle().startsWith('Panie'));
-        System.assert(new VocativePolishFirstName('Alicja', '', new Map<String, String>(), new Map<String, VocativePolishFirstName.VocativeSex>()).getVocativeStringWithTitle().startsWith('Pani'));
-        System.assert(new VocativePolishFirstName('Maliq', '', new Map<String, String>(), new Map<String, VocativePolishFirstName.VocativeSex>()).getVocativeStringWithTitle().startsWith('Panie/Pani'));
+        System.assert(new VocativePolishFirstName('Krzysztof').getVocativeStringWithTitle().startsWith('Panie'));
+        System.assert(new VocativePolishFirstName('Alicja').getVocativeStringWithTitle().startsWith('Pani'));
+        System.assert(new VocativePolishFirstName('Maliq').getVocativeStringWithTitle().startsWith('Panie/Pani'));
     }
 
     @IsTest
     static void shouldReturnProperGender() {
-        System.assertEquals('M', new VocativePolishFirstName('Krzysztof', '', new Map<String, String>(), new Map<String, VocativePolishFirstName.VocativeSex>()).getDetectedGender());
-        System.assertEquals('W', new VocativePolishFirstName('Alicja', '', new Map<String, String>(), new Map<String, VocativePolishFirstName.VocativeSex>()).getDetectedGender());
-        System.assertEquals('U', new VocativePolishFirstName('Maliq', '', new Map<String, String>(), new Map<String, VocativePolishFirstName.VocativeSex>()).getDetectedGender());
+        System.assertEquals('M', new VocativePolishFirstName('Krzysztof').getDetectedGender());
+        System.assertEquals('W', new VocativePolishFirstName('Alicja').getDetectedGender());
+        System.assertEquals('U', new VocativePolishFirstName('Maliq').getDetectedGender());
     }
 
     @IsTest
     static void shouldReturnTrueForMaleName() {
-        System.assert(new VocativePolishFirstName('Krzysztof', '', new Map<String, String>(), new Map<String, VocativePolishFirstName.VocativeSex>()).isMan());
+        System.assert(new VocativePolishFirstName('Krzysztof').isMan());
 
     }
 
     @IsTest
     static void shouldReturnTrueForFemaleName() {
-        System.assert(new VocativePolishFirstName('Alicja', '', new Map<String, String>(), new Map<String, VocativePolishFirstName.VocativeSex>()).isWoman());
+        System.assert(new VocativePolishFirstName('Alicja').isWoman());
     }
 
 
@@ -85,17 +91,17 @@ private class VocativePolishFirstNameTest {
 
     @IsTest
     static void shouldProcessDoubleBarreledName() {
-        System.assertEquals('Janie-Krzysztofie', new VocativePolishFirstName('Jan-Krzysztof', '', new Map<String, String>(), new Map<String, VocativePolishFirstName.VocativeSex>()).getVocativeFirstName());
+        System.assertEquals('Janie-Krzysztofie', new VocativePolishFirstName('Jan-Krzysztof').getVocativeFirstName());
     }
 
     @IsTest
     static void shouldProcessDoubleName() {
-        System.assertEquals('Janie Mario', new VocativePolishFirstName('Jan Maria', '', new Map<String, String>(), new Map<String, VocativePolishFirstName.VocativeSex>()).getVocativeFirstName());
+        System.assertEquals('Janie Mario', new VocativePolishFirstName('Jan Maria').getVocativeFirstName());
     }
 
     @IsTest
     static void shouldProcessTwoNamesWithConjunction() {
         // TODO: Assume Undefined gender
-        System.assertEquals('Janie i Mario', new VocativePolishFirstName('Jan i Maria', '', new Map<String, String>(), new Map<String, VocativePolishFirstName.VocativeSex>()).getVocativeFirstName());
+        System.assertEquals('Janie i Mario', new VocativePolishFirstName('Jan i Maria').getVocativeFirstName());
     }
 }
