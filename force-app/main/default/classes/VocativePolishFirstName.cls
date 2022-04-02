@@ -291,7 +291,6 @@ public class VocativePolishFirstName {
      * @return string
      */
     public static String nameCaseConvert(String name) {
-        // TODO: Jan-Krzysztof will fail
         String output = '';
         for (String str : name.toLowerCase().splitByCharacterTypeCamelCase()) {
             output += str.capitalize();
