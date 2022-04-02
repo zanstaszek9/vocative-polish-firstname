@@ -351,37 +351,45 @@ public class VocativePolishFirstName {
             throw new VocativePolishFirstNameException('First name cannot be empty');
         }
 
-        if (this.vocative == null) {
-            firstname = nameCaseConvert(firstname).trim();
-            VocativeSex creatingVocative = new VocativeSex(firstname, '', '');
-            this.vocative = creatingVocative;
+        if (this.vocative != null) {
+            return;
+        }
 
-            for (String partOfName : firstname.splitByCharacterTypeCamelCase()) {
-                final VocativeSex tempVocative = this.checkExceptions(partOfName);
-                if (isInExceptionList(tempVocative)) {
-                    this.vocative = tempVocative;
-                    return;
-                }
+        firstname = nameCaseConvert(firstname).trim();
+        final VocativeSex creatingVocative = new VocativeSex(firstname, '', '');
+        this.vocative = creatingVocative;
 
-                if (isSpaceOrDelimiterOrConjunction(partOfName.length())) {
-                    creatingVocative.attachConjunction(partOfName.toLowerCase());
-                    continue;
-                }
+        processAndAddNamePartsToVocative(firstname, creatingVocative);
+    }
 
-                try {
-                    for (VocativeRule vocativeRule : vocativeRules) {
-                        if (vocativeRule.isEndingMatching(partOfName)) {
-                            creatingVocative.attachToVocativeSex(partOfName, vocativeRule);
-                            break;
-                        }
-                    }
-                }
-                catch (StringException e) {
-                    throw new VocativePolishFirstNameException('An error with name ' + partOfName + ':  ' + e, e);
-                }
+    private void processAndAddNamePartsToVocative(final String firstname, final VocativeSex creatingVocative) {
+        for (String partOfName : firstname.splitByCharacterTypeCamelCase()) {
+            final VocativeSex tempVocative = this.checkExceptions(partOfName);
+            if (isInExceptionList(tempVocative)) {
+                this.vocative = tempVocative;
+                return;
             }
 
+            if (isSpaceOrDelimiterOrConjunction(partOfName.length())) {
+                creatingVocative.attachConjunction(partOfName.toLowerCase());
+                continue;
+            }
 
+            try {
+                findAndUseMatchingRule(partOfName, creatingVocative);
+            }
+            catch (StringException e) {
+                throw new VocativePolishFirstNameException('An error with name ' + partOfName + ':  ' + e, e);
+            }
+        }
+    }
+
+    private void findAndUseMatchingRule(String partOfName, VocativeSex creatingVocative) {
+        for (VocativeRule vocativeRule : vocativeRules) {
+            if (vocativeRule.isEndingMatching(partOfName)) {
+                creatingVocative.attachToVocativeSex(partOfName, vocativeRule);
+                return;
+            }
         }
     }
 
