@@ -72,6 +72,21 @@ private class VocativePolishFirstNameTest {
     }
 
     @IsTest
+    static void shouldReturnProperGenderForDoubleNames() {
+        System.assertEquals('M', new VocativePolishFirstName('Jan-Krzysztof').getDetectedGender());
+        System.assertEquals('W', new VocativePolishFirstName('Anna-Alicja').getDetectedGender());
+        System.assertEquals('M', new VocativePolishFirstName('Jan Maria').getDetectedGender());
+        System.assertEquals('W', new VocativePolishFirstName('Maria Jan').getDetectedGender());
+    }
+
+    @IsTest
+    static void shouldReturnProperGenderTwoNames() {
+        System.assertEquals('G', new VocativePolishFirstName('Tomasz i Julia').getDetectedGender());
+        System.assertEquals('G', new VocativePolishFirstName('Julia i Tomasz').getDetectedGender());
+    }
+
+
+    @IsTest
     static void shouldReturnTrueForMaleName() {
         System.assert(new VocativePolishFirstName('Krzysztof').isMan());
 

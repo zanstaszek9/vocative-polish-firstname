@@ -19,6 +19,7 @@ public class VocativePolishFirstName {
         public final String denominatorName;
         public String sex;
         public String vocative = '';
+        private String commonConjunction = 'i';
 
         /**
          * @description
@@ -36,14 +37,22 @@ public class VocativePolishFirstName {
             return String.isNotBlank(this.vocative) && String.isNotBlank(this.sex);
         }
 
-        public void attachToVocativeSex(String denominatorName, String sex, String vocative) {
-            this.sex = (String.isBlank(this.sex)) ? this.sex = sex : this.sex;
-            this.vocative += vocative;
+
+        public void attachConjunction(String aString) {
+            if (isConjunctionBetweenTwoNames(aString)) {
+                this.sex = 'G';
+            }
+            this.vocative += aString;
         }
 
         public void attachToVocativeSex(String denominatorName, VocativeRule vocativeRule) {
             this.sex = (String.isBlank(this.sex)) ? this.sex = vocativeRule.gender : this.sex;
             this.vocative += vocativeRule.getVocativeName(denominatorName);
+        }
+
+        private Boolean isConjunctionBetweenTwoNames(String aString){
+            //TODO make static
+            return aString == commonConjunction;
         }
     }
 
@@ -57,6 +66,7 @@ public class VocativePolishFirstName {
      */
     private final Map<String, Map<String, String>> titles = new Map<String, Map<String, String>>{
             'default' => new Map<String, String>{
+                    'G' => 'Państwo',
                     'U' => 'Panie/Pani',
                     'M' => 'Panie',
                     'W' => 'Pani'
@@ -355,8 +365,8 @@ public class VocativePolishFirstName {
 
                 final Integer first_nameLength = first_name.length();
 
-                if (first_nameLength < 2) {
-                    creatingVocative.attachToVocativeSex('', '', first_name.toLowerCase());
+                if (isSpaceOrDelimiter(first_nameLength)) {
+                    creatingVocative.attachConjunction(first_name.toLowerCase());
                     continue;
                 }
 
@@ -377,8 +387,13 @@ public class VocativePolishFirstName {
         }
     }
 
+    private Boolean isSpaceOrDelimiter(Integer first_nameLength) {
+        return first_nameLength < 2;
+    }
+
     /**
      * @description Check if last letters of toBeChopped matches all Suffixes
+     *
      * @param toBeChecked String to check suffixes
      * @param suffixes
      *
