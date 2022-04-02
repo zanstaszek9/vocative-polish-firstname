@@ -342,7 +342,7 @@ public class VocativePolishFirstName {
     /**
      * @description Remake first name to Polish vocative
      *
-     * @param firstname first_name
+     * @param firstname firstname
      *
      * @throws VocativePolishFirstNameException
      */
@@ -356,30 +356,28 @@ public class VocativePolishFirstName {
             VocativeSex creatingVocative = new VocativeSex(firstname, '', '');
             this.vocative = creatingVocative;
 
-            for (String first_name : firstname.splitByCharacterTypeCamelCase()) {
-                VocativeSex tempVocative = this.checkExceptions(first_name);
+            for (String partOfName : firstname.splitByCharacterTypeCamelCase()) {
+                VocativeSex tempVocative = this.checkExceptions(partOfName);
                 if (tempVocative != null) {
                     this.vocative = tempVocative;
                     return;
                 }
 
-                final Integer first_nameLength = first_name.length();
-
-                if (isSpaceOrDelimiter(first_nameLength)) {
-                    creatingVocative.attachConjunction(first_name.toLowerCase());
+                if (isSpaceOrDelimiterOrConjunction(partOfName.length())) {
+                    creatingVocative.attachConjunction(partOfName.toLowerCase());
                     continue;
                 }
 
                 try {
                     for (VocativeRule vocativeRule : vocativeRules) {
-                        if (vocativeRule.isEndingMatching(first_name)) {
-                            creatingVocative.attachToVocativeSex(first_name, vocativeRule);
+                        if (vocativeRule.isEndingMatching(partOfName)) {
+                            creatingVocative.attachToVocativeSex(partOfName, vocativeRule);
                             break;
                         }
                     }
                 }
                 catch (StringException e) {
-                    throw new VocativePolishFirstNameException('An error with name ' + first_name + ':  ' + e, e);
+                    throw new VocativePolishFirstNameException('An error with name ' + partOfName + ':  ' + e, e);
                 }
             }
 
@@ -387,8 +385,9 @@ public class VocativePolishFirstName {
         }
     }
 
-    private Boolean isSpaceOrDelimiter(Integer first_nameLength) {
-        return first_nameLength < 2;
+    private Boolean isSpaceOrDelimiterOrConjunction(Integer partOfName) {
+        final Integer maxDelimiterLength;
+        return partOfName <= maxDelimiterLength;
     }
 
     /**
