@@ -312,7 +312,7 @@ public class VocativePolishFirstName {
         }
 
         firstname = nameCaseConvert(firstname).trim();
-        final VocativePerson creatingVocative = new VocativePerson(firstname, '', '');
+        final VocativePerson creatingVocative = new VocativePerson(firstname);
         this.vocativePerson = creatingVocative;
 
         processAndAddNamePartsToVocative(firstname, creatingVocative);

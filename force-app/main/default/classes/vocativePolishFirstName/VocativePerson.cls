@@ -31,6 +31,14 @@ public with sharing class VocativePerson {
         this.vocative = vocative;
     }
 
+    /**
+     * @description
+     * @param denominatorName name in denominator (pl. mianownik) form
+     **/
+    public VocativePerson(String denominatorName) {
+        this(denominatorName, '', '');
+    }
+
     public Boolean hasDefinedVocativeAndSex() {
         return String.isNotBlank(this.vocative) && String.isNotBlank(this.sex);
     }
