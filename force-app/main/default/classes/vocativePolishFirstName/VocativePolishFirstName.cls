@@ -358,32 +358,6 @@ public class VocativePolishFirstName {
         return partOfName <= maxDelimiterLength;
     }
 
-    /**
-     * @description Check if last letters of toBeChopped matches all Suffixes
-     *
-     * @param toBeChecked String to check suffixes
-     * @param suffixes
-     *
-     * @return
-     **/
-    public static Boolean endsWithAnySpecifiedIgnoreCase(final String toBeChecked, final Set<String> suffixes) {
-        Boolean doesStringEndsWithAnySuffix = false;
-        for (String suffix : suffixes) {
-            doesStringEndsWithAnySuffix |= toBeChecked.endsWithIgnoreCase(suffix);
-        }
-        return doesStringEndsWithAnySuffix;
-    }
-
-    /**
-     * @description Removes letters from the right
-     * @param toBeChopped String to be chopped
-     * @param amountOfLettersToRemoveFromRight
-     *
-     * @return
-     **/
-    public static String chopString(final String toBeChopped, final Integer amountOfLettersToRemoveFromRight) {
-        return (toBeChopped.substring(0, toBeChopped.length() - amountOfLettersToRemoveFromRight));
-    }
 
     public class VocativeRule {
         public Set<String> nameEndings;
@@ -417,7 +391,7 @@ public class VocativePolishFirstName {
         }
 
         public Boolean isEndingMatching(final String firstname) {
-            return endsWithAnySpecifiedIgnoreCase(firstname, this.nameEndings);
+            return VPFN_StringUtils.endsWithAnySpecifiedIgnoreCase(firstname, this.nameEndings);
         }
 
         /**
@@ -427,7 +401,7 @@ public class VocativePolishFirstName {
          * @return Actual Vocative form
          **/
         public String getVocativeName(final String firstname) {
-            return (chopString(firstname, this.replaceFromRight)) + vocativeSuffix;
+            return (VPFN_StringUtils.chopString(firstname, this.replaceFromRight)) + vocativeSuffix;
         }
 
     }
