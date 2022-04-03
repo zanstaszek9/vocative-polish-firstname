@@ -175,10 +175,19 @@ public class VocativePolishFirstName {
     /**
      * @description Returns gender
      *
-     * @return string
+     * @return GENDER
      */
     public GENDER getDetectedGender() {
         return this.vocativePerson.getDetectedGender();
+    }
+
+    /**
+     * @description Returns gender as String
+     *
+     * @return string
+     */
+    public String getDetectedGenderAsString() {
+        return this.vocativePerson.getDetectedGender().name().toLowerCase().capitalize();
     }
 
 
