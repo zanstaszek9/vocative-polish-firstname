@@ -34,7 +34,7 @@ public class VocativePolishFirstName {
     private VocativePerson vocativePerson;
 
     /**
-     * @description List of exceptions
+     * @description List of names that are exceptions to the general rules
      */
     public final Map<String, VocativePerson> exceptions = new Map<String, VocativePerson>{
             'Ola' => new VocativePerson('Ola', GENDER.WOMAN, 'Olu'),
@@ -128,15 +128,15 @@ public class VocativePolishFirstName {
     /**
      * @description Setup own titles like Mr&#47; Mrs, Panie&#47;Pani
      * <p/>
-     * for english ex. ['U' => '', GENDER.MAN => 'Mrs.', GENDER.WOMAN => 'Mr.'];
+     * for english ex. [GENDER.UNDEFINABLE => '', GENDER.MAN => 'Mrs.', GENDER.WOMAN => 'Mr.'];
      * <p/>
-     * for polish ex. ['U' => '', GENDER.MAN => 'Szanowny Panie', GENDER.WOMAN => 'Szanowna Pani'];
+     * for polish ex. [GENDER.UNDEFINABLE => '', GENDER.MAN => 'Szanowny Panie', GENDER.WOMAN => 'Szanowna Pani'];
      * <p/>
      * For multiple titles definitions use group name
      * <p/>
-     * for polish ex. group: 'default' => ['U' => 'Panie &#47;  Pani', GENDER.MAN => 'Panie', GENDER.WOMAN => 'Pani'];
+     * for polish ex. group: 'default' => [GENDER.UNDEFINABLE => 'Panie &#47;  Pani', GENDER.MAN => 'Panie', GENDER.WOMAN => 'Pani'];
      * <p/>
-     * for polish ex. group: 'polite' => ['U' => '', GENDER.MAN => 'Szanowny Panie', GENDER.WOMAN => 'Szanowna Pani'];
+     * for polish ex. group: 'polite' => [GENDER.UNDEFINABLE => '', GENDER.MAN => 'Szanowny Panie', GENDER.WOMAN => 'Szanowna Pani'];
      *
      * @param titles
      * @param aGroup
