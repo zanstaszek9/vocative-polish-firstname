@@ -22,8 +22,8 @@ private class VocativePolishFirstNameTest {
         //when
         for (Contact  contact : contacts) {
             final VocativePolishFirstName nameWithVoc = new VocativePolishFirstName(contact.FirstName);
-            if (contact.LastName != nameWithVoc.getVocativeFirstName()){
-                namesWithWrongVocative.put(contact.LastName, nameWithVoc.getVocativeFirstName());
+            if (contact.LastName != nameWithVoc.getFirstNameInVocative()){
+                namesWithWrongVocative.put(contact.LastName, nameWithVoc.getFirstNameInVocative());
             }
             final VocativePolishFirstName.GENDER mappedGender = genderMapping(contact.Gender__c);
             if (mappedGender != nameWithVoc.getDetectedGender()){
@@ -49,13 +49,13 @@ private class VocativePolishFirstNameTest {
 
     @IsTest
     static void shouldProcessCorrectlyOnPolishDiacritics() {
-        System.assertEquals('Bogusądzie', new VocativePolishFirstName('Bogusąd').getVocativeFirstName());
-        System.assertEquals('Więcemile', new VocativePolishFirstName('Więcemił').getVocativeFirstName());
-        System.assertEquals('Kiryle', new VocativePolishFirstName('Kirył').getVocativeFirstName());
-        System.assertEquals('Czechoniu', new VocativePolishFirstName('Czechoń').getVocativeFirstName());
-        System.assertEquals('Mściwóju', new VocativePolishFirstName('Mściwój').getVocativeFirstName());
-        System.assertEquals('Świętopełku', new VocativePolishFirstName('Świętopełk').getVocativeFirstName());
-        System.assertEquals('Andżeliko', new VocativePolishFirstName('Andżelika').getVocativeFirstName());
+        System.assertEquals('Bogusądzie', new VocativePolishFirstName('Bogusąd').getFirstNameInVocative());
+        System.assertEquals('Więcemile', new VocativePolishFirstName('Więcemił').getFirstNameInVocative());
+        System.assertEquals('Kiryle', new VocativePolishFirstName('Kirył').getFirstNameInVocative());
+        System.assertEquals('Czechoniu', new VocativePolishFirstName('Czechoń').getFirstNameInVocative());
+        System.assertEquals('Mściwóju', new VocativePolishFirstName('Mściwój').getFirstNameInVocative());
+        System.assertEquals('Świętopełku', new VocativePolishFirstName('Świętopełk').getFirstNameInVocative());
+        System.assertEquals('Andżeliko', new VocativePolishFirstName('Andżelika').getFirstNameInVocative());
 
 
     }
@@ -118,16 +118,16 @@ private class VocativePolishFirstNameTest {
 
     @IsTest
     static void shouldProcessDoubleBarreledName() {
-        System.assertEquals('Janie-Krzysztofie', new VocativePolishFirstName('Jan-Krzysztof').getVocativeFirstName());
+        System.assertEquals('Janie-Krzysztofie', new VocativePolishFirstName('Jan-Krzysztof').getFirstNameInVocative());
     }
 
     @IsTest
     static void shouldProcessDoubleName() {
-        System.assertEquals('Janie Mario', new VocativePolishFirstName('Jan Maria').getVocativeFirstName());
+        System.assertEquals('Janie Mario', new VocativePolishFirstName('Jan Maria').getFirstNameInVocative());
     }
 
     @IsTest
     static void shouldProcessTwoNamesWithConjunction() {
-        System.assertEquals('Janie i Mario', new VocativePolishFirstName('Jan i Maria').getVocativeFirstName());
+        System.assertEquals('Janie i Mario', new VocativePolishFirstName('Jan i Maria').getFirstNameInVocative());
     }
 }

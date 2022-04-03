@@ -112,7 +112,7 @@ public class VocativePolishFirstName {
      *
      * @return string
      */
-    public String getVocativeFirstName() { //TODO: Change name
+    public String getFirstNameInVocative() {
         return this.vocativePerson.vocative;
     }
 
@@ -191,7 +191,7 @@ public class VocativePolishFirstName {
      * @return string
      */
     public String getVocativeStringWithTitle(String delimiter, String aGroup) {
-        return this.getDetectedTitle(aGroup) + delimiter + this.getVocativeFirstName();
+        return this.getDetectedTitle(aGroup) + delimiter + this.getFirstNameInVocative();
     }
 
     /**
