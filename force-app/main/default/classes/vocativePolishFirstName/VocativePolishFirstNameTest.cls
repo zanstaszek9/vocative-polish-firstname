@@ -13,6 +13,17 @@
 private class VocativePolishFirstNameTest {
 
     @IsTest
+    static void createContactAndSetVocativeRelatedFields() {
+        final Contact contact = new Contact(FirstName = 'Konrad');
+        final VocativePolishFirstName nameWithVocative = VocativePolishFirstName.prepareContact(contact);
+
+        System.assertEquals('Konrad', contact.FirstName);
+        System.assertEquals('Konradzie', contact.Polish_Vocative__c);
+        System.assertEquals('Panie', contact.Title);
+        System.assertEquals('Man', contact.Gender__c);
+    }
+
+    @IsTest
     static void checkAgainstAllVocativesFromFile() {
         final Map<String, String> namesWithWrongVocative = new Map<String, String>();
         final Map<String, String> namesWithWrongGender = new Map<String, String>();

@@ -14,6 +14,17 @@ public class VocativePolishFirstName {
 
     private VocativePerson vocativePerson;
 
+
+    public static VocativePolishFirstName prepareContact(Contact contactToAssignValues) {
+        final VocativePolishFirstName vpfn = new VocativePolishFirstName(contactToAssignValues.FirstName);
+
+        contactToAssignValues.Polish_Vocative__c = vpfn.getFirstNameInVocative();
+        contactToAssignValues.Title = vpfn.getDetectedTitle();
+        contactToAssignValues.Gender__c = vpfn.getDetectedGenderAsString();
+
+        return vpfn;
+    }
+
     /**
      * @description
      * @param first_name
