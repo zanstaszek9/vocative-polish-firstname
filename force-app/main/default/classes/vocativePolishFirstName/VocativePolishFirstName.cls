@@ -12,54 +12,6 @@
 
 public class VocativePolishFirstName {
 
-    public enum GENDER {UNDEFINABLE, MAN, WOMAN, PLURAL}
-
-    /**
-     * @description Polish definitions array for default group
-     * <p/>
-     *      GENDER.PLURAL => 'Państwo', <br/>
-     *      GENDER.UNDEFINABLE => 'Panie &#47; Pani', <br/>
-     *      GENDER.MAN => 'Panie', <br/>
-     *      GENDER.WOMAN => 'Pani' <br/>
-     */
-    private final Map<String, Map<GENDER, String>> titles = new Map<String, Map<GENDER, String>>{
-            'default' => new Map<GENDER, String>{
-                    GENDER.PLURAL => 'Państwo',
-                    GENDER.UNDEFINABLE => 'Panie/Pani',
-                    GENDER.MAN => 'Panie',
-                    GENDER.WOMAN => 'Pani'
-            }
-    };
-
-    private VocativePerson vocativePerson;
-
-    /**
-     * @description List of names that are exceptions to the general rules
-     */
-    public final Map<String, VocativePerson> exceptionsToVocativeRules = new Map<String, VocativePerson>{
-            'Ola' => new VocativePerson('Ola', GENDER.WOMAN, 'Olu'),
-            'Saba' => new VocativePerson('Saba', GENDER.WOMAN, 'Sabo'),
-            'Noemi' => new VocativePerson('Noemi', GENDER.WOMAN, 'Noemi'),
-            'Sonia' => new VocativePerson('Sonia', GENDER.WOMAN, 'Soniu'),
-            'Luba' => new VocativePerson('Luba', GENDER.WOMAN, 'Lubo'),
-            'Jeremi' => new VocativePerson('Jeremi', GENDER.MAN, 'Jeremi'),
-            'Kirył' => new VocativePerson('Kirył', GENDER.MAN, 'Kiryle'),
-            'Miriam' => new VocativePerson('Miriam', GENDER.WOMAN, 'Miriam'),
-            'Margot' => new VocativePerson('Margot', GENDER.WOMAN, 'Margot'),
-            'Ingrid' => new VocativePerson('Ingrid', GENDER.WOMAN, 'Ingrid'),
-            'Lew' => new VocativePerson('Lew', GENDER.MAN, 'Lwie'),
-            'Narcyz' => new VocativePerson('Narcyz', GENDER.MAN, 'Narcyzie'),
-            'Kosma' => new VocativePerson('Kosma', GENDER.MAN, 'Kosmo'),
-            'Bonawentura' => new VocativePerson('Bonawentura', GENDER.MAN, 'Bonawenturo'),
-            'Carmen' => new VocativePerson('Carmen', GENDER.WOMAN, 'Carmen'),
-            'Doris' => new VocativePerson('Doris', GENDER.WOMAN, 'Doris'),
-            'Dolores' => new VocativePerson('Dolores', GENDER.WOMAN, 'Dolores'),
-            'Abigail' => new VocativePerson('Abigail', GENDER.WOMAN, 'Abigail'),
-            'Nikolett' => new VocativePerson('Nikolett', GENDER.WOMAN, 'Nikoletto'),
-            'Ania' => new VocativePerson('Ania', GENDER.WOMAN, 'Aniu')
-    };
-
-
     /**
      * @description
      * @param first_name
@@ -163,6 +115,7 @@ public class VocativePolishFirstName {
     public String getVocativeFirstName() { //TODO: Change name
         return this.vocativePerson.vocative;
     }
+
     /**
      * @description Returns title for a given Group that has been previously defined
      *
@@ -171,7 +124,7 @@ public class VocativePolishFirstName {
      * @return String
      */
     public String getDetectedTitle(String aGroup) {
-        return this.titles.get(aGroup).get(this.vocativePerson.gender);
+        return this.titles.get(aGroup).get(this.vocativePerson.getDetectedGender());
     }
 
     /**
@@ -189,7 +142,7 @@ public class VocativePolishFirstName {
      * @return string
      */
     public GENDER getDetectedGender() {
-        return this.vocativePerson.gender;
+        return this.vocativePerson.getDetectedGender();
     }
 
 
@@ -199,11 +152,7 @@ public class VocativePolishFirstName {
      * @return bool
      */
     public Boolean isMan() {
-        if (this.vocativePerson.gender == GENDER.MAN) {
-            return true;
-        }
-
-        return false;
+        return this.vocativePerson.isMan();
     }
 
     /**
@@ -212,11 +161,7 @@ public class VocativePolishFirstName {
      * @return bool
      */
     public Boolean isWoman() {
-        if (this.vocativePerson.gender == GENDER.WOMAN) {
-            return true;
-        }
-
-        return false;
+        return this.vocativePerson.isWoman();
     }
 
     /**
@@ -225,11 +170,7 @@ public class VocativePolishFirstName {
      * @return bool
      */
     public Boolean isUndefinable() {
-        if (this.vocativePerson.gender == GENDER.UNDEFINABLE) {
-            return true;
-        }
-
-        return false;
+        return this.vocativePerson.isUndefinable();
     }
 
     /**
@@ -238,11 +179,7 @@ public class VocativePolishFirstName {
      * @return bool
      */
     public Boolean isPlural() {
-        if (this.vocativePerson.gender == GENDER.PLURAL) {
-            return true;
-        }
-
-        return false;
+        return this.vocativePerson.isPlural();
     }
 
     /**
@@ -311,7 +248,7 @@ public class VocativePolishFirstName {
             throw new VocativePolishFirstNameException('Invalid format - exception to the rules of firstname must have specified gender and vocative form.');
         }
 
-        switch on nameWithException.gender {
+        switch on nameWithException.getDetectedGender() {
             when MAN, WOMAN, UNDEFINABLE, PLURAL {
                 return nameWithException;
             }
@@ -387,4 +324,51 @@ public class VocativePolishFirstName {
     }
 
 
+
+    public enum GENDER {UNDEFINABLE, MAN, WOMAN, PLURAL}
+
+    /**
+     * @description Polish definitions array for default group
+     * <p/>
+     *      GENDER.PLURAL => 'Państwo', <br/>
+     *      GENDER.UNDEFINABLE => 'Panie &#47; Pani', <br/>
+     *      GENDER.MAN => 'Panie', <br/>
+     *      GENDER.WOMAN => 'Pani' <br/>
+     */
+    private final Map<String, Map<GENDER, String>> titles = new Map<String, Map<GENDER, String>>{
+            'default' => new Map<GENDER, String>{
+                    GENDER.PLURAL => 'Państwo',
+                    GENDER.UNDEFINABLE => 'Panie/Pani',
+                    GENDER.MAN => 'Panie',
+                    GENDER.WOMAN => 'Pani'
+            }
+    };
+
+    private VocativePerson vocativePerson;
+
+    /**
+     * @description List of names that are exceptions to the general rules
+     */
+    public final Map<String, VocativePerson> exceptionsToVocativeRules = new Map<String, VocativePerson>{
+            'Ola' => new VocativePerson('Ola', GENDER.WOMAN, 'Olu'),
+            'Saba' => new VocativePerson('Saba', GENDER.WOMAN, 'Sabo'),
+            'Noemi' => new VocativePerson('Noemi', GENDER.WOMAN, 'Noemi'),
+            'Sonia' => new VocativePerson('Sonia', GENDER.WOMAN, 'Soniu'),
+            'Luba' => new VocativePerson('Luba', GENDER.WOMAN, 'Lubo'),
+            'Jeremi' => new VocativePerson('Jeremi', GENDER.MAN, 'Jeremi'),
+            'Kirył' => new VocativePerson('Kirył', GENDER.MAN, 'Kiryle'),
+            'Miriam' => new VocativePerson('Miriam', GENDER.WOMAN, 'Miriam'),
+            'Margot' => new VocativePerson('Margot', GENDER.WOMAN, 'Margot'),
+            'Ingrid' => new VocativePerson('Ingrid', GENDER.WOMAN, 'Ingrid'),
+            'Lew' => new VocativePerson('Lew', GENDER.MAN, 'Lwie'),
+            'Narcyz' => new VocativePerson('Narcyz', GENDER.MAN, 'Narcyzie'),
+            'Kosma' => new VocativePerson('Kosma', GENDER.MAN, 'Kosmo'),
+            'Bonawentura' => new VocativePerson('Bonawentura', GENDER.MAN, 'Bonawenturo'),
+            'Carmen' => new VocativePerson('Carmen', GENDER.WOMAN, 'Carmen'),
+            'Doris' => new VocativePerson('Doris', GENDER.WOMAN, 'Doris'),
+            'Dolores' => new VocativePerson('Dolores', GENDER.WOMAN, 'Dolores'),
+            'Abigail' => new VocativePerson('Abigail', GENDER.WOMAN, 'Abigail'),
+            'Nikolett' => new VocativePerson('Nikolett', GENDER.WOMAN, 'Nikoletto'),
+            'Ania' => new VocativePerson('Ania', GENDER.WOMAN, 'Aniu')
+    };
 }

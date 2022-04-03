@@ -16,7 +16,7 @@ public with sharing class VocativePerson {
     private final static String commonConjunction = 'i';
 
     public final String denominatorName;
-    public VocativePolishFirstName.GENDER gender;
+    private VocativePolishFirstName.GENDER gender;
     public String vocative = '';
 
     /**
@@ -58,6 +58,52 @@ public with sharing class VocativePerson {
 
     private static Boolean isConjunctionBetweenTwoNames(String aString){
         return aString == commonConjunction;
+    }
+
+    /**
+     * @description Returns gender M - Male, W - Woman, U - Unknown
+     *
+     * @return string
+     */
+    public VocativePolishFirstName.GENDER getDetectedGender() {
+        return this.gender;
+    }
+
+
+    /**
+     * @description Returns true if first name belongs to man
+     *
+     * @return bool
+     */
+    public Boolean isMan() {
+        return this.gender == VocativePolishFirstName.GENDER.MAN;
+    }
+
+    /**
+     * @description Returns true if first name belongs to woman
+     *
+     * @return bool
+     */
+    public Boolean isWoman() {
+        return this.gender == VocativePolishFirstName.GENDER.WOMAN;
+    }
+
+    /**
+     * @description Returns true if gender cannot be defined by first name
+     *
+     * @return bool
+     */
+    public Boolean isUndefinable() {
+        return this.gender == VocativePolishFirstName.GENDER.UNDEFINABLE;
+    }
+
+    /**
+     * @description Returns true if first name are made up from names of multiple people
+     *
+     * @return bool
+     */
+    public Boolean isPlural() {
+        return this.gender == VocativePolishFirstName.GENDER.PLURAL;
     }
 
 }
