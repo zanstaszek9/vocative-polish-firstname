@@ -12,19 +12,21 @@
 
 public class VocativePolishFirstName {
 
+    private VocativePerson vocativePerson;
+
     /**
      * @description
      * @param first_name
      * @param titles
-     * @param exceptions
+     * @param exceptionNames Names that are exception to the general vocative rules
      **/
-    public VocativePolishFirstName(String first_name, Map<GENDER, String> titles, Map<String, VocativePerson> exceptions) {
+    public VocativePolishFirstName(String first_name, Map<GENDER, String> titles, Map<String, VocativePerson> exceptionNames) {
         if (!titles.isEmpty()) {
             this.setTitles(titles);
         }
 
-        if (!exceptions.isEmpty()) {
-            this.exceptionsToVocativeRules.putAll(exceptions);
+        if (!exceptionNames.isEmpty()) {
+            this.exceptionsToVocativeRules.putAll(exceptionNames);
         }
 
         this.remakeToVocative(first_name);
@@ -38,68 +40,102 @@ public class VocativePolishFirstName {
         this(first_name, new Map<GENDER, String>(), new Map<String, VocativePerson>());
     }
 
+
     /**
-     * @description Return default titles definition
+     * @description Remake first name to Polish vocative
      *
-     * @return array
+     * @param firstname firstname
+     *
+     * @throws VocativePolishFirstNameException
      */
-    public Map<GENDER, String> getTitles() {
-        return this.titles.get('default');
+    public void remakeToVocative(String firstname) {
+        if (String.isBlank(firstname)) {
+            throw new VocativePolishFirstNameException('First name cannot be empty');
+        }
+
+        if (this.vocativePerson != null) {
+            return;
+        }
+
+        firstname = nameCaseConvert(firstname).trim();
+        final VocativePerson creatingVocative = new VocativePerson(firstname);
+        this.vocativePerson = creatingVocative;
+
+        processAndAddNamePartsToVocative(firstname, creatingVocative);
+    }
+
+    private void processAndAddNamePartsToVocative(final String firstname, final VocativePerson creatingVocative) {
+        for (String partOfName : firstname.splitByCharacterTypeCamelCase()) {
+            final VocativePerson tempVocative = this.checkExceptions(partOfName);
+            if (isInExceptionList(tempVocative)) {
+                this.vocativePerson = tempVocative;
+                return;
+            }
+
+            if (isSpaceOrDelimiterOrConjunction(partOfName.length())) {
+                creatingVocative.attachConjunction(partOfName.toLowerCase());
+                continue;
+            }
+
+            try {
+                findAndUseMatchingRule(partOfName, creatingVocative);
+            }
+            catch (StringException e) {
+                throw new VocativePolishFirstNameException('An error with name ' + partOfName + ':  ' + e, e);
+            }
+        }
     }
 
     /**
-     * @description Returns titles definition by group name
+     * @description
+     * @param first_name
      *
-     * @param aGroup
+     * @return VocativePerson
      *
-     * @return Map<String, String>
+     * @throws VocativePolishFirstNameException
      */
-    public Map<GENDER, String> getTitlesByGroup(String aGroup) {
-        return this.titles.get(aGroup);
+    private VocativePerson checkExceptions(String first_name) {
+        final VocativePerson nameWithException = this.exceptionsToVocativeRules.get(first_name);
+        if (nameWithException == null) {
+            return null;
+        }
+
+        if (!nameWithException.hasDefinedVocativeAndGender()) {
+            throw new VocativePolishFirstNameException('Invalid format - exception to the rules of firstname must have specified gender and vocative form.');
+        }
+
+        switch on nameWithException.getDetectedGender() {
+            when MAN, WOMAN, UNDEFINABLE, PLURAL {
+                return nameWithException;
+            }
+            when else {
+                throw new VocativePolishFirstNameException('Undefined gender');
+            }
+        }
     }
 
-    /**
-     * @description Setup own titles like Mr&#47; Mrs, Panie&#47;Pani
-     * <p/>
-     * for english ex. ['GENDER.UNDEFINABLE => 'Mr. &#47; Mrs.', GENDER.MAN => 'Mrs.', GENDER.WOMAN => 'Mr.'];
-     * <p/>
-     * for polish ex. ['GENDER.UNDEFINABLE => 'Mr. &#47; Mrs.', GENDER.MAN => 'Szanowny Panie', GENDER.WOMAN => 'Szanowna Pani'];
-     * <p/>
-     * For multiple titles definitions use group name
-     * <p/>
-     * for polish ex. group: 'default' => ['GENDER.UNDEFINABLE => 'Panie &#47;  Pani', GENDER.MAN => 'Panie', GENDER.WOMAN => 'Pani'];
-     * <p/>
-     * for polish ex. group: 'polite' => ['GENDER.UNDEFINABLE => '', GENDER.MAN => 'Szanowny Panie', GENDER.WOMAN => 'Szanowna Pani'];
-     *
-     * @param titles
-     **/
-    public void setTitles(Map<GENDER, String> titles) {
-        setTitles(titles, 'default');
+    private void findAndUseMatchingRule(String partOfName, VocativePerson creatingVocative) {
+        for (VocativeRule vocativeRule : VocativeRule.vocativeRules) {
+            if (vocativeRule.isEndingMatching(partOfName)) {
+                creatingVocative.attachToVocativePerson(partOfName, vocativeRule);
+                return;
+            }
+        }
     }
 
-    /**
-     * @description Setup own titles like Mr&#47; Mrs, Panie&#47;Pani
-     * <p/>
-     * for english ex. [GENDER.UNDEFINABLE => '', GENDER.MAN => 'Mrs.', GENDER.WOMAN => 'Mr.'];
-     * <p/>
-     * for polish ex. [GENDER.UNDEFINABLE => '', GENDER.MAN => 'Szanowny Panie', GENDER.WOMAN => 'Szanowna Pani'];
-     * <p/>
-     * For multiple titles definitions use group name
-     * <p/>
-     * for polish ex. group: 'default' => [GENDER.UNDEFINABLE => 'Panie &#47;  Pani', GENDER.MAN => 'Panie', GENDER.WOMAN => 'Pani'];
-     * <p/>
-     * for polish ex. group: 'polite' => [GENDER.UNDEFINABLE => '', GENDER.MAN => 'Szanowny Panie', GENDER.WOMAN => 'Szanowna Pani'];
-     *
-     * @param titles
-     * @param aGroup
-     */
-    public void setTitles(Map<GENDER, String> titles, String aGroup) {
-        this.titles.put(aGroup, titles);
+    private Boolean isInExceptionList(VocativePerson tempVocative) {
+        return tempVocative != null;
+    }
+
+    private Boolean isSpaceOrDelimiterOrConjunction(Integer partOfName) {
+        final Integer maxDelimiterLength = 1;
+        return partOfName <= maxDelimiterLength;
     }
 
 
+
     /**
-     * @description Returns array with vocative firs name and gender.
+     * @description Returns a vocative person object
      *
      * @return VocativePerson
      */
@@ -137,7 +173,7 @@ public class VocativePolishFirstName {
     }
 
     /**
-     * @description Returns gender M - Male, W - Woman, U - Unknown
+     * @description Returns gender
      *
      * @return string
      */
@@ -230,99 +266,6 @@ public class VocativePolishFirstName {
     }
 
 
-    /**
-     * @description
-     * @param first_name
-     *
-     * @return VocativePerson
-     *
-     * @throws VocativePolishFirstNameException
-     */
-    private VocativePerson checkExceptions(String first_name) {
-        final VocativePerson nameWithException = this.exceptionsToVocativeRules.get(first_name);
-        if (nameWithException == null) {
-            return null;
-        }
-
-        if (!nameWithException.hasDefinedVocativeAndGender()) {
-            throw new VocativePolishFirstNameException('Invalid format - exception to the rules of firstname must have specified gender and vocative form.');
-        }
-
-        switch on nameWithException.getDetectedGender() {
-            when MAN, WOMAN, UNDEFINABLE, PLURAL {
-                return nameWithException;
-            }
-            when else {
-                throw new VocativePolishFirstNameException('Undefined gender');
-            }
-        }
-
-    }
-
-
-    /**
-     * @description Remake first name to Polish vocative
-     *
-     * @param firstname firstname
-     *
-     * @throws VocativePolishFirstNameException
-     */
-    public void remakeToVocative(String firstname) {
-        if (String.isBlank(firstname)) {
-            throw new VocativePolishFirstNameException('First name cannot be empty');
-        }
-
-        if (this.vocativePerson != null) {
-            return;
-        }
-
-        firstname = nameCaseConvert(firstname).trim();
-        final VocativePerson creatingVocative = new VocativePerson(firstname);
-        this.vocativePerson = creatingVocative;
-
-        processAndAddNamePartsToVocative(firstname, creatingVocative);
-    }
-
-    private void processAndAddNamePartsToVocative(final String firstname, final VocativePerson creatingVocative) {
-        for (String partOfName : firstname.splitByCharacterTypeCamelCase()) {
-            final VocativePerson tempVocative = this.checkExceptions(partOfName);
-            if (isInExceptionList(tempVocative)) {
-                this.vocativePerson = tempVocative;
-                return;
-            }
-
-            if (isSpaceOrDelimiterOrConjunction(partOfName.length())) {
-                creatingVocative.attachConjunction(partOfName.toLowerCase());
-                continue;
-            }
-
-            try {
-                findAndUseMatchingRule(partOfName, creatingVocative);
-            }
-            catch (StringException e) {
-                throw new VocativePolishFirstNameException('An error with name ' + partOfName + ':  ' + e, e);
-            }
-        }
-    }
-
-    private void findAndUseMatchingRule(String partOfName, VocativePerson creatingVocative) {
-        for (VocativeRule vocativeRule : VocativeRule.vocativeRules) {
-            if (vocativeRule.isEndingMatching(partOfName)) {
-                creatingVocative.attachToVocativePerson(partOfName, vocativeRule);
-                return;
-            }
-        }
-    }
-
-    private Boolean isInExceptionList(VocativePerson tempVocative) {
-        return tempVocative != null;
-    }
-
-    private Boolean isSpaceOrDelimiterOrConjunction(Integer partOfName) {
-        final Integer maxDelimiterLength = 1;
-        return partOfName <= maxDelimiterLength;
-    }
-
 
 
     public enum GENDER {UNDEFINABLE, MAN, WOMAN, PLURAL}
@@ -344,12 +287,11 @@ public class VocativePolishFirstName {
             }
     };
 
-    private VocativePerson vocativePerson;
 
     /**
-     * @description List of names that are exceptions to the general rules
+     * @description List of names that are exceptionNames to the general rules
      */
-    public final Map<String, VocativePerson> exceptionsToVocativeRules = new Map<String, VocativePerson>{
+    private final Map<String, VocativePerson> exceptionsToVocativeRules = new Map<String, VocativePerson>{
             'Ola' => new VocativePerson('Ola', GENDER.WOMAN, 'Olu'),
             'Saba' => new VocativePerson('Saba', GENDER.WOMAN, 'Sabo'),
             'Noemi' => new VocativePerson('Noemi', GENDER.WOMAN, 'Noemi'),
@@ -371,4 +313,64 @@ public class VocativePolishFirstName {
             'Nikolett' => new VocativePerson('Nikolett', GENDER.WOMAN, 'Nikoletto'),
             'Ania' => new VocativePerson('Ania', GENDER.WOMAN, 'Aniu')
     };
+
+
+    /**
+     * @description Return default titles definition
+     *
+     * @return array
+     */
+    public Map<GENDER, String> getTitles() {
+        return this.titles.get('default');
+    }
+
+    /**
+     * @description Returns titles definition by group name
+     *
+     * @param aGroup
+     *
+     * @return Map<String, String>
+     */
+    public Map<GENDER, String> getTitlesByGroup(String aGroup) {
+        return this.titles.get(aGroup);
+    }
+
+    /**
+     * @description Setup own titles like Mr&#47; Mrs, Panie&#47;Pani
+     * <p/>
+     * for english ex. [GENDER.UNDEFINABLE => 'Mr. &#47; Mrs.', GENDER.MAN => 'Mrs.', GENDER.WOMAN => 'Mr.'];
+     * <p/>
+     * for polish ex. [GENDER.UNDEFINABLE => 'Mr. &#47; Mrs.', GENDER.MAN => 'Szanowny Panie', GENDER.WOMAN => 'Szanowna Pani'];
+     * <p/>
+     * For multiple titles definitions use group name
+     * <p/>
+     * for polish ex. group: 'default' => ['GENDER.UNDEFINABLE => 'Panie &#47;  Pani', GENDER.MAN => 'Panie', GENDER.WOMAN => 'Pani'];
+     * <p/>
+     * for polish ex. group: 'polite' => ['GENDER.UNDEFINABLE => '', GENDER.MAN => 'Szanowny Panie', GENDER.WOMAN => 'Szanowna Pani'];
+     *
+     * @param titles
+     **/
+    public void setTitles(Map<GENDER, String> titles) {
+        setTitles(titles, 'default');
+    }
+
+    /**
+     * @description Setup own titles like Mr&#47; Mrs, Panie&#47;Pani
+     * <p/>
+     * for english ex. [GENDER.UNDEFINABLE => '', GENDER.MAN => 'Mrs.', GENDER.WOMAN => 'Mr.'];
+     * <p/>
+     * for polish ex. [GENDER.UNDEFINABLE => '', GENDER.MAN => 'Szanowny Panie', GENDER.WOMAN => 'Szanowna Pani'];
+     * <p/>
+     * For multiple titles definitions use group name
+     * <p/>
+     * for polish ex. group: 'default' => [GENDER.UNDEFINABLE => 'Panie &#47;  Pani', GENDER.MAN => 'Panie', GENDER.WOMAN => 'Pani'];
+     * <p/>
+     * for polish ex. group: 'polite' => [GENDER.UNDEFINABLE => '', GENDER.MAN => 'Szanowny Panie', GENDER.WOMAN => 'Szanowna Pani'];
+     *
+     * @param titles
+     * @param aGroup
+     */
+    public void setTitles(Map<GENDER, String> titles, String aGroup) {
+        this.titles.put(aGroup, titles);
+    }
 }
