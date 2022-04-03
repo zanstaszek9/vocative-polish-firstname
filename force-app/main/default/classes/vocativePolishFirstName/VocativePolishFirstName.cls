@@ -343,7 +343,7 @@ public class VocativePolishFirstName {
     }
 
     private void findAndUseMatchingRule(String partOfName, VocativePerson creatingVocative) {
-        for (VocativeRule vocativeRule : vocativeRules) {
+        for (VocativeRule vocativeRule : VocativeRule.vocativeRules) {
             if (vocativeRule.isEndingMatching(partOfName)) {
                 creatingVocative.attachToVocativePerson(partOfName, vocativeRule);
                 return;
@@ -361,107 +361,4 @@ public class VocativePolishFirstName {
     }
 
 
-    public class VocativeRule {
-        public Set<String> nameEndings;
-        public GENDER gender;
-        public Integer replaceFromRight;
-        public String vocativeSuffix;
-
-        /**
-         * @description
-         * @param nameEnding The last letters from tha name that allows to assume Vocative form
-         * @param gender A gender to assume
-         * @param replaceFromRight Amount of letters to chop from right
-         * @param vocativeSuffix Suffix to add to the end of string
-         **/
-        public VocativeRule(String nameEnding, GENDER gender, Integer replaceFromRight, String vocativeSuffix) {
-            this(new Set<String>{nameEnding}, gender, replaceFromRight, vocativeSuffix);
-        }
-
-        /**
-         * @description
-         * @param nameEndings A group of the last letters from tha name that allows to assume Vocative form for all endings
-         * @param gender A gender to assume
-         * @param replaceFromRight Amount of letters to chop from right
-         * @param vocativeSuffix Suffix to add to the end of string
-         **/
-        public VocativeRule(Set<String> nameEndings, GENDER gender, Integer replaceFromRight, String vocativeSuffix) {
-            this.nameEndings = nameEndings;
-            this.gender = gender;
-            this.replaceFromRight = replaceFromRight;
-            this.vocativeSuffix = vocativeSuffix;
-        }
-
-        public Boolean isEndingMatching(final String firstname) {
-            return VPFN_StringUtils.endsWithAnySpecifiedIgnoreCase(firstname, this.nameEndings);
-        }
-
-        /**
-         * @description Return the actual Vocative form
-         * @param firstname
-         *
-         * @return Actual Vocative form
-         **/
-        public String getVocativeName(final String firstname) {
-            return (VPFN_StringUtils.chopString(firstname, this.replaceFromRight)) + vocativeSuffix;
-        }
-
-    }
-
-    /**
-     * @description List of Vocative Rules with lazy-loading
-     **/
-    public static List<VocativeRule> vocativeRules {
-        public get {
-            if (vocativeRules == null) {
-                vocativeRules = new List<VocativeRule>();
-                populateVocativeRules();
-            }
-            return vocativeRules;
-        }
-        private set;
-    }
-
-    /**
-     * @description Defined rules that should cover all standard Polish vocatives
-     **/
-    public static void populateVocativeRules() {
-        vocativeRules.add(new VocativeRule(new Set<String>{
-                'ni', 'li', 'zi'
-        }, GENDER.MAN, 0, ''));
-        vocativeRules.add(new VocativeRule('eł', GENDER.MAN, 2, 'le'));
-        vocativeRules.add(new VocativeRule('ił', GENDER.MAN, 1, 'le'));
-        vocativeRules.add(new VocativeRule('et', GENDER.MAN, 1, 'cie'));
-        vocativeRules.add(new VocativeRule('tr', GENDER.MAN, 0, 'ze'));
-        vocativeRules.add(new VocativeRule('ał', GENDER.MAN, 1, 'le'));
-        vocativeRules.add(new VocativeRule(new Set<String>{'it', 'rt'}, GENDER.MAN, 1, 'cie'));
-        vocativeRules.add(new VocativeRule('ciek', GENDER.MAN, 4, 'ćku'));
-        vocativeRules.add(new VocativeRule('siek', GENDER.MAN, 4, 'śku'));
-        vocativeRules.add(new VocativeRule('niec', GENDER.MAN, 4, 'ńcu'));
-        vocativeRules.add(new VocativeRule('per', GENDER.MAN, 2, 'rze'));
-        vocativeRules.add(new VocativeRule(new Set<String>{'ek', 'ko'}, GENDER.MAN, 2, 'ku'));
-        vocativeRules.add(new VocativeRule('st', GENDER.MAN, 2, 'ście'));
-        vocativeRules.add(new VocativeRule('sł', GENDER.MAN, 2, 'śle'));
-        vocativeRules.add(new VocativeRule(new Set<String>{'cja', 'ria', 'lia', 'dia', 'wia', 'fia', 'iela', 'bela', 'zula', 'saba'}, GENDER.WOMAN, 1, 'o'));
-        vocativeRules.add(new VocativeRule(new Set<String>{'iola', 'rola'}, GENDER.WOMAN, 1, 'u'));
-        vocativeRules.add(new VocativeRule(new Set<String>{'aja', 'sia'}, GENDER.WOMAN, 1, 'u'));
-        vocativeRules.add(new VocativeRule(new Set<String>{'ja', 'ia', 'la'}, GENDER.WOMAN, 1, 'o'));
-        vocativeRules.add(new VocativeRule('ba', GENDER.MAN, 1, 'o'));
-        vocativeRules.add(new VocativeRule(new Set<String>{'oe', 'ue'}, GENDER.MAN, 0, ''));
-        vocativeRules.add(new VocativeRule('oń', GENDER.MAN, 1, 'niu'));
-        vocativeRules.add(new VocativeRule(new Set<String>{'n', 'f', 'm', 'w', 'p', 's', 'b'}, GENDER.MAN, 0, 'ie'));
-        vocativeRules.add(new VocativeRule('bel', GENDER.MAN, 3, 'ble'));
-        vocativeRules.add(new VocativeRule('ez', GENDER.WOMAN, 0, ''));
-        vocativeRules.add(new VocativeRule(new Set<String>{'g', 'h', 'j', 'k', 'l', 'z'}, GENDER.MAN, 0, 'u'));
-        vocativeRules.add(new VocativeRule('der', GENDER.MAN, 2, 'rze'));
-        vocativeRules.add(new VocativeRule('ster', GENDER.MAN, 2, 'rze'));
-        vocativeRules.add(new VocativeRule('r', GENDER.MAN, 0, 'ze'));
-        vocativeRules.add(new VocativeRule('d', GENDER.MAN, 0, 'zie'));
-        vocativeRules.add(new VocativeRule('a', GENDER.WOMAN, 1, 'o'));
-        vocativeRules.add(new VocativeRule('e', GENDER.WOMAN, 0, ''));
-        vocativeRules.add(new VocativeRule('y', GENDER.MAN, 0, ''));
-        vocativeRules.add(new VocativeRule('o', GENDER.MAN, 0, ''));
-        vocativeRules.add(new VocativeRule('t', GENDER.MAN, 1, 'cie'));
-        vocativeRules.add(new VocativeRule('', GENDER.UNDEFINABLE, 0, '')); //TODO Test czy nameEnding pusty jest TRUE
-    }
 }

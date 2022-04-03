@@ -51,7 +51,7 @@ public with sharing class VocativePerson {
         this.vocative += aString;
     }
 
-    public void attachToVocativePerson(String denominatorName, VocativePolishFirstName.VocativeRule vocativeRule) {
+    public void attachToVocativePerson(String denominatorName, VocativeRule vocativeRule) {
         this.gender = (this.gender == null) ? this.gender = vocativeRule.gender : this.gender;
         this.vocative += vocativeRule.getVocativeName(denominatorName);
     }
