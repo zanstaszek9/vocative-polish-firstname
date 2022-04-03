@@ -17,10 +17,10 @@ private class VocativePolishFirstNameTest {
         final Contact contact = new Contact(FirstName = 'Konrad');
         final VocativePolishFirstName nameWithVocative = VocativePolishFirstName.prepareContact(contact);
 
-        System.assertEquals('Konrad', contact.FirstName);
-        System.assertEquals('Konradzie', contact.Polish_Vocative__c);
-        System.assertEquals('Panie', contact.Title);
-        System.assertEquals('Man', contact.Gender__c);
+        System.assertEquals('Konradzie', contact.VPFN_Polish_Vocative__c);
+        System.assertEquals('Panie', contact.VPFN_Vocative_Salutation__c);
+        System.assertEquals('Man', contact.VPFN_Gender__c);
+//        System.assertEquals('Mr.', contact.Salutation); //TODO
     }
 
     @IsTest

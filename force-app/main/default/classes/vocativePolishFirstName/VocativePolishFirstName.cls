@@ -18,9 +18,9 @@ public class VocativePolishFirstName {
     public static VocativePolishFirstName prepareContact(Contact contactToAssignValues) {
         final VocativePolishFirstName vpfn = new VocativePolishFirstName(contactToAssignValues.FirstName);
 
-        contactToAssignValues.Polish_Vocative__c = vpfn.getFirstNameInVocative();
-        contactToAssignValues.Title = vpfn.getDetectedTitle();
-        contactToAssignValues.Gender__c = vpfn.getDetectedGenderAsString();
+        contactToAssignValues.VPFN_Polish_Vocative__c = vpfn.getFirstNameInVocative();
+        contactToAssignValues.VPFN_Vocative_Salutation__c = vpfn.getDetectedTitle();
+        contactToAssignValues.VPFN_Gender__c = vpfn.getDetectedGenderAsString();
 
         return vpfn;
     }
