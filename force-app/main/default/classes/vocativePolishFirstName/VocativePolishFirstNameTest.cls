@@ -93,7 +93,6 @@ private class VocativePolishFirstNameTest {
     @IsTest
     static void shouldReturnTrueForMaleName() {
         System.assert(new VocativePolishFirstName('Krzysztof').isMan());
-
     }
 
     @IsTest
@@ -101,6 +100,15 @@ private class VocativePolishFirstNameTest {
         System.assert(new VocativePolishFirstName('Alicja').isWoman());
     }
 
+    @IsTest
+    static void shouldReturnTrueForUndefinableName() {
+        System.assert(new VocativePolishFirstName('Maliq').isUndefinable());
+    }
+
+    @IsTest
+    static void shouldReturnTrueForNamesOfTwoPeople() {
+        System.assert(new VocativePolishFirstName('Krzysztof i Alicja').isPlural());
+    }
 
     @IsTest
     static void shouldCapitalizeDoubleName() {
@@ -120,7 +128,6 @@ private class VocativePolishFirstNameTest {
 
     @IsTest
     static void shouldProcessTwoNamesWithConjunction() {
-        // TODO: Assume Undefined gender
         System.assertEquals('Janie i Mario', new VocativePolishFirstName('Jan i Maria').getVocativeFirstName());
     }
 }

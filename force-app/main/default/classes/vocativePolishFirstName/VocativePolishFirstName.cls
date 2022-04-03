@@ -36,7 +36,7 @@ public class VocativePolishFirstName {
     /**
      * @description List of names that are exceptions to the general rules
      */
-    public final Map<String, VocativePerson> exceptions = new Map<String, VocativePerson>{
+    public final Map<String, VocativePerson> exceptionsToVocativeRules = new Map<String, VocativePerson>{
             'Ola' => new VocativePerson('Ola', GENDER.WOMAN, 'Olu'),
             'Saba' => new VocativePerson('Saba', GENDER.WOMAN, 'Sabo'),
             'Noemi' => new VocativePerson('Noemi', GENDER.WOMAN, 'Noemi'),
@@ -72,7 +72,7 @@ public class VocativePolishFirstName {
         }
 
         if (!exceptions.isEmpty()) {
-            this.exceptions.putAll(exceptions);
+            this.exceptionsToVocativeRules.putAll(exceptions);
         }
 
         this.remakeToVocative(first_name);
@@ -220,6 +220,32 @@ public class VocativePolishFirstName {
     }
 
     /**
+     * @description Returns true if gender cannot be defined by first name
+     *
+     * @return bool
+     */
+    public Boolean isUndefinable() {
+        if (this.vocativePerson.gender == GENDER.UNDEFINABLE) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * @description Returns true if first name are made up from names of multiple people
+     *
+     * @return bool
+     */
+    public Boolean isPlural() {
+        if (this.vocativePerson.gender == GENDER.PLURAL) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
      * @description Return vocative first name with title
      *
      * @param delimiter default ' ' (space)
@@ -276,7 +302,7 @@ public class VocativePolishFirstName {
      * @throws VocativePolishFirstNameException
      */
     private VocativePerson checkExceptions(String first_name) {
-        final VocativePerson nameWithException = this.exceptions.get(first_name);
+        final VocativePerson nameWithException = this.exceptionsToVocativeRules.get(first_name);
         if (nameWithException == null) {
             return null;
         }
