@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VPFN_Vocative_Salutation__c</fullName>
+    <description>Salutation, dependent on gender, in the Vocative form. Part of Vocative Polish First Name library.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Salutation in the Vocative form.</inlineHelpText>
+    <label>Vocative Salutation</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Pani</fullName>
+                <default>false</default>
+                <label>Pani</label>
+            </value>
+            <value>
+                <fullName>Panie</fullName>
+                <default>false</default>
+                <label>Panie</label>
+            </value>
+            <value>
+                <fullName>Pani / Pani</fullName>
+                <default>false</default>
+                <label>Pani / Pani</label>
+            </value>
+            <value>
+                <fullName>Państwo</fullName>
+                <default>false</default>
+                <label>Państwo</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>
