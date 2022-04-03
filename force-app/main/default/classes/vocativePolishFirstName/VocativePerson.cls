@@ -10,24 +10,24 @@
  */
 
 /**
-* @description Structure to hold name, sex and vocative
+* @description Structure to hold name, gender and vocative
 */
 public with sharing class VocativePerson {
     private final static String commonConjunction = 'i';
 
     public final String denominatorName;
-    public String sex;
+    public VocativePolishFirstName.GENDER gender;
     public String vocative = '';
 
     /**
      * @description
      * @param denominatorName name in denominator (pl. mianownik) form
-     * @param sex sex indication in form of letters, 'U' for 'Unable to define', 'W' for Woman, 'M' for Man, 'G' for Group
+     * @param gender gender indication in form of letters
      * @param vocative name in vocative (pl. wołacz) form
      **/
-    public VocativePerson(String denominatorName, String sex, String vocative) {
+    public VocativePerson(String denominatorName, VocativePolishFirstName.GENDER gender, String vocative) {
         this.denominatorName = denominatorName;
-        this.sex = sex;
+        this.gender = gender;
         this.vocative = vocative;
     }
 
@@ -36,23 +36,23 @@ public with sharing class VocativePerson {
      * @param denominatorName name in denominator (pl. mianownik) form
      **/
     public VocativePerson(String denominatorName) {
-        this(denominatorName, '', '');
+        this(denominatorName, null, '');
     }
 
-    public Boolean hasDefinedVocativeAndSex() {
-        return String.isNotBlank(this.vocative) && String.isNotBlank(this.sex);
+    public Boolean hasDefinedVocativeAndGender() {
+        return String.isNotBlank(this.vocative) && this.gender != null;
     }
 
 
     public void attachConjunction(String aString) {
         if (isConjunctionBetweenTwoNames(aString)) {
-            this.sex = 'G';
+            this.gender = VocativePolishFirstName.GENDER.PLURAL;
         }
         this.vocative += aString;
     }
 
     public void attachToVocativePerson(String denominatorName, VocativePolishFirstName.VocativeRule vocativeRule) {
-        this.sex = (String.isBlank(this.sex)) ? this.sex = vocativeRule.gender : this.sex;
+        this.gender = (this.gender == null) ? this.gender = vocativeRule.gender : this.gender;
         this.vocative += vocativeRule.getVocativeName(denominatorName);
     }
 

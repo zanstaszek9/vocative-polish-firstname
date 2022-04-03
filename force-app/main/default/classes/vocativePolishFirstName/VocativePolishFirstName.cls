@@ -12,20 +12,22 @@
 
 public class VocativePolishFirstName {
 
+    public enum GENDER {UNDEFINABLE, MAN, WOMAN, PLURAL}
 
     /**
      * @description Polish definitions array for default group
      * <p/>
-     * U = Unable to define
-     * M = Male
-     * W = Woman
+     *      GENDER.PLURAL => 'Państwo', <br/>
+     *      GENDER.UNDEFINABLE => 'Panie &#47; Pani', <br/>
+     *      GENDER.MAN => 'Panie', <br/>
+     *      GENDER.WOMAN => 'Pani' <br/>
      */
-    private final Map<String, Map<String, String>> titles = new Map<String, Map<String, String>>{
-            'default' => new Map<String, String>{
-                    'G' => 'Państwo',
-                    'U' => 'Panie/Pani',
-                    'M' => 'Panie',
-                    'W' => 'Pani'
+    private final Map<String, Map<GENDER, String>> titles = new Map<String, Map<GENDER, String>>{
+            'default' => new Map<GENDER, String>{
+                    GENDER.PLURAL => 'Państwo',
+                    GENDER.UNDEFINABLE => 'Panie/Pani',
+                    GENDER.MAN => 'Panie',
+                    GENDER.WOMAN => 'Pani'
             }
     };
 
@@ -35,26 +37,26 @@ public class VocativePolishFirstName {
      * @description List of exceptions
      */
     public final Map<String, VocativePerson> exceptions = new Map<String, VocativePerson>{
-            'Ola' => new VocativePerson('Ola', 'W', 'Olu'),
-            'Saba' => new VocativePerson('Saba', 'W', 'Sabo'),
-            'Noemi' => new VocativePerson('Noemi', 'W', 'Noemi'),
-            'Sonia' => new VocativePerson('Sonia', 'W', 'Soniu'),
-            'Luba' => new VocativePerson('Luba', 'W', 'Lubo'),
-            'Jeremi' => new VocativePerson('Jeremi', 'M', 'Jeremi'),
-            'Kirył' => new VocativePerson('Kirył', 'M', 'Kiryle'),
-            'Miriam' => new VocativePerson('Miriam', 'W', 'Miriam'),
-            'Margot' => new VocativePerson('Margot', 'W', 'Margot'),
-            'Ingrid' => new VocativePerson('Ingrid', 'W', 'Ingrid'),
-            'Lew' => new VocativePerson('Lew', 'M', 'Lwie'),
-            'Narcyz' => new VocativePerson('Narcyz', 'M', 'Narcyzie'),
-            'Kosma' => new VocativePerson('Kosma', 'M', 'Kosmo'),
-            'Bonawentura' => new VocativePerson('Bonawentura', 'M', 'Bonawenturo'),
-            'Carmen' => new VocativePerson('Carmen', 'W', 'Carmen'),
-            'Doris' => new VocativePerson('Doris', 'W', 'Doris'),
-            'Dolores' => new VocativePerson('Dolores', 'W', 'Dolores'),
-            'Abigail' => new VocativePerson('Abigail', 'W', 'Abigail'),
-            'Nikolett' => new VocativePerson('Nikolett', 'W', 'Nikoletto'),
-            'Ania' => new VocativePerson('Ania', 'W', 'Aniu')
+            'Ola' => new VocativePerson('Ola', GENDER.WOMAN, 'Olu'),
+            'Saba' => new VocativePerson('Saba', GENDER.WOMAN, 'Sabo'),
+            'Noemi' => new VocativePerson('Noemi', GENDER.WOMAN, 'Noemi'),
+            'Sonia' => new VocativePerson('Sonia', GENDER.WOMAN, 'Soniu'),
+            'Luba' => new VocativePerson('Luba', GENDER.WOMAN, 'Lubo'),
+            'Jeremi' => new VocativePerson('Jeremi', GENDER.MAN, 'Jeremi'),
+            'Kirył' => new VocativePerson('Kirył', GENDER.MAN, 'Kiryle'),
+            'Miriam' => new VocativePerson('Miriam', GENDER.WOMAN, 'Miriam'),
+            'Margot' => new VocativePerson('Margot', GENDER.WOMAN, 'Margot'),
+            'Ingrid' => new VocativePerson('Ingrid', GENDER.WOMAN, 'Ingrid'),
+            'Lew' => new VocativePerson('Lew', GENDER.MAN, 'Lwie'),
+            'Narcyz' => new VocativePerson('Narcyz', GENDER.MAN, 'Narcyzie'),
+            'Kosma' => new VocativePerson('Kosma', GENDER.MAN, 'Kosmo'),
+            'Bonawentura' => new VocativePerson('Bonawentura', GENDER.MAN, 'Bonawenturo'),
+            'Carmen' => new VocativePerson('Carmen', GENDER.WOMAN, 'Carmen'),
+            'Doris' => new VocativePerson('Doris', GENDER.WOMAN, 'Doris'),
+            'Dolores' => new VocativePerson('Dolores', GENDER.WOMAN, 'Dolores'),
+            'Abigail' => new VocativePerson('Abigail', GENDER.WOMAN, 'Abigail'),
+            'Nikolett' => new VocativePerson('Nikolett', GENDER.WOMAN, 'Nikoletto'),
+            'Ania' => new VocativePerson('Ania', GENDER.WOMAN, 'Aniu')
     };
 
 
@@ -64,7 +66,7 @@ public class VocativePolishFirstName {
      * @param titles
      * @param exceptions
      **/
-    public VocativePolishFirstName(String first_name, Map<String, String> titles, Map<String, VocativePerson> exceptions) {
+    public VocativePolishFirstName(String first_name, Map<GENDER, String> titles, Map<String, VocativePerson> exceptions) {
         if (!titles.isEmpty()) {
             this.setTitles(titles);
         }
@@ -81,7 +83,7 @@ public class VocativePolishFirstName {
      * @param first_name
      **/
     public VocativePolishFirstName(String first_name) {
-        this(first_name, new Map<String, String>(), new Map<String, VocativePerson>());
+        this(first_name, new Map<GENDER, String>(), new Map<String, VocativePerson>());
     }
 
     /**
@@ -89,7 +91,7 @@ public class VocativePolishFirstName {
      *
      * @return array
      */
-    public Map<String, String> getTitles() {
+    public Map<GENDER, String> getTitles() {
         return this.titles.get('default');
     }
 
@@ -100,46 +102,46 @@ public class VocativePolishFirstName {
      *
      * @return Map<String, String>
      */
-    public Map<String, String> getTitlesByGroup(String aGroup) {
+    public Map<GENDER, String> getTitlesByGroup(String aGroup) {
         return this.titles.get(aGroup);
     }
 
     /**
      * @description Setup own titles like Mr&#47; Mrs, Panie&#47;Pani
      * <p/>
-     * for english ex. ['U' => '', 'M' => 'Mrs.', 'W' => 'Mr.'];
+     * for english ex. ['GENDER.UNDEFINABLE => 'Mr. &#47; Mrs.', GENDER.MAN => 'Mrs.', GENDER.WOMAN => 'Mr.'];
      * <p/>
-     * for polish ex. ['U' => '', 'M' => 'Szanowny Panie', 'W' => 'Szanowna Pani'];
+     * for polish ex. ['GENDER.UNDEFINABLE => 'Mr. &#47; Mrs.', GENDER.MAN => 'Szanowny Panie', GENDER.WOMAN => 'Szanowna Pani'];
      * <p/>
      * For multiple titles definitions use group name
      * <p/>
-     * for polish ex. group: 'default' => ['U' => 'Panie &#47;  Pani', 'M' => 'Panie', 'W' => 'Pani'];
+     * for polish ex. group: 'default' => ['GENDER.UNDEFINABLE => 'Panie &#47;  Pani', GENDER.MAN => 'Panie', GENDER.WOMAN => 'Pani'];
      * <p/>
-     * for polish ex. group: 'polite' => ['U' => '', 'M' => 'Szanowny Panie', 'W' => 'Szanowna Pani'];
+     * for polish ex. group: 'polite' => ['GENDER.UNDEFINABLE => '', GENDER.MAN => 'Szanowny Panie', GENDER.WOMAN => 'Szanowna Pani'];
      *
      * @param titles
      **/
-    public void setTitles(Map<String, String> titles) {
+    public void setTitles(Map<GENDER, String> titles) {
         setTitles(titles, 'default');
     }
 
     /**
      * @description Setup own titles like Mr&#47; Mrs, Panie&#47;Pani
      * <p/>
-     * for english ex. ['U' => '', 'M' => 'Mrs.', 'W' => 'Mr.'];
+     * for english ex. ['U' => '', GENDER.MAN => 'Mrs.', GENDER.WOMAN => 'Mr.'];
      * <p/>
-     * for polish ex. ['U' => '', 'M' => 'Szanowny Panie', 'W' => 'Szanowna Pani'];
+     * for polish ex. ['U' => '', GENDER.MAN => 'Szanowny Panie', GENDER.WOMAN => 'Szanowna Pani'];
      * <p/>
      * For multiple titles definitions use group name
      * <p/>
-     * for polish ex. group: 'default' => ['U' => 'Panie &#47;  Pani', 'M' => 'Panie', 'W' => 'Pani'];
+     * for polish ex. group: 'default' => ['U' => 'Panie &#47;  Pani', GENDER.MAN => 'Panie', GENDER.WOMAN => 'Pani'];
      * <p/>
-     * for polish ex. group: 'polite' => ['U' => '', 'M' => 'Szanowny Panie', 'W' => 'Szanowna Pani'];
+     * for polish ex. group: 'polite' => ['U' => '', GENDER.MAN => 'Szanowny Panie', GENDER.WOMAN => 'Szanowna Pani'];
      *
      * @param titles
      * @param aGroup
      */
-    public void setTitles(Map<String, String> titles, String aGroup) {
+    public void setTitles(Map<GENDER, String> titles, String aGroup) {
         this.titles.put(aGroup, titles);
     }
 
@@ -169,7 +171,7 @@ public class VocativePolishFirstName {
      * @return String
      */
     public String getDetectedTitle(String aGroup) {
-        return this.titles.get(aGroup).get(this.vocativePerson.sex);
+        return this.titles.get(aGroup).get(this.vocativePerson.gender);
     }
 
     /**
@@ -186,8 +188,8 @@ public class VocativePolishFirstName {
      *
      * @return string
      */
-    public String getDetectedGender() {
-        return this.vocativePerson.sex;
+    public GENDER getDetectedGender() {
+        return this.vocativePerson.gender;
     }
 
 
@@ -197,7 +199,7 @@ public class VocativePolishFirstName {
      * @return bool
      */
     public Boolean isMan() {
-        if (this.vocativePerson.sex == 'M') {
+        if (this.vocativePerson.gender == GENDER.MAN) {
             return true;
         }
 
@@ -210,7 +212,7 @@ public class VocativePolishFirstName {
      * @return bool
      */
     public Boolean isWoman() {
-        if (this.vocativePerson.sex == 'W') {
+        if (this.vocativePerson.gender == GENDER.WOMAN) {
             return true;
         }
 
@@ -279,12 +281,12 @@ public class VocativePolishFirstName {
             return null;
         }
 
-        if (!nameWithException.hasDefinedVocativeAndSex()) {
+        if (!nameWithException.hasDefinedVocativeAndGender()) {
             throw new VocativePolishFirstNameException('Invalid format - exception to the rules of firstname must have specified gender and vocative form.');
         }
 
-        switch on nameWithException.sex {
-            when 'M', 'W', 'U' {
+        switch on nameWithException.gender {
+            when MAN, WOMAN, UNDEFINABLE, PLURAL {
                 return nameWithException;
             }
             when else {
@@ -361,7 +363,7 @@ public class VocativePolishFirstName {
 
     public class VocativeRule {
         public Set<String> nameEndings;
-        public String gender;
+        public GENDER gender;
         public Integer replaceFromRight;
         public String vocativeSuffix;
 
@@ -372,7 +374,7 @@ public class VocativePolishFirstName {
          * @param replaceFromRight Amount of letters to chop from right
          * @param vocativeSuffix Suffix to add to the end of string
          **/
-        public VocativeRule(String nameEnding, String gender, Integer replaceFromRight, String vocativeSuffix) {
+        public VocativeRule(String nameEnding, GENDER gender, Integer replaceFromRight, String vocativeSuffix) {
             this(new Set<String>{nameEnding}, gender, replaceFromRight, vocativeSuffix);
         }
 
@@ -383,7 +385,7 @@ public class VocativePolishFirstName {
          * @param replaceFromRight Amount of letters to chop from right
          * @param vocativeSuffix Suffix to add to the end of string
          **/
-        public VocativeRule(Set<String> nameEndings, String gender, Integer replaceFromRight, String vocativeSuffix) {
+        public VocativeRule(Set<String> nameEndings, GENDER gender, Integer replaceFromRight, String vocativeSuffix) {
             this.nameEndings = nameEndings;
             this.gender = gender;
             this.replaceFromRight = replaceFromRight;
@@ -424,40 +426,42 @@ public class VocativePolishFirstName {
      * @description Defined rules that should cover all standard Polish vocatives
      **/
     public static void populateVocativeRules() {
-        vocativeRules.add(new VocativeRule(new Set<String>{'ni', 'li', 'zi'}, 'M', 0, ''));
-        vocativeRules.add(new VocativeRule('eł', 'M', 2, 'le'));
-        vocativeRules.add(new VocativeRule('ił', 'M', 1, 'le'));
-        vocativeRules.add(new VocativeRule('et', 'M', 1, 'cie'));
-        vocativeRules.add(new VocativeRule('tr', 'M', 0, 'ze'));
-        vocativeRules.add(new VocativeRule('ał', 'M', 1, 'le'));
-        vocativeRules.add(new VocativeRule(new Set<String>{'it', 'rt'}, 'M', 1, 'cie'));
-        vocativeRules.add(new VocativeRule('ciek', 'M', 4, 'ćku'));
-        vocativeRules.add(new VocativeRule('siek', 'M', 4, 'śku'));
-        vocativeRules.add(new VocativeRule('niec', 'M', 4, 'ńcu'));
-        vocativeRules.add(new VocativeRule('per', 'M', 2, 'rze'));
-        vocativeRules.add(new VocativeRule(new Set<String>{'ek', 'ko'}, 'M', 2, 'ku'));
-        vocativeRules.add(new VocativeRule('st', 'M', 2, 'ście'));
-        vocativeRules.add(new VocativeRule('sł', 'M', 2, 'śle'));
-        vocativeRules.add(new VocativeRule(new Set<String>{'cja', 'ria', 'lia', 'dia', 'wia', 'fia', 'iela', 'bela', 'zula', 'saba'}, 'W', 1, 'o'));
-        vocativeRules.add(new VocativeRule(new Set<String>{'iola', 'rola'}, 'W', 1, 'u'));
-        vocativeRules.add(new VocativeRule(new Set<String>{'aja', 'sia'}, 'W', 1, 'u'));
-        vocativeRules.add(new VocativeRule(new Set<String>{'ja', 'ia', 'la'}, 'W', 1, 'o'));
-        vocativeRules.add(new VocativeRule('ba', 'M', 1, 'o'));
-        vocativeRules.add(new VocativeRule(new Set<String>{'oe', 'ue'}, 'M', 0, ''));
-        vocativeRules.add(new VocativeRule('oń', 'M', 1, 'niu'));
-        vocativeRules.add(new VocativeRule(new Set<String>{'n', 'f', 'm', 'w', 'p', 's', 'b'}, 'M', 0, 'ie'));
-        vocativeRules.add(new VocativeRule('bel', 'M', 3, 'ble'));
-        vocativeRules.add(new VocativeRule('ez', 'W', 0, ''));
-        vocativeRules.add(new VocativeRule(new Set<String>{'g', 'h', 'j', 'k', 'l', 'z'}, 'M', 0, 'u'));
-        vocativeRules.add(new VocativeRule('der', 'M', 2, 'rze'));
-        vocativeRules.add(new VocativeRule('ster', 'M', 2, 'rze'));
-        vocativeRules.add(new VocativeRule('r', 'M', 0, 'ze'));
-        vocativeRules.add(new VocativeRule('d', 'M', 0, 'zie'));
-        vocativeRules.add(new VocativeRule('a', 'W', 1, 'o'));
-        vocativeRules.add(new VocativeRule('e', 'W', 0, ''));
-        vocativeRules.add(new VocativeRule('y', 'M', 0, ''));
-        vocativeRules.add(new VocativeRule('o', 'M', 0, ''));
-        vocativeRules.add(new VocativeRule('t', 'M', 1, 'cie'));
-        vocativeRules.add(new VocativeRule('', 'U', 0, '')); //TODO Test czy nameEnding pusty jest TRUE
+        vocativeRules.add(new VocativeRule(new Set<String>{
+                'ni', 'li', 'zi'
+        }, GENDER.MAN, 0, ''));
+        vocativeRules.add(new VocativeRule('eł', GENDER.MAN, 2, 'le'));
+        vocativeRules.add(new VocativeRule('ił', GENDER.MAN, 1, 'le'));
+        vocativeRules.add(new VocativeRule('et', GENDER.MAN, 1, 'cie'));
+        vocativeRules.add(new VocativeRule('tr', GENDER.MAN, 0, 'ze'));
+        vocativeRules.add(new VocativeRule('ał', GENDER.MAN, 1, 'le'));
+        vocativeRules.add(new VocativeRule(new Set<String>{'it', 'rt'}, GENDER.MAN, 1, 'cie'));
+        vocativeRules.add(new VocativeRule('ciek', GENDER.MAN, 4, 'ćku'));
+        vocativeRules.add(new VocativeRule('siek', GENDER.MAN, 4, 'śku'));
+        vocativeRules.add(new VocativeRule('niec', GENDER.MAN, 4, 'ńcu'));
+        vocativeRules.add(new VocativeRule('per', GENDER.MAN, 2, 'rze'));
+        vocativeRules.add(new VocativeRule(new Set<String>{'ek', 'ko'}, GENDER.MAN, 2, 'ku'));
+        vocativeRules.add(new VocativeRule('st', GENDER.MAN, 2, 'ście'));
+        vocativeRules.add(new VocativeRule('sł', GENDER.MAN, 2, 'śle'));
+        vocativeRules.add(new VocativeRule(new Set<String>{'cja', 'ria', 'lia', 'dia', 'wia', 'fia', 'iela', 'bela', 'zula', 'saba'}, GENDER.WOMAN, 1, 'o'));
+        vocativeRules.add(new VocativeRule(new Set<String>{'iola', 'rola'}, GENDER.WOMAN, 1, 'u'));
+        vocativeRules.add(new VocativeRule(new Set<String>{'aja', 'sia'}, GENDER.WOMAN, 1, 'u'));
+        vocativeRules.add(new VocativeRule(new Set<String>{'ja', 'ia', 'la'}, GENDER.WOMAN, 1, 'o'));
+        vocativeRules.add(new VocativeRule('ba', GENDER.MAN, 1, 'o'));
+        vocativeRules.add(new VocativeRule(new Set<String>{'oe', 'ue'}, GENDER.MAN, 0, ''));
+        vocativeRules.add(new VocativeRule('oń', GENDER.MAN, 1, 'niu'));
+        vocativeRules.add(new VocativeRule(new Set<String>{'n', 'f', 'm', 'w', 'p', 's', 'b'}, GENDER.MAN, 0, 'ie'));
+        vocativeRules.add(new VocativeRule('bel', GENDER.MAN, 3, 'ble'));
+        vocativeRules.add(new VocativeRule('ez', GENDER.WOMAN, 0, ''));
+        vocativeRules.add(new VocativeRule(new Set<String>{'g', 'h', 'j', 'k', 'l', 'z'}, GENDER.MAN, 0, 'u'));
+        vocativeRules.add(new VocativeRule('der', GENDER.MAN, 2, 'rze'));
+        vocativeRules.add(new VocativeRule('ster', GENDER.MAN, 2, 'rze'));
+        vocativeRules.add(new VocativeRule('r', GENDER.MAN, 0, 'ze'));
+        vocativeRules.add(new VocativeRule('d', GENDER.MAN, 0, 'zie'));
+        vocativeRules.add(new VocativeRule('a', GENDER.WOMAN, 1, 'o'));
+        vocativeRules.add(new VocativeRule('e', GENDER.WOMAN, 0, ''));
+        vocativeRules.add(new VocativeRule('y', GENDER.MAN, 0, ''));
+        vocativeRules.add(new VocativeRule('o', GENDER.MAN, 0, ''));
+        vocativeRules.add(new VocativeRule('t', GENDER.MAN, 1, 'cie'));
+        vocativeRules.add(new VocativeRule('', GENDER.UNDEFINABLE, 0, '')); //TODO Test czy nameEnding pusty jest TRUE
     }
 }

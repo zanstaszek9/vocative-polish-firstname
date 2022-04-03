@@ -25,13 +25,26 @@ private class VocativePolishFirstNameTest {
             if (contact.LastName != nameWithVoc.getVocativeFirstName()){
                 namesWithWrongVocative.put(contact.LastName, nameWithVoc.getVocativeFirstName());
             }
-            if (contact.Gender__c != nameWithVoc.getDetectedGender()){
-                namesWithWrongGender.put(contact.Gender__c, nameWithVoc.getDetectedGender());
+            final VocativePolishFirstName.GENDER mappedGender = genderMapping(contact.Gender__c);
+            if (mappedGender != nameWithVoc.getDetectedGender()){
+                namesWithWrongGender.put(contact.Gender__c, nameWithVoc.getDetectedGender().name());
             }
         }
         //then
         System.assert(namesWithWrongVocative.isEmpty(), namesWithWrongVocative.size() + ' vocatives were wrong: ' + namesWithWrongVocative);
         System.assert(namesWithWrongGender.isEmpty(), namesWithWrongGender.size() + ' genders were wrong: ' + namesWithWrongGender);
+    }
+
+    private static VocativePolishFirstName.GENDER genderMapping(String gender){
+        if (gender == 'P')
+            return VocativePolishFirstName.GENDER.PLURAL;
+        else if (gender == 'U')
+            return VocativePolishFirstName.GENDER.UNDEFINABLE;
+        else if (gender == 'M')
+            return VocativePolishFirstName.GENDER.MAN;
+        else if (gender == 'W')
+            return VocativePolishFirstName.GENDER.WOMAN;
+        else return null;
     }
 
     @IsTest
@@ -48,31 +61,32 @@ private class VocativePolishFirstNameTest {
     }
 
     @IsTest
-    static void shouldReturnProperTitlesForDefaultSexes() {
+    static void shouldReturnProperTitlesForDefaultGenders() {
         System.assert(new VocativePolishFirstName('Krzysztof').getVocativeStringWithTitle().startsWith('Panie'));
         System.assert(new VocativePolishFirstName('Alicja').getVocativeStringWithTitle().startsWith('Pani'));
         System.assert(new VocativePolishFirstName('Maliq').getVocativeStringWithTitle().startsWith('Panie/Pani'));
+        System.assert(new VocativePolishFirstName('Krzysztof i Alicja').getVocativeStringWithTitle().startsWith('Państwo'));
     }
 
     @IsTest
     static void shouldReturnProperGender() {
-        System.assertEquals('M', new VocativePolishFirstName('Krzysztof').getDetectedGender());
-        System.assertEquals('W', new VocativePolishFirstName('Alicja').getDetectedGender());
-        System.assertEquals('U', new VocativePolishFirstName('Maliq').getDetectedGender());
+        System.assertEquals(VocativePolishFirstName.GENDER.MAN, new VocativePolishFirstName('Krzysztof').getDetectedGender());
+        System.assertEquals(VocativePolishFirstName.GENDER.WOMAN, new VocativePolishFirstName('Alicja').getDetectedGender());
+        System.assertEquals(VocativePolishFirstName.GENDER.UNDEFINABLE, new VocativePolishFirstName('Maliq').getDetectedGender());
     }
 
     @IsTest
     static void shouldReturnProperGenderForDoubleNames() {
-        System.assertEquals('M', new VocativePolishFirstName('Jan-Krzysztof').getDetectedGender());
-        System.assertEquals('W', new VocativePolishFirstName('Anna-Alicja').getDetectedGender());
-        System.assertEquals('M', new VocativePolishFirstName('Jan Maria').getDetectedGender());
-        System.assertEquals('W', new VocativePolishFirstName('Maria Jan').getDetectedGender());
+        System.assertEquals(VocativePolishFirstName.GENDER.MAN, new VocativePolishFirstName('Jan-Krzysztof').getDetectedGender());
+        System.assertEquals(VocativePolishFirstName.GENDER.WOMAN, new VocativePolishFirstName('Anna-Alicja').getDetectedGender());
+        System.assertEquals(VocativePolishFirstName.GENDER.MAN, new VocativePolishFirstName('Jan Maria').getDetectedGender());
+        System.assertEquals(VocativePolishFirstName.GENDER.WOMAN, new VocativePolishFirstName('Maria Jan').getDetectedGender());
     }
 
     @IsTest
     static void shouldReturnProperGenderTwoNames() {
-        System.assertEquals('G', new VocativePolishFirstName('Tomasz i Julia').getDetectedGender());
-        System.assertEquals('G', new VocativePolishFirstName('Julia i Tomasz').getDetectedGender());
+        System.assertEquals(VocativePolishFirstName.GENDER.PLURAL, new VocativePolishFirstName('Tomasz i Julia').getDetectedGender());
+        System.assertEquals(VocativePolishFirstName.GENDER.PLURAL, new VocativePolishFirstName('Julia i Tomasz').getDetectedGender());
     }
 
 
