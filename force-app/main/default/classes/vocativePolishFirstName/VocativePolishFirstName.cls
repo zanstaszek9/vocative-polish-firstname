@@ -16,11 +16,22 @@ public class VocativePolishFirstName {
 
 
     public static VocativePolishFirstName prepareContact(Contact contactToAssignValues) {
+        return prepareContact(contactToAssignValues, false);
+    }
+
+    public static VocativePolishFirstName prepareContact(Contact contactToAssignValues, Boolean overwriteExistingValues) {
         final VocativePolishFirstName vpfn = new VocativePolishFirstName(contactToAssignValues.FirstName);
 
-        contactToAssignValues.VPFN_Polish_Vocative__c = vpfn.getFirstNameInVocative();
-        contactToAssignValues.VPFN_Vocative_Salutation__c = vpfn.getDetectedTitle();
-        contactToAssignValues.VPFN_Gender__c = vpfn.getDetectedGenderAsString();
+        if (overwriteExistingValues) {
+            contactToAssignValues.VPFN_Polish_Vocative__c = vpfn.getFirstNameInVocative();
+            contactToAssignValues.VPFN_Vocative_Salutation__c = vpfn.getDetectedTitle();
+            contactToAssignValues.VPFN_Gender__c = vpfn.getDetectedGenderAsString();
+        }
+        else {
+            if (String.isBlank(contactToAssignValues.VPFN_Polish_Vocative__c)) contactToAssignValues.VPFN_Polish_Vocative__c = vpfn.getFirstNameInVocative();
+            if (String.isBlank(contactToAssignValues.VPFN_Vocative_Salutation__c)) contactToAssignValues.VPFN_Vocative_Salutation__c = vpfn.getDetectedTitle();
+            if (String.isBlank(contactToAssignValues.VPFN_Gender__c)) contactToAssignValues.VPFN_Gender__c = vpfn.getDetectedGenderAsString();
+        }
 
         return vpfn;
     }
